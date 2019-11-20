@@ -134,7 +134,11 @@
                         //表格加载
                         app.adminListObject.tableInit({
                             url: loadUrl,
-                            columns: _columns
+                            columns: _columns,
+                            queryParams: function (par) {
+                                par.Menu_ID = app.pId;
+                                return par;
+                            }
                         });
                     }
                 });
