@@ -87,6 +87,8 @@ namespace HzyAdmin
             });
             //将DbContextSqlServer对象注册Logic层静态对象中
             Logic.Class.AppBase.db = new DbContextSqlServer();
+            //如果上面 OFFSET 不兼容 则使用 row number 分页
+            //Logic.Class.AppBase.db = new DbContextSqlServer(PagingMode.ROW_NUMBER);
             //将DbContextSqlServer对象注册UI层构造函数中
             //services.AddSingleton(Logic.Class.BaseLogic.db.GetType());
             #endregion
