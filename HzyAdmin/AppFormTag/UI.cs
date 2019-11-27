@@ -140,6 +140,20 @@ namespace AppFormTag
             });
         }
 
+        public static HtmlString FindBack<T, T1>(Expression<Func<T, object>> Text, Expression<Func<T1, object>> ID, string FindClick, string RemoveClick, int Col = 6, string Title = null, string Placeholder = null, bool KO = true, bool Readonly = true, string W = "1200px", string H = "1200px")
+            where T : class, new()
+            where T1 : class, new()
+        {
+            var Obj = AnalysisExpression(Text);
+            var Obj1 = AnalysisExpression(ID);
+
+            if (string.IsNullOrEmpty(Title))
+                Title = Obj.Item2;
+
+            var _New_Placeholder = (string.IsNullOrEmpty(Placeholder) ? "请选择 " + Title : Placeholder);
+
+            return new HtmlString(FindBack(Title, Obj.Item1, Obj1.Item1, FindClick, RemoveClick, Col, _New_Placeholder, Readonly));
+        }
 
         public static HtmlString FindBack<T, T1>(Expression<Func<T, object>> Text, Expression<Func<T1, object>> ID, string Url, string FindClick, string RemoveClick, int Col = 6, string Title = null, string Placeholder = null, bool KO = true, bool Readonly = true, string W = "1200px", string H = "1200px")
             where T : class, new()
@@ -158,13 +172,18 @@ namespace AppFormTag
 
         public static string FindBack(string Title, string Text, string ID, string Url, string FindClick, string RemoveClick, int Col = 6, string Placeholder = null, bool Readonly = true, string W = "1200px", string H = "1200px")
         {
+            return FindBack(Title, Text, ID, $"admin.findBack.open('{Url}', '{Placeholder}', function(row){{{FindClick}}},'{W}','{H}');", RemoveClick, Col, Placeholder, Readonly);
+        }
+
+        public static string FindBack(string Title, string Text, string ID, string FindClick, string RemoveClick, int Col = 6, string Placeholder = null, bool Readonly = true)
+        {
             var _Tmp = $@"<div class='col-sm-{Col}'>
             <h4 class='example-title'>{Title}</h4>
             <div class='input-group'>
                 <input type='text' class='form-control' name='{Text}' v-model='{Text}' placeholder='{Placeholder}' {(Readonly ? "readonly='readonly'" : "")} />
                 <input type='text' class='form-control hidden-xs-up' name='{ID}' v-model='{ID}' />
                 <span class='input-group-btn'>" +
-                      $"<button type='button' class='btn btn-outline btn-default' onclick=\"admin.findBack.open('{Url}', '{Placeholder}', function(row){{{FindClick}}},'{W}','{H}');\"><i class='fas fa-search'></i></button>" +
+                      $"<button type='button' class='btn btn-outline btn-default' onclick=\"{FindClick}\"><i class='fas fa-search'></i></button>" +
                       $"<button type='button' class='btn btn-outline btn-default' onclick=\"{RemoveClick}\"><i class='fas fa-times'></i></button>" +
                 @"</span>
             </div>
@@ -172,8 +191,6 @@ namespace AppFormTag
 
             return _Tmp;
         }
-
-
 
 
 

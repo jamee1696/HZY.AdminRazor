@@ -35,6 +35,8 @@
 
         @(UI.FindBack<Sys_User, Member>(w => w.User_Name, w => w.Member_UserID, Url.Action("Index", "User", new { findback = 1 }), "app.findBack(row,'User')", "app.findBack(null,'User');", 4))
 
+        @*@(UI.FindBack<Sys_User, Member>(w => w.User_Name, w => w.Member_UserID, "app.openFindBack()", "app.findBack(null,'User');", 4))*@
+
         <div class="col-sm-6">
             <h4 class="example-title">@(UI.GetField<Member>(w => w.Member_Photo).Item2)</h4>
             <input type="file" class="form-control" name="Member_Photo" />
@@ -153,6 +155,14 @@
                     isupfile: true
                 });
             },
+            //自定义打开 查找带回窗口
+            //openFindBack: function () {
+            //    admin.findBack.open('/url/index' + this.Member_UserID, '请选择 xxx', function (row) {
+
+            //        app.findBack(row, 'User');
+
+            //    }, '1200px', '1200px');
+            //},
             //查找带回
             findBack: function (row, tag) {
                 if (row != null && row.length > 0) row = row[0];
