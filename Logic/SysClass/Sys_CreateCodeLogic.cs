@@ -174,6 +174,8 @@ where a.TABLE_NAME='" + table + "' ";
                         break;
                 }
 
+                Task.Delay(3000);
+
             });
 
 

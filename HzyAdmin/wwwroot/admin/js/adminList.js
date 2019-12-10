@@ -189,6 +189,11 @@ window.adminList = (function () {
                         tableObject.bootstrapTable("checkBy", { field: "_ukid", values: [adminListClass.tableSelectedIndex] });
                     }
                     if (tableParameter.onLoadSuccess) tableParameter.onLoadSuccess();
+
+                    setTimeout(function () {
+                        adminListClass.tableObject.bootstrapTable('resetView');
+                    },300);
+                    
                 };
 
                 //调用表格插件

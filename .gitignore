@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /HzyAdmin/wwwroot/content/CreateFile/Model
+/HzyAdmin/wwwroot/content/createFile/ViewsControllers
