@@ -7,6 +7,8 @@
 
  **文档、演示：http://hzyadmin.milaizhijie.com** 
 
+> .NetCore 2.2 版本请查看分支master : https://gitee.com/hao-zhi-ying/HzyAdmin/tree/master/
+
 
 #### 软件架构
 开发环境：vs2019 、 NetCore 3.1.100
