@@ -1,21 +1,21 @@
 # HzyAdmin-Core
 
 #### 介绍
-基于.Net Core 2.2 开发的 通用后台管理系统！通配权限。
+基于.Net Core 3.1 开发的 通用后台管理系统！通配权限。
 
- **有兴趣看看 Vue 版本单页程序基于 AspNetCore3.0 : https://gitee.com/hao-zhi-ying/HzyAdminSpa** 
+ **有兴趣看看 Vue 版本单页程序基于 : https://gitee.com/hao-zhi-ying/HzyAdminSpa** 
 
  **文档、演示：http://hzyadmin.milaizhijie.com** 
 
 
 #### 软件架构
-开发环境：vs2017+ 、 NetCore 2.2.301
+开发环境：vs2019 、 NetCore 3.1.100
 
 交流群: 534584927
 
 前端：BootStrap 4、Layer、Jquery、Vue
 
-后端：NetCore 2.2.301 一定要安装等于或者大于该版本的SDK
+后端：NetCore 3.1.100 一定要安装等于或者大于该版本的SDK
 
 数据库脚本位置：HzyAdmin/wwwroot/AppDb/appdb.sql
 
