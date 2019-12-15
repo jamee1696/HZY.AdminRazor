@@ -156,10 +156,7 @@ namespace HzyAdmin
             //    app.UseHsts();
             //}
 
-            #region nlog 日志
-            //初始化NLog
-            LogHelper.Init(app, env, loggerFactory);
-
+            #region app 生命周期
             //程序启动
             applicationLifetime.ApplicationStarted.Register(() =>
             {

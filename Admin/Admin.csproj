@@ -1,0 +1,291 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Admin.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\Error.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_ValidationScriptsPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Base\Member\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Base\Member\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Base\Member\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Base\Member\Info.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Error\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Home\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Home\Main.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Login\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Print\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\AppLog\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\AppLog\Info.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\ChangePwd\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\CreateCode\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\Function\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\Function\Info.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\MenuFunction\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\MenuFunction\Info.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\PowerControl\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\RoleFunction\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\Role\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\Role\Info.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\User\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Sys\User\Info.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="NLog\nlog.config" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_CookieConsentPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Base\Member\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Base\Member\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Error\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Error\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Home\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Home\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Home\Main.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Home\Main.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Login\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Login\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Print\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Print\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\AppLog\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\AppLog\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\AppLog\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\AppLog\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\ChangePwd\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\ChangePwd\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\CreateCode\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\CreateCode\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\Function\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\Function\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\Function\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\Function\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\MenuFunction\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\MenuFunction\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\MenuFunction\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\MenuFunction\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\PowerControl\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\PowerControl\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\Role\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\Role\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\Role\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\Role\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\RoleFunction\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\RoleFunction\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\User\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\User\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\Sys\User\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Sys\User\Info.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Watch Remove="Views\Shared\_CookieConsentPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_CookieConsentPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.0.0-rc8" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc4" />
+    <PackageReference Include="UEditor.Core" Version="1.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entitys\Entitys.csproj" />
+    <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\Toolkit\Toolkit.csproj" />
+  </ItemGroup>
+
+
+
+</Project>

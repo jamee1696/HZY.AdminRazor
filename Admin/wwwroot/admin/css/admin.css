@@ -1,0 +1,113 @@
+﻿.border-r-0 {
+    border-radius: 0;
+}
+
+.bg-bgcolor {
+    background: #F1F3F4;
+}
+
+#panelSearch {
+    display: none;
+}
+
+.formToolbar {
+    position: fixed;
+    width: 100%;
+    background: #F1F3F4;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 99999;
+}
+
+/*body {
+    color: #333 !important;
+}*/
+
+.table-bordered, .table-bordered th {
+    border-bottom: 0;
+}
+
+.table thead th {
+    border-bottom: 0;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height .table thead th {
+    border-bottom: 0;
+}
+/**********复选框样式**********/
+.admin-checkbox input[type=checkbox], input[type=radio] {
+    display: none;
+}
+
+    .admin-checkbox input[type=checkbox] + label:before {
+        content: "\2713";
+        color: transparent;
+        display: inline-block;
+        border: 1px solid #e4eaec;
+        line-height: 20px;
+        margin: -5px 5px 0 0;
+        height: 20px;
+        width: 22px;
+        text-align: center;
+        vertical-align: middle;
+        /*transition: color ease .1s;*/
+        background: #D7DCDE;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .admin-checkbox input[type=checkbox]:checked + label:before {
+        color: #fff;
+        background: #11c26d;
+    }
+/*************复选框样式 end ***************/
+.adminForm {
+    overflow: hidden;
+    overflow-y: auto;
+    display: inline-block;
+    height: calc(100% - 4rem);
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+}
+
+/************************layer 版本样式覆盖 **************************/
+
+.layui-layer-btn0 {
+    color: #fff !important;
+}
+
+/************************BootstrapTable 插件 bootstrap 版本样式覆盖 **************************/
+.table .thead-dark th {
+    background-color: #3e4854;
+}
+
+.fixed-table-container .selected,
+.table-hover tbody tr:hover {
+    background-color: #E8F7FD;
+    color: #1890ff;
+}
+
+.bootstrap-table .fixed-table-container .table thead th .th-inner {
+    padding: 0.45rem !important;
+}
+
+    .bootstrap-table .fixed-table-container .table thead th .th-inner label {
+        margin-bottom: 0 !important;
+    }
+
+.table td, .table th {
+    padding: 0.4rem;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer) {
+    border-bottom: 0;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height .fixed-table-border {
+    border-left: 0;
+    border-right: 0;
+}
