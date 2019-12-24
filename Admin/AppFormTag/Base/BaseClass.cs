@@ -26,7 +26,6 @@ namespace AppFormTag.Base
         /// <summary>
         /// 获取属性 字符串
         /// </summary>
-        /// <param name="_Attribute"></param>
         /// <returns></returns>
         public string GetAttributeString()
         {

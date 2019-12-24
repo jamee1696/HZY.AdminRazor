@@ -18,6 +18,7 @@ namespace AppFormTag.Base
         /// </summary>
         /// <param name="_Name">标签名称</param>
         /// <param name="_Attribute">标签属性</param>
+        /// <param name="_Text"></param>
         public TwoLabel(string _Name, Dictionary<string, string> _Attribute, string _Text = "")
         {
             this.Name = _Name;

@@ -16,12 +16,10 @@ namespace Admin.Areas.Admin.Controllers.Base
 
     public class MemberController : AdminBaseController
     {
-        private IHostingEnvironment _IHostingEnvironment = null;
         private string _WebRootPath = string.Empty;
-        public MemberController(IHostingEnvironment IHostingEnvironment)
+        public MemberController(IWebHostEnvironment iWebHostEnvironment)
         {
-            this._IHostingEnvironment = IHostingEnvironment;
-            _WebRootPath = this._IHostingEnvironment.WebRootPath;
+            _WebRootPath = iWebHostEnvironment.WebRootPath;
             this.MenuKey = "A-100";
         }
 

@@ -20,14 +20,10 @@ namespace Admin.Areas.Admin.Controllers.Sys
     /// </summary>
     public class CreateCodeController : AdminBaseController
     {
-
-
-        private IHostingEnvironment _IHostingEnvironment = null;
         private string _WebRootPath = string.Empty;
-        public CreateCodeController(IHostingEnvironment IHostingEnvironment)
+        public CreateCodeController(IWebHostEnvironment iWebHostEnvironment)
         {
-            this._IHostingEnvironment = IHostingEnvironment;
-            _WebRootPath = this._IHostingEnvironment.WebRootPath;
+            _WebRootPath = iWebHostEnvironment.WebRootPath;
         }
 
         public Sys_CreateCodeLogic _Logic = new Sys_CreateCodeLogic();
