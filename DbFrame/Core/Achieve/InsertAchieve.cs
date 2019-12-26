@@ -42,6 +42,8 @@ namespace DbFrame.Core.Achieve
             else
                 _ResKeyId = this.ExecuteScalar(Sql.Code.ToString(), Sql.GetDynamicParameters());
 
+            if (_KeyId is Guid && (Guid)_KeyId != Guid.Empty) return _KeyId;
+
             if (_ResKeyId == null)
                 return (this._KeyFieldDescribe == null) ? null : _KeyId;
             return _ResKeyId;
@@ -57,6 +59,8 @@ namespace DbFrame.Core.Achieve
                 _ResKeyId = this.ExecuteScalar(Sql.Code.ToString(), Sql.GetDynamicParameters(), this.Ado._DbTransaction);
             else
                 _ResKeyId = this.ExecuteScalarAsync(Sql.Code.ToString(), Sql.GetDynamicParameters()).Result;
+
+            if (_KeyId is Guid && (Guid)_KeyId != Guid.Empty) return Task.FromResult(_KeyId);
 
             if (_ResKeyId == null)
                 return (this._KeyFieldDescribe == null) ? null : (_KeyId == null ? null : Task.FromResult(_KeyId));
