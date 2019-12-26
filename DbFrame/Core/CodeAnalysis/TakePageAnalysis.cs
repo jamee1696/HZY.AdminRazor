@@ -26,19 +26,23 @@ namespace DbFrame.Core.CodeAnalysis
                 }
                 else
                 {
-                    var _Column = _Sql.Code_Column.ToString();
-
-                    var _RowId = @"ROW_NUMBER () OVER (  ORDER BY " + _Sql.Code_OrderBy + " ) AS ROWID,";
-
-                    _Sql.Code_Column.Clear().Append(_RowId + _Column);
-
-                    StringBuilder builder = new StringBuilder();
-
-                    builder.AppendFormat("SELECT * FROM (#SqlString#) TAB_ROW_NUMBER WHERE ROWID BETWEEN {0} AND {1} ", (PageSize * (PageNumber - 1)) + 1, PageNumber * PageSize);
+                    var orderBySql = _Sql.Code_OrderBy.ToString();
+                    var newOrderBySql = string.Empty;
+                    foreach (var item in _Sql.Alias.Keys)
+                    {
+                        newOrderBySql = orderBySql.Replace(item.ToString(), "TAB_ROWID");
+                        orderBySql = newOrderBySql;
+                    }
 
                     //清空 Orderby
                     _Sql.Code_OrderBy.Clear();
-                    _Sql.Code_TakePage.Clear().Append(builder);
+                    _Sql.Code_TakePage.Clear().Append($@"
+SELECT * FROM (
+    SELECT ROW_NUMBER() OVER(ORDER BY {newOrderBySql}) AS ROWID,* FROM (
+        #SqlString#
+    ) AS TAB_ROWID
+) TAB_ROW_NUMBER WHERE TAB_ROW_NUMBER.ROWID BETWEEN {(PageSize * (PageNumber - 1)) + 1} AND {PageNumber * PageSize}
+");
                 }
             }
             else if (analysis._DbContextType == DbContextType.MySql)

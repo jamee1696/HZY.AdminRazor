@@ -158,7 +158,7 @@ namespace Logic.Class
                 var sortable = dc.ColumnName != "_ukid";
                 var visible = dc.ColumnName != "_ukid";
 
-                if (_FieldDescribe != null) title = string.IsNullOrWhiteSpace(_FieldDescribe.Alias) ? title : _FieldDescribe.Alias;
+                if (_FieldDescribe != null) title = string.IsNullOrWhiteSpace(_FieldDescribe.DisplayName) ? title : _FieldDescribe.DisplayName;
 
                 _Column.Add(field, title);
                 _Field.Add(nameof(field), field);

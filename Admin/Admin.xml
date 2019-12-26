@@ -282,7 +282,6 @@
             <summary>
             获取属性 字符串
             </summary>
-            <param name="_Attribute"></param>
             <returns></returns>
         </member>
         <member name="T:AppFormTag.Base.OneLabel">
@@ -308,6 +307,7 @@
             </summary>
             <param name="_Name">标签名称</param>
             <param name="_Attribute">标签属性</param>
+            <param name="_Text"></param>
         </member>
         <member name="T:AppFormTag.FormsBase">
             <summary>

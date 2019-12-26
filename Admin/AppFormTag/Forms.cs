@@ -55,7 +55,7 @@ namespace AppFormTag
             var TableName = DbTable.GetTableName(typeof(T));
             Tuple<string, List<FieldDescribe>> Tuple = DbTable.GetTable(TableName);
 
-            Title = Tuple.Item2.Find(w => w.Name == Name).Alias;
+            Title = Tuple.Item2.Find(w => w.Name == Name).DisplayName;
 
             return (Name, Title);
         }

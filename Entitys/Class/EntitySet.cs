@@ -7,22 +7,35 @@ using System.Threading.Tasks;
 namespace Entitys.Class
 {
     using DbFrame.BaseClass;
+    using Entitys.SysClass;
+
     public class EntitySet
     {
 
         public static void Register(DbTable tabs)
         {
-            //系统表 Start
-            tabs.Register(typeof(Entitys.SysClass.Sys_AppLog));
-            tabs.Register(typeof(Entitys.SysClass.Sys_Function));
-            tabs.Register(typeof(Entitys.SysClass.Sys_Menu));
-            tabs.Register(typeof(Entitys.SysClass.Sys_MenuFunction));
-            tabs.Register(typeof(Entitys.SysClass.Sys_Role));
-            tabs.Register(typeof(Entitys.SysClass.Sys_RoleMenuFunction));
-            tabs.Register(typeof(Entitys.SysClass.Sys_User));
-            tabs.Register(typeof(Entitys.SysClass.Sys_UserRole));
-            //系统表 End
-            tabs.Register(typeof(Member));
+            var _types = new List<Type>();
+            _types.Add(typeof(Member));
+            _types.Add(typeof(Sys_AppLog));
+            _types.Add(typeof(Sys_Function));
+            _types.Add(typeof(Sys_Menu));
+            _types.Add(typeof(Sys_MenuFunction));
+            _types.Add(typeof(Sys_Role));
+            _types.Add(typeof(Sys_RoleMenuFunction));
+            _types.Add(typeof(Sys_User));
+            _types.Add(typeof(Sys_UserRole));
+
+            //
+            //注册 Model 并解析 xml 注解
+            //
+            foreach (var item in _types)
+            {
+                tabs.Register(item, (propertyinfo, fielddescribe, tableType) =>
+                {
+                    fielddescribe.DisplayName = Toolkit.ReadXmlSummary.XMLForMember(propertyinfo)?.InnerText?.Trim()?.Split("=>")?[0];
+                });
+            }
+
         }
 
     }

@@ -298,9 +298,10 @@ namespace DbFrame.Core.CodeAnalysis
             //ROWS FETCH 分页
             var _Code_TakePage_String = _Sql.Code_TakePage.ToString();
 
+            var orderByString = _Sql.Code_OrderBy.ToString();
             if (!string.IsNullOrEmpty(_Code_TakePage_String) && !_Code_TakePage_String.Contains("#SqlString#"))
             {
-                _Sql.Code_OrderBy.Append(_Code_TakePage_String);
+                orderByString += _Code_TakePage_String;
             }
 
             //组装
@@ -326,9 +327,9 @@ namespace DbFrame.Core.CodeAnalysis
                 _Sql.Code.AppendFormat(" HAVING {0}", _Sql.Code_Having);
             }
 
-            if (!string.IsNullOrEmpty(_Sql.Code_OrderBy.ToString()))
+            if (!string.IsNullOrEmpty(orderByString))
             {
-                _Sql.Code.AppendFormat(" ORDER BY {0}", _Sql.Code_OrderBy);
+                _Sql.Code.AppendFormat(" ORDER BY {0}", orderByString);
             }
 
             //ROW_NUMBER 分页
