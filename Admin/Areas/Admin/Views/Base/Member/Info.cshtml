@@ -46,9 +46,11 @@
         <div class="col-sm-6">
             <h4 class="example-title">@(UI.GetField<Member>(w => w.Member_FilePath).Item2)</h4>
             <input type="file" class="form-control" name="Member_FilePath" multiple="multiple" />
-            <div v-for="item in Member_FilePath.split(',')">
-                <a v-bind:href="item" v-show="item" target="_blank">{{item}}</a>
-            </div>
+            <template v-if="Member_FilePath">
+                <div v-for="item in Member_FilePath.split(',')">
+                    <a v-bind:href="item" v-show="item" target="_blank">{{item}}</a>
+                </div>
+            </template>
         </div>
 
         @(UI.UEditor<Member>(item => item.Member_Introduce, 12))
