@@ -121,6 +121,10 @@
                         setTimeout(function () {
                             editor_Member_Introduce.setContent(app.Member_Introduce ? app.Member_Introduce.replace(/'/g, '\'') : "");
                         }, 300);
+                        //如果新增
+                        if (!app.formKey) {
+                            app.Member_Sex = "";//解决 新增时不能默认选中第一个 option
+                        }
                     }
                 });
 
