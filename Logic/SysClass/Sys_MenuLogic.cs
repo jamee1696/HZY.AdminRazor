@@ -167,15 +167,24 @@ namespace Logic.SysClass
             for (int i = 0; i < _Sys_MenuList.Count; i++)
             {
                 var item = _Sys_MenuList[i];
-                if (!_Sys_MenuList.Any(w => w.Menu_ID == item.Menu_ParentID.ToGuid()) & !_New_Sys_MenuList.Any(w => w.Menu_ID == item.Menu_ParentID.ToGuid()))
-                {
-                    var _Menu = _Sys_MenuAllList.Find(w => w.Menu_ID == item.Menu_ParentID);
-                    if (_Menu != null) _New_Sys_MenuList.Add(_Menu);
-                }
+                this.CheckUpperLevel(_Sys_MenuAllList, _Sys_MenuList, _New_Sys_MenuList, item);
                 if (!_New_Sys_MenuList.Any(w => w.Menu_ID == item.Menu_ID)) _New_Sys_MenuList.Add(item);
             }
 
             return _New_Sys_MenuList.OrderBy(w => w.Menu_Num).ToList();
+        }
+
+        private void CheckUpperLevel(List<Sys_Menu> sys_MenuAllList, List<Sys_Menu> old_Sys_MenuList, List<Sys_Menu> new_Sys_MenuList, Sys_Menu menu)
+        {
+            if (!old_Sys_MenuList.Any(w => w.Menu_ID == menu.Menu_ParentID.ToGuid()) && !new_Sys_MenuList.Any(w => w.Menu_ID == menu.Menu_ParentID))
+            {
+                var _Menu = sys_MenuAllList.Find(w => w.Menu_ID == menu.Menu_ParentID);
+                if (_Menu != null)
+                {
+                    new_Sys_MenuList.Add(_Menu);
+                    this.CheckUpperLevel(sys_MenuAllList, old_Sys_MenuList, new_Sys_MenuList, _Menu);
+                }
+            }
         }
 
         /// <summary>
