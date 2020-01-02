@@ -76,10 +76,11 @@ namespace Logic.SysClass
                     if (_Success == 0) throw new MessageBox(this.ErrorMessage);
                 }
 
-                //
+                //先删除此用户的全部角色 再增加
+                db.Delete<Sys_UserRole>(w => w.t1.UserRole_UserID == model.User_ID);
                 if (Sys_UserRoleList.Count > 0)
                 {
-                    db.Delete<Sys_UserRole>(w => w.t1.UserRole_UserID == model.User_ID);
+                    
                     foreach (var item in Sys_UserRoleList)
                     {
                         item.UserRole_UserID = model.User_ID;

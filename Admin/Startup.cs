@@ -35,7 +35,9 @@ namespace Admin
             services.AddControllersWithViews().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
-            });
+            })
+                //生成环境可以去掉
+                .AddRazorRuntimeCompilation();
 
             #region AdminConfig
             services.AdminConfigureServices(Configuration);

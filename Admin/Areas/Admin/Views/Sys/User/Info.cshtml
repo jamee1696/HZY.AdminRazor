@@ -104,6 +104,13 @@
                 },
                 //保存
                 save: function () {
+                    //验证角色不为空
+                    if (this.Sys_UserRoleList.length > 0) {
+                        for (var i = 0; i < this.Sys_UserRoleList.length; i++) {
+                            var item = this.Sys_UserRoleList[i];
+                            if (item.UserRole_RoleID == null) return admin.msg('请选择角色');
+                        }
+                    }
                     var loadUrl = "@Url.Action("Save")";
                     console.log(1);
                     //
