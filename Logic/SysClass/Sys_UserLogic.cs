@@ -77,9 +77,9 @@ namespace Logic.SysClass
                 }
 
                 //
+                db.Delete<Sys_UserRole>(w => w.t1.UserRole_UserID == model.User_ID);
                 if (Sys_UserRoleList.Count > 0)
                 {
-                    db.Delete<Sys_UserRole>(w => w.t1.UserRole_UserID == model.User_ID);
                     foreach (var item in Sys_UserRoleList)
                     {
                         item.UserRole_UserID = model.User_ID;

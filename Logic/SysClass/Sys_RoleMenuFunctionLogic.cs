@@ -43,7 +43,7 @@ namespace Logic.SysClass
         /// <returns></returns>
         public Hashtable LoadForm()
         {
-            var _Sys_RoleList = db.Query<Sys_Role>().OrderBy(w => w.SqlStr($"convert(int,{nameof(w.t1.Role_Num)})")).ToList<Dictionary<string, object>>();
+            var _Sys_RoleList = db.Query<Sys_Role>().OrderBy(w => w.SqlStr($"convert(varchar(10),{nameof(w.t1.Role_Num)})")).ToList<Dictionary<string, object>>();
 
             foreach (var item in _Sys_RoleList)
             {
