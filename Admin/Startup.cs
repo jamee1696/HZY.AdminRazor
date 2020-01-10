@@ -36,8 +36,7 @@ namespace Admin
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             })
-                //生成环境可以去掉
-                .AddRazorRuntimeCompilation();
+        .AddRazorRuntimeCompilation();
 
             #region AdminConfig
             services.AdminConfigureServices(Configuration);
