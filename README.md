@@ -3,7 +3,7 @@
 #### 介绍
 基于.Net Core 3.1 开发的 通用后台管理系统！通配权限。
 
- **有兴趣看看 Vue 版本单页程序基于 : https://gitee.com/hzy6/HzyAdminSpa** 
+ **有兴趣看看 Vue 版本单页程序基于 : https://gitee.com/hzy6/HZY.Admin.Spa** 
 
  **文档、演示：http://hzyadmin.milaizhijie.com**
 
