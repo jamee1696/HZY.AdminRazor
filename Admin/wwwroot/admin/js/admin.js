@@ -87,8 +87,10 @@ window.admin = {
             data: options.data,
             async: options.async,
             success: function (r) {
-                options.success(r);
                 if (options.loading) admin.loading.end();
+                setTimeout(function () {
+                    options.success(r);
+                },500);                                
             },
             beforeSend: function (XMLHttpRequest) {
                 console.log(XMLHttpRequest);
