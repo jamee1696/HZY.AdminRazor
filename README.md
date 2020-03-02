@@ -1,5 +1,12 @@
 # HzyAdmin-Core
 
+
+#### 捐赠 大哥们，如果觉得还行就请我喝瓶水吧
+|  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0302/162422_94ee4116_1242080.jpeg "微信图片_20200302162149.jpg")   |  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0302/162431_7e7da4ea_1242080.jpeg "微信图片_20200302162144.jpg")   |
+| --- | --- |
+
+
+
 #### 介绍
 基于.Net Core 3.1 开发的 通用后台管理系统！通配权限。
 
