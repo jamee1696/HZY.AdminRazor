@@ -341,8 +341,8 @@ window.admin = {
                         //判断是否 是这种格式 /Date(1539187200000)/
                         if (_value.indexOf('/Date(') >= 0 && _value.lastIndexOf(')/') >= 0)
                             _value = new Date(parseInt(_value.substring(6, _value.lastIndexOf(')/')))).Format('yyyy-MM-dd hh:mm');
-                        else
-                            _value = _value.replace(/\r/g, "\\r").replace(/\n/g, "\\n").replace(/\'/g, "\\'");
+                        //else
+                        //    _value = _value.replace(/\r/g, "\\r").replace(/\n/g, "\\n").replace(/\'/g, "\\'");
                     }
                 }
                 _vueObject[item] = _value;
