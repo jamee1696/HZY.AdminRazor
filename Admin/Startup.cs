@@ -10,17 +10,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using UEditor.Core;
 
 namespace Admin
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            webHostEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment webHostEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,10 +39,10 @@ namespace Admin
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             })
-        .AddRazorRuntimeCompilation();
+            .AddRazorRuntimeCompilation();
 
             #region AdminConfig
-            services.AdminConfigureServices(Configuration);
+            services.AdminConfigureServices(Configuration, webHostEnvironment);
             #endregion
         }
 

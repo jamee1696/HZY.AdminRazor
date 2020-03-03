@@ -27,7 +27,7 @@ namespace Admin
     {
         private static readonly IEnumerable<string> _VersionList = typeof(ApiVersionsEnum).GetEnumNames().ToList().OrderByDescending(w => w);
 
-        public static void AdminConfigureServices(this IServiceCollection services, IConfiguration Configuration)
+        public static void AdminConfigureServices(this IServiceCollection services, IConfiguration Configuration, IWebHostEnvironment env)
         {
             #region 跨域配置
             //配置跨域处理
@@ -141,6 +141,15 @@ namespace Admin
                 #endregion
 
             });
+            #endregion
+
+            #region Ueditor
+            //Ueditor  编辑器 服务端 注入  configFileRelativePath: "wwwroot/admin/libs/nUeditor/net/config.json", isCacheConfig: false, basePath: "C:/basepath"
+            services.AddUEditorService(
+                    configFileRelativePath: env.WebRootPath + "/admin/libs/neditor/net/config.json",
+                    isCacheConfig: false,
+                    basePath: env.WebRootPath + "/admin/libs/neditor/net/"
+                );
             #endregion
         }
 
