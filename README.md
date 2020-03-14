@@ -32,7 +32,7 @@
 
 
 #### 部分界面截图
-![输入图片说明](https://images.gitee.com/uploads/images/2019/0711/004720_5c95a75f_1242080.jpeg "1.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0314/224558_f569321d_1242080.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0830/184022_514f540f_1242080.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0805/085723_b1c615f0_1242080.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0711/005112_29863a12_1242080.jpeg "1562777452(1).jpg")
