@@ -6,7 +6,8 @@
     <!-- 避免IE使用兼容模式 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <!-- 移动设备 viewport -->
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
     <!-- 360浏览器默认使用Webkit内核 -->
     <meta name="renderer" content="webkit">
     <!-- 禁止搜索引擎抓取 -->
@@ -25,35 +26,29 @@
         <![endif]-->
     <title>HzyAdmin</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="libs/fontawesome-free-5.9.0-web/css/all.min.css" rel="stylesheet" />
-    <link href="libs/metismenu-master/metisMenu.min.css" rel="stylesheet" />
-    <link href="libs/web-icons-master/css/web-icons.css" rel="stylesheet" />
+    <!--样式-->
+    <link href="css/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/core.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
-    <link href="css/main.css" rel="stylesheet" />
-    <!--js-->
-    <script src="js/router.js"></script>
-    <script src="libs/jquery/jquery-3.2.1.min.js"></script>
-    <script src="libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
-    <script src="libs/bootstrap-master/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="libs/metismenu-master/metisMenu.min.js"></script>
-    <script src="~/admin/libs/sweetalert-master/sweetalert.min.js"></script>
-    <script src="js/main.js"></script>
+    <!--主页面-->
+    <link href="css/hzyAdminUI.css" rel="stylesheet" />
+
     <style type="text/css">
         #hzy-login {
-            background: url(images/login4.jpg);
+            background: #f0f2f5 url(images/login-bg.svg) no-repeat 50%;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="hzy-login" class="animated fadeIn">
-        <div class="login-modal">
-        </div>
+    <div id="hzy-login">
+        <!-- <div class="login-modal">
+        </div> -->
         <div class="container-fluid">
             <div class="row">
-                <div class="login-panel">
+                <div class="login-panel shadow-lg">
                     <h1 class="text-center">HzyAdmin</h1>
 
                     <div class="container-fluid">
@@ -75,7 +70,9 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="loginCode" placeholder="请输入验证码">
                                     <div class="input-group-append">
-                                        <img class="yzm" src="http://www.suiyu.org.cn/Admin/Login/yzm" onclick="$(this).attr('src','http://www.suiyu.org.cn/Admin/Login/yzm'+'/'+new Date().getTime());" width="100" style="height: 31px; border-bottom: 1px solid #e4eaec;">
+                                        <img class="yzm" src="http://www.suiyu.org.cn/Admin/Login/yzm"
+                                            onclick="$(this).attr('src','http://www.suiyu.org.cn/Admin/Login/yzm'+'/'+new Date().getTime());"
+                                            width="100" style="height: 29px; border-bottom: 1px solid #e4eaec;">
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +90,9 @@
             </div>
         </div>
     </div>
-
-
+    <!--js-->
+    <script src="libs/jquery/jquery-3.2.1.min.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

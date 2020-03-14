@@ -25,29 +25,39 @@
         <![endif]-->
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="~/admin/hzyAdminUI/libs/fontawesome-free-5.9.0-web/css/all.min.css" rel="stylesheet" />
+    <!--菜单-->
     <link href="~/admin/hzyAdminUI/libs/metismenu-master/metisMenu.min.css" rel="stylesheet" />
-    <link href="~/admin/hzyAdminUI/libs/web-icons-master/css/web-icons.css" rel="stylesheet" />
+    <!--web icons 图标库-->
+    <link href="~/admin/hzyAdminUI/css/web-icons-master/css/web-icons.css" rel="stylesheet" />
+    <!--样式-->
+    <link href="~/admin/hzyAdminUI/css/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="~/admin/hzyAdminUI/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/admin/hzyAdminUI/css/core.css" rel="stylesheet" />
     <link href="~/admin/hzyAdminUI/css/site.css" rel="stylesheet" />
-    <link href="~/admin/hzyAdminUI/css/main.css" rel="stylesheet" />
-    <!--js-->
-    <script src="~/admin/hzyAdminUI/js/router.js"></script>
-    <script src="~/admin/hzyAdminUI/libs/jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/admin/hzyAdminUI/libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
-    <script src="~/admin/hzyAdminUI/libs/bootstrap-master/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/admin/hzyAdminUI/libs/metismenu-master/metisMenu.min.js"></script>
-    <script src="~/admin/hzyAdminUI/js/main.js"></script>
+    <!--选项卡-->
+    <link href="~/admin/hzyAdminUI/libs/hzyBootStrapTabs/index.css" rel="stylesheet" />
+    <!--主页面-->
+    <link href="~/admin/hzyAdminUI/css/hzyAdminUI.css" rel="stylesheet" />
     <!--system-->
     @{await Html.RenderPartialAsync("~/Areas/Admin/Views/Sys/PowerControl/Index.cshtml");}
-    <script src="~/admin/libs/layer/layer.js"></script>
-    <script src="~/admin/js/admin.js"></script>
-    <script src="~/admin/libs/vue/vue.js"></script>
     @RenderSection("Styles", required: false)
     <link href="~/admin/css/admin.css" rel="stylesheet" />
 </head>
-<body class="@ViewBag.BodyClass">    
+<body class="@ViewBag.BodyClass">
     @RenderBody()
+    <!--脚本-->
+    <script src="~/admin/hzyAdminUI/libs/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/admin/hzyAdminUI/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!--metisMenu 菜单-->
+    <script src="~/admin/hzyAdminUI/libs/metismenu-master/metisMenu.min.js"></script>
+    <!--选项卡-->
+    <script src="~/admin/hzyAdminUI/libs/hzyBootStrapTabs/index.js"></script>
+    <!--主页面-->
+    <script src="~/admin/hzyAdminUI/js/hzyAdminUI.js"></script>
+    <!--admin-->
+    <script src="~/admin/libs/layer/layer.js"></script>
+    <script src="~/admin/js/admin.js"></script>
+    <script src="~/admin/libs/vue/vue.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

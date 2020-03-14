@@ -42,7 +42,7 @@ namespace Admin.Areas.Admin.Controllers
             return this.Success(new
             {
                 status = 1,
-                jumpurl = AppConfig.HomePageUrl + "#!%u9996%u9875#!/Admin/Home/Main/",
+                jumpurl = AppConfig.HomePageUrl,
                 token = token
             });
         }

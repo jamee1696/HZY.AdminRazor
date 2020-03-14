@@ -204,12 +204,12 @@ namespace Logic.SysClass
             {
                 if (Id == Guid.Empty)
                 {
-                    _StringBuilder.Append("<ul class=\"metismenu\" id=\"adminMenu\">");
+                    _StringBuilder.Append("<ul class='metismenu' id='hzyAdminMenu'>");
 
-                    _StringBuilder.Append("<li hzy-router=\"#!首页#!/Admin/Home/Main/\"><a href=\"javascript:void(0)\"><i class=\"fas fa-tachometer-alt\"></i><span>首页</span></a></li>");
+                    _StringBuilder.Append("<li hzy-id='home' hzy-href='/Admin/Home/Main/' hzy-title='首页'><a href='javascript:;'><i class='fas fa-tachometer-alt'></i><span>首页</span></a></li>");
                 }
                 else
-                    _StringBuilder.Append("<ul class=\"mm-collapse\">");
+                    _StringBuilder.Append("<ul class='mm-collapse'>");
 
                 foreach (var item in _Parent_List)
                 {
@@ -219,16 +219,16 @@ namespace Logic.SysClass
                     {
                         _StringBuilder.Append("<li>");
 
-                        _StringBuilder.AppendFormat("<a class=\"has-arrow\" href=\"javascript:void(0)\" aria-expanded=\"false\"><i class=\"{0}\"></i><span>{1}</span></a>", item.Menu_Icon, item.Menu_Name);
+                        _StringBuilder.Append($"<a class='has-arrow' href='javascript:;' aria-expanded='false'><i class='{item.Menu_Icon}'></i><span>{item.Menu_Name}</span></a>");
 
                         this.CreateMenus(item.Menu_ID, _Sys_Menu_List, _StringBuilder);
                         _StringBuilder.Append("</li>");
                     }
                     else
                     {
-                        _StringBuilder.AppendFormat("<li hzy-router=\"#!{0}#!{1}\">", item.Menu_Name, item.Menu_Url);
+                        _StringBuilder.Append($"<li hzy-id='{item.Menu_ID}' hzy-href='{item.Menu_Url}' hzy-title='{item.Menu_Name}'>");
 
-                        _StringBuilder.AppendFormat("<a href=\"javascript:void(0);var url='{0}';\" aria-expanded=\"false\"><i class=\"{1}\"></i><span>{2}</span></a>", item.Menu_Url, item.Menu_Icon, item.Menu_Name);
+                        _StringBuilder.Append($"<a href='javascript:;var url='{item.Menu_Url}';' aria-expanded='false'><i class='{item.Menu_Icon}'></i><span>{item.Menu_Name}</span></a>");
 
                         _StringBuilder.Append("</li>");
                     }
