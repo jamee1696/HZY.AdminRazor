@@ -18,7 +18,7 @@ var hzyBootStrapTabs = {
     //是否自动适应高度
     isIframeHeight: false,
     //tabArray=[{ id:'1' , title:'名称' , href:'www.baidu.com',active:false,isClose=false }]
-    init: function (el, tabArray = [], _callChangeTab, _moveSpeed = 1000, _locationMoveSpeed = 200, _isIframeHeight = false) {
+    init: function(el, tabArray = [], _callChangeTab, _moveSpeed = 1000, _locationMoveSpeed = 200, _isIframeHeight = false) {
         var _this = this;
         _this.el = el;
         $(_this.el).empty().html(_this.getTemp(tabArray));
@@ -28,7 +28,7 @@ var hzyBootStrapTabs = {
         _this.locationMoveSpeed = _locationMoveSpeed;
         _this.isIframeHeight = _isIframeHeight;
         //
-        $(window).resize(function () {          //当浏览器大小变化时
+        $(window).resize(function() { //当浏览器大小变化时
             //alert($(window).height());          //浏览器时下窗口可视区域高度
             //alert($(document).height());        //浏览器时下窗口文档的高度
             //alert($(document.body).height());   //浏览器时下窗口文档body的高度
@@ -39,7 +39,7 @@ var hzyBootStrapTabs = {
         });
 
         if (_this.isIframeHeight) {
-            setInterval(function () {
+            setInterval(function() {
                 //定时检测 iframe 高度
                 var iframe = $(el).find('iframe');
                 for (var i = 0; i < iframe.length; i++) {
@@ -56,7 +56,7 @@ var hzyBootStrapTabs = {
             _this.addTab(tabinfo.id, tabinfo.title, tabinfo.href, tabinfo.active, tabinfo.isClose);
         }
     },
-    getTemp: function (tabArray) {
+    getTemp: function(tabArray) {
 
         var tempTab = '';
 
@@ -90,7 +90,7 @@ var hzyBootStrapTabs = {
         </div>
         <div class="hzytabs-tablist-center">
             <ul class="nav nav-pills" role="tablist">
-                `+ tempTab + `
+                ` + tempTab + `
             </ul>
         </div>
         <div class="hzytabs-tablist-right">
@@ -118,11 +118,11 @@ var hzyBootStrapTabs = {
     </div>
     <div class="tab-content">
         <div class="tab-loading">
-            <div class="spinner-border text-primary" role="status">
+            <div class="spinner-grow text-danger" style="width: 5rem; height: 5rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>        
-        `+ tempIframe + `
+        ` + tempIframe + `
     </div>
 </div>
 
@@ -131,65 +131,77 @@ var hzyBootStrapTabs = {
         return temp;
 
     },
-    getTempTab: function (id, title, href, active = false, isClose = true) {
+    getTempTab: function(id, title, href, active = false, isClose = true) {
 
         var closeTemp = `<i class="fas fa-close"></i>`;
         closeTemp = '';
 
         return `
 
-<li class="nav-item" hzy-id="`+ id + `" hzy-title="` + title + `" hzy-href="` + href + `" hzy-active="` + active + `" hzy-isClose="` + isClose + `" ondblclick="hzyBootStrapTabs.removeThisTab()">
-    <a class="nav-link`+ (active ? ' active' : '') + `" id="` + id + `-tab" data-toggle="pill" href="#` + id + `" role="tab" aria-controls="` + id + `" aria-selected="` + active + `" isClose="` + isClose + `">` + title + ` ` + (isClose ? closeTemp : '') + `</a>
+<li class="nav-item" hzy-id="` + id + `" hzy-title="` + title + `" hzy-href="` + href + `" hzy-active="` + active + `" hzy-isClose="` + isClose + `" ondblclick="hzyBootStrapTabs.removeThisTab()">
+    <a class="nav-link` + (active ? ' active' : '') + `" id="` + id + `-tab" data-toggle="pill" href="#` + id + `" role="tab" aria-controls="` + id + `" aria-selected="` + active + `" isClose="` + isClose + `">` + title + ` ` + (isClose ? closeTemp : '') + `</a>
 </li>
 
 `;
 
     },
-    getTempIframe: function (id, title, href, active = false, isClose = true) {
+    getTempIframe: function(id, title, href, active = false, isClose = true) {
 
         return `
 
-<div class="tab-pane fade`+ (active ? ' show active' : '') + `" id="` + id + `" role="tabpanel" aria-labelledby="` + id + `-tab">
-    <iframe frameborder="0" scrolling="auto" src="`+ href + `" name="` + id + `-iframe" onload="hzyBootStrapTabs.iframeSetHeight(this)"></iframe>
+<div class="tab-pane fade` + (active ? ' show active' : '') + `" id="` + id + `" role="tabpanel" aria-labelledby="` + id + `-tab">
+    <iframe frameborder="0" scrolling="auto" src="` + href + `" name="` + id + `-iframe" onload="hzyBootStrapTabs.iframeSetHeight(this)"></iframe>
 </div>
 
 `;
 
     },
     //设置 iframe 高度
-    iframeSetHeight: function (e) {
+    iframeSetHeight: function(e) {
         //console.log('e', e.contentWindow.document.body);
         var src = $(e).attr('src');
         if (src.indexOf('http') == 0) return;
         if (!this.isIframeHeight) return;
-        setTimeout(function () {
+        setTimeout(function() {
             //$(e).height($(e.contentWindow.document.body).height() + 50);
             $(e).height($(e.contentDocument.body).height() + 50);
         }, 200);
     },
+    //
+    iframeLoadingStart: function() {
+        $(this.el).find('.tab-loading').show();
+    },
+    iframeLoadingClose: function() {
+        setTimeout(() => {
+            $(this.el).find('.tab-loading').hide();
+        }, 300);
+    },
     //监听iframe 对象加载完成
-    iframeLoadSuccess: function (iframe, callBack) {
+    iframeLoadSuccess: function(iframe, callBack) {
         if (iframe.attachEvent) {
             //todo something
             if (callBack) callBack();
         } else {
-            iframe.onload = function () {
+            iframe.onload = function() {
                 //todo something
                 if (callBack) callBack();
             }
         }
     },
     //加载当前页面
-    loadCurrentPage: function () {
+    loadCurrentPage: function() {
+        var _this = this;
+        _this.iframeLoadingStart();
         var iframe = $(this.el).find('.tab-content .tab-pane.active iframe');
         var src = iframe.attr('src');
         iframe.attr('src', src);
-        this.iframeLoadSuccess(iframe[0], function () {
+        this.iframeLoadSuccess(iframe[0], function() {
             console.log('iframe 加载完成!');
+            _this.iframeLoadingClose();
         });
     },
     //左移动
-    moveLeft: function () {
+    moveLeft: function() {
         var _moveLen = $(this.el).find('.hzytabs-tablist-center').width();
         var ul = $(this.el).find('.hzytabs-tablist-center ul');
 
@@ -207,14 +219,14 @@ var hzyBootStrapTabs = {
             return;
         }
 
-        this.animateTab(ul, { left: '-=' + _moveLen + 'px' }, function () {
+        this.animateTab(ul, { left: '-=' + _moveLen + 'px' }, function() {
             if (Math.abs(ul.position().left) >= endValue) {
                 ul.css({ 'left': '-' + endValue + 'px' });
             }
         });
     },
     //右移动
-    moveRight: function () {
+    moveRight: function() {
         var _moveLen = $(this.el).find('.hzytabs-tablist-center').width();
         var ul = $(this.el).find('.hzytabs-tablist-center ul');
 
@@ -223,25 +235,25 @@ var hzyBootStrapTabs = {
             return;
         }
 
-        this.animateTab(ul, { left: '+=' + _moveLen + 'px' }, function () {
+        this.animateTab(ul, { left: '+=' + _moveLen + 'px' }, function() {
             if (ul.position().left > 0) {
                 ul.css({ 'left': '0px' });
             }
         });
     },
     //移动动画
-    animateTab: function (dom, obj, callCheckEnd, newMoveSpeed = 0) {
+    animateTab: function(dom, obj, callCheckEnd, newMoveSpeed = 0) {
         dom.stop().animate(obj, newMoveSpeed > 0 ? newMoveSpeed : this.moveSpeed, callCheckEnd);
     },
     //激活选项卡
-    activeTab: function (id) {
+    activeTab: function(id) {
         //先取消所有激活
         $(this.el).find('.hzytabs-tablist-center li a.nav-link').removeClass('active');
         $(this.el).find('.hzytabs-tablist-center li a.nav-link').attr('aria-selected', false);
         //
         $(this.el).find('.tab-content .tab-pane').removeClass('show active');
         //
-        var tab = $(this.el).find('.hzytabs-tablist-center a[id=' + id + '-tab]');//.tab('show')
+        var tab = $(this.el).find('.hzytabs-tablist-center a[id=' + id + '-tab]'); //.tab('show')
         tab.addClass('active');
         tab.attr('aria-selected', true);
         $(this.el).find('.tab-content .tab-pane[id=' + id + ']').addClass('show active');
@@ -272,7 +284,7 @@ var hzyBootStrapTabs = {
         this.location();
     },
     //选项卡智能定位 tab
-    location: function () {
+    location: function() {
         var lookArea = $(this.el).find('.hzytabs-tablist-center');
 
         var ul = lookArea.find('ul');
@@ -282,7 +294,7 @@ var hzyBootStrapTabs = {
 
         //判断是否需要定位
         if (offsetLeft < tabListOffsetLeft) {
-            this.animateTab(ul, { 'left': '-' + tab.position().left + 'px' }, function () {
+            this.animateTab(ul, { 'left': '-' + tab.position().left + 'px' }, function() {
                 ul = lookArea.find('ul');
                 if (ul.position().left > 0) {
                     ul.css({ 'left': '0px' });
@@ -293,7 +305,7 @@ var hzyBootStrapTabs = {
         var _otherArea = ($(this.el).width() - lookArea.width()) + tab.width();
         if (offsetLeft > (lookArea.width() + tabListOffsetLeft) - _otherArea) {
             var len = tab.position().left - lookArea.width() + _otherArea;
-            this.animateTab(ul, { 'left': '-' + len + 'px' }, function () {
+            this.animateTab(ul, { 'left': '-' + len + 'px' }, function() {
                 ul = lookArea.find('ul');
                 var lis = ul.find('li');
                 var liWidth = 0;
@@ -312,7 +324,8 @@ var hzyBootStrapTabs = {
         }
     },
     //添加 tab
-    addTab: function (id, title, href, active = true, isClose = true) {
+    addTab: function(id, title, href, active = true, isClose = true) {
+        var _this = this;
         var ul = $(this.el).find('.hzytabs-tablist-center ul');
         //检查 id 是否存在
         var tab = $(this.el).find('.hzytabs-tablist-center a[id=' + id + '-tab]');
@@ -320,6 +333,7 @@ var hzyBootStrapTabs = {
             this.activeTab(id);
             return;
         }
+        _this.iframeLoadingStart();
         //不存在添加 dom
         var tempTab = this.getTempTab(id, title, href, active, isClose);
         var tempIframe = this.getTempIframe(id, title, href, active, isClose);
@@ -327,14 +341,15 @@ var hzyBootStrapTabs = {
         $(this.el).find('.tab-content').append(tempIframe);
         //iframe 加载完成监听
         var iframe = $(this.el).find('.tab-content .tab-pane.active iframe');
-        this.iframeLoadSuccess(iframe[0], function () {
+        this.iframeLoadSuccess(iframe[0], function() {
             console.log('iframe 加载完成!');
+            _this.iframeLoadingClose();
         });
         //激活选项卡
         this.activeTab(id);
     },
     //移除当前 选项卡
-    removeThisTab: function () {
+    removeThisTab: function() {
         var tab = $(this.el).find('.hzytabs-tablist-center li a.nav-link.active');
         var isClose = tab.parent().attr('hzy-isClose');
         if (!JSON.parse(isClose)) return;
@@ -344,7 +359,7 @@ var hzyBootStrapTabs = {
         }
     },
     //移除选项卡
-    removeTab: function (id) {
+    removeTab: function(id) {
         var tab = $(this.el).find('.hzytabs-tablist-center a[id=' + id + '-tab]').parent();
         var content = $(this.el).find('.tab-content .tab-pane[id=' + id + ']');
         //判断能否移除
@@ -357,7 +372,7 @@ var hzyBootStrapTabs = {
         this.activeTab(prevId);
     },
     //移除所有
-    removeAllTab: function () {
+    removeAllTab: function() {
         var tabs = $(this.el).find('.hzytabs-tablist-center li a.nav-link');
         for (var i = 0; i < tabs.length; i++) {
             var item = $(tabs[i]);
@@ -371,7 +386,7 @@ var hzyBootStrapTabs = {
         this.activeTab(id);
     },
     //移除其他选项卡
-    removeOtherTab: function () {
+    removeOtherTab: function() {
         var tab = $(this.el).find('.hzytabs-tablist-center li a.nav-link.active');
         var idActive = tab.attr('aria-controls');
 

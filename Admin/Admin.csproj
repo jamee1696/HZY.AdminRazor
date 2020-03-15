@@ -534,12 +534,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\admin\hzyAdminUI\.git\objects\info\" />
     <Folder Include="wwwroot\admin\hzyAdminUI\.git\refs\tags\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\libs\bootstrap-master\dist\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\libs\bootstrap-master\js\dist\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\libs\bootstrap-master\js\src\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\libs\bootstrap-master\js\tests\unit\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\libs\fontawesome-free-5.9.0-web\svgs\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\libs\web-icons-master\src\" />
   </ItemGroup>
 
 
