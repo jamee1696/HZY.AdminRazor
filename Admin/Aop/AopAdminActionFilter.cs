@@ -16,6 +16,13 @@ namespace Aop
     /// </summary>
     public class AopAdminActionFilter : ActionFilterAttribute
     {
+        private List<string> Actions { get; set; } = new List<string>()
+        {
+            //"Save",
+            //"Delete",
+            //"ChangePwd",
+        };
+
         /// <summary>
         /// 忽略特性
         /// </summary>
@@ -62,6 +69,9 @@ namespace Aop
             }
 
             AccountLogic.InsertAppLog(context.HttpContext, _Controller._Account.UserID);
+
+            //阻止进行 添加 修改 删除
+            if (Actions.Select(w => w.ToLower()).Contains(_ActionName.ToLower())) throw new MessageBox("更多操作请下载源代码本地运行!");
 
             //如果表单key 存在 则自动将 控制器 基类 表单key 属性赋值上
             var _FormKey = _Controller.Request.Query["formKey"].ToStr();
