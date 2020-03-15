@@ -28,6 +28,7 @@ var hzy = {
     init: function () {
         hzy.menu.domObject = $('#hzyAdminMenu').metisMenu({ toggle: true });
         hzy.menu.init();
+        hzy.header.init();
         window.onresize = function () {
             hzy.menu.init();
         };
