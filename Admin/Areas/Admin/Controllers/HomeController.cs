@@ -45,6 +45,30 @@ namespace Admin.Areas.Admin.Controllers
             return this.Success();
         }
 
+        [HttpGet]
+        public IActionResult Chat()
+        {
+            var _Ip = HttpContext.Connection.RemoteIpAddress.ToString();
+            ViewBag.IP = _Ip;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChatInit()
+        {
+            var _Sessions = WebSocketWork.GetAllAppSessions()?
+                .OrderByDescending(w => w.LastActiveTime)
+                .Select(w => w.HttpContext.Connection.RemoteIpAddress.ToString())
+                .Distinct()
+                .ToList();
+
+            return Json(new
+            {
+                status = 1,
+                oldMsg = WebSocketWork.OldMessages.ToStr(),
+                userList = _Sessions
+            });
+        }
 
 
     }

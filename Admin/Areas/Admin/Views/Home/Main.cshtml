@@ -362,5 +362,17 @@
 
 }
 @section Scripts{
-
+    <script>
+        $(function () {
+            layer.open({
+                type: 2,
+                title: "WebSocket 测试",
+                shadeClose: false,
+                shade: [0.8, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['893px', '600px'],
+                content: '@Url.Action("Chat")'
+            });
+        });
+    </script>
 }

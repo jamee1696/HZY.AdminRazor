@@ -220,6 +220,71 @@
             </remarks>
             <returns></returns>
         </member>
+        <member name="M:Admin.WebSocketWork.ExecuteCommand(Admin.WebSocketMsgModel,System.String)">
+            <summary>
+            接收前端发过来的指令
+            </summary>
+            <param name="appSession"></param>
+            <param name="Content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.WebSocketWork.GetAppSessions(System.Func{Admin.WebSocketMsgModel,System.Boolean})">
+            <summary>
+            根据条件筛选 Session 对象
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.WebSocketWork.GetAllAppSessions">
+            <summary>
+            获取 所有 session 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.WebSocketWork.AddAppSession(Admin.WebSocketMsgModel)">
+            <summary>
+            插入Session 对象
+            </summary>
+            <param name="appSession"></param>
+        </member>
+        <member name="M:Admin.WebSocketWork.RemoveSession(System.Func{Admin.WebSocketMsgModel,System.Boolean})">
+            <summary>
+            移除Session 对象
+            </summary>
+            <param name="predicate"></param>
+        </member>
+        <member name="M:Admin.WebSocketWork.GetAppSessionCount">
+            <summary>
+            获取 session 连接数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.WebSocketWork.Any(System.Func{Admin.WebSocketMsgModel,System.Boolean})">
+            <summary>
+            检查 session 是否存在
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Admin.WebSocketWork.SendAsync``1(System.Func{Admin.WebSocketMsgModel,System.Boolean},``0,System.Int32)">
+            <summary>
+            发送消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <param name="Data"></param>
+        </member>
+        <member name="M:Admin.WebSocketWork.SendAllAsync``1(``0,System.Int32)">
+            <summary>
+            所有连接用户发送消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="Data"></param>
+        </member>
+        <member name="T:Admin.WebSocketMsgModel">
+            <summary>
+            WebSocket 消息 模型
+            </summary>
+        </member>
         <member name="T:Aop.AopAdminActionFilter">
             <summary>
             检查session 

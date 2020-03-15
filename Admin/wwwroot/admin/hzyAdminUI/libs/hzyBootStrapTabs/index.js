@@ -169,12 +169,12 @@ var hzyBootStrapTabs = {
     },
     //
     iframeLoadingStart: function() {
-        $(this.el).find('.tab-loading').show();
+        //$(this.el).find('.tab-loading').show();
     },
     iframeLoadingClose: function() {
-        setTimeout(() => {
-            $(this.el).find('.tab-loading').hide();
-        }, 300);
+        //setTimeout(() => {
+        //    $(this.el).find('.tab-loading').hide();
+        //}, 300);
     },
     //监听iframe 对象加载完成
     iframeLoadSuccess: function(iframe, callBack) {

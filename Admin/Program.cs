@@ -16,7 +16,7 @@ namespace Admin
     {
         public static void Main(string[] args)
         {
-            var logger = NLog.Web.NLogBuilder.ConfigureNLog("NLog/nlog.config").GetCurrentClassLogger();
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
                 //…Ë÷√NLog

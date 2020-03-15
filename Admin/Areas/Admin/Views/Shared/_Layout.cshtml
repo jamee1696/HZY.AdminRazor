@@ -38,8 +38,6 @@
     <link href="~/admin/hzyAdminUI/libs/hzyBootStrapTabs/index.css" rel="stylesheet" />
     <!--主页面-->
     <link href="~/admin/hzyAdminUI/css/hzyAdminUI.css" rel="stylesheet" />
-    <!--system-->
-    @{await Html.RenderPartialAsync("~/Areas/Admin/Views/Sys/PowerControl/Index.cshtml");}
     @RenderSection("Styles", required: false)
     <link href="~/admin/css/admin.css" rel="stylesheet" />
 </head>
@@ -47,6 +45,8 @@
     @RenderBody()
     <!--脚本-->
     <script src="~/admin/hzyAdminUI/libs/jquery/jquery-3.2.1.min.js"></script>
+    <!--system-->
+    @{await Html.RenderPartialAsync("~/Areas/Admin/Views/Sys/PowerControl/Index.cshtml");}
     <script src="~/admin/hzyAdminUI/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--metisMenu 菜单-->
     <script src="~/admin/hzyAdminUI/libs/metismenu-master/metisMenu.min.js"></script>

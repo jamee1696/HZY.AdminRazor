@@ -6,7 +6,7 @@
 
 .hzytabs-content .tab-content .tab-loading {
     position: absolute;
-    display: block;
+    display: none;
     width: 100%;
     height: 100vh;
     z-index: 99999;

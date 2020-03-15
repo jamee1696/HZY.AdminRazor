@@ -22,6 +22,8 @@ namespace Admin
     using Microsoft.Extensions.Hosting;
     using Swashbuckle.AspNetCore.Filters;
     using Microsoft.OpenApi.Models;
+    using Logic.Class;
+    using Entitys.SysClass;
 
     public static class AdminStartupConfigure
     {
@@ -151,6 +153,11 @@ namespace Admin
                     basePath: env.WebRootPath + "/admin/libs/neditor/net/"
                 );
             #endregion
+
+
+            #region websocket 中间件 注入
+            WebSocketWork.RegisterService(services);
+            #endregion
         }
 
         public static void AdminConfigure(this IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
@@ -171,6 +178,8 @@ namespace Admin
             applicationLifetime.ApplicationStarted.Register(() =>
             {
                 Tools.Log.Write("App启动");
+                //清除前30天数据
+                AppBase.db.DeleteAsync<Sys_AppLog>(w => w.t1.AppLog_CreateTime <= DateTime.Now.AddDays(-30));
             });
             //程序正在结束中
             applicationLifetime.ApplicationStopping.Register(() =>
@@ -215,6 +224,13 @@ namespace Admin
 
             #region 使用跨域
             //app.UseCors("ApiAny");
+            #endregion
+
+            #region WebSocket
+
+            //WebSocket
+            WebSocketWork.Register(app);
+
             #endregion
 
         }
