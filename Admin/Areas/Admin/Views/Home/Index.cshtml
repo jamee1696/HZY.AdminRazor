@@ -21,7 +21,7 @@
             }
         };
         //js路由初始化
-        hzy.init();
+        hzyAdminUI.init();
         //初始化多标签页框架
         hzyBootStrapTabs.init("#hzyAdminTabs", [{
             id: 'home',
@@ -30,7 +30,11 @@
             active: true,
             isClose: false
         }], function (obj) {
-            hzy.menu.active(obj.id);
+            hzyAdminUI.menu.active(obj.id);
+        }, function () {
+            //admin.loading.start();
+        }, function () {
+            //admin.loading.end();
         });
     </script>
 }
@@ -39,7 +43,7 @@
         <div class="hzy-header-left">
             <ul>
                 <!--fas fa-indent-->
-                <li class="hzy-headerhover" onclick="hzy.menu.toggle();">
+                <li class="hzy-headerhover" onclick="hzyAdminUI.menu.toggle();">
                     <a href="javascript:void(0)">
                         <i class="fas fa-outdent"></i>
                     </a>
@@ -65,7 +69,7 @@
                 <!--fa fa-compress-->
                 <li class="hzy-headerhover">
                     <a href="javascript:;"
-                       onclick="hzy.fullScreen.handleFullScreen(this)"><i class="fas fa-expand"></i></a>
+                       onclick="hzyAdminUI.fullScreen.handleFullScreen(this)"><i class="fas fa-expand"></i></a>
                 </li>
                 <li class="hzy-headerhover"><a href="@ViewBag.Out">登录人：&nbsp;<span>@ViewBag.UsreName</span>&nbsp;<i class="fas fa-sign-out-alt"></i></a></li>
             </ul>
@@ -103,55 +107,55 @@
                             <ul class="list-unstyled list-inline" style="text-align: left;">
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-white"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-white')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-white')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-blue"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-blue')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-blue')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-dark"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-dark')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-dark')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-primary"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-primary')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-primary')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-cyan"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-cyan')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-cyan')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-green"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-green')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-green')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-indigo"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-indigo')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-indigo')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-grey"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-grey')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-grey')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-pink"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-pink')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-pink')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-purple"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-purple')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-purple')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-red"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-red')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-red')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-teal"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-teal')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-teal')"></div>
                                 </li>
                                 <li class="pr-5 pl-5 inline-block">
                                     <div class="index-skin hzy-header-skin-orange"
-                                         onclick="hzy.header.setSkin('hzy-header-skin-orange')"></div>
+                                         onclick="hzyAdminUI.header.setSkin('hzy-header-skin-orange')"></div>
                                 </li>
                             </ul>
                         </div>
@@ -161,9 +165,9 @@
                         <label for="exampleInputEmail1">左侧菜单颜色：</label>
                         <div class="row">
                             <div class="col-sm-12 hzy-skin hzy-skin-default"
-                                 onclick="hzy.menu.setSkin(hzy.menu.mSkin.default)"></div>
+                                 onclick="hzyAdminUI.menu.setSkin(hzyAdminUI.menu.mSkin.default)"></div>
                             <div class="col-sm-12 hzy-skin hzy-skin-white"
-                                 onclick="hzy.menu.setSkin(hzy.menu.mSkin.white)"></div>
+                                 onclick="hzyAdminUI.menu.setSkin(hzyAdminUI.menu.mSkin.white)"></div>
                         </div>
 
                     </div>

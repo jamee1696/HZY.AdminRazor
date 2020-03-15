@@ -271,48 +271,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\admin\hzyAdminUI\.git\ms-persist.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\admin\hzyAdminUI\.git\COMMIT_EDITMSG" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\config" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\description" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\FETCH_HEAD" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\HEAD" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\applypatch-msg.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\commit-msg.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\fsmonitor-watchman.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\post-update.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\pre-applypatch.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\pre-commit.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\pre-push.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\pre-rebase.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\pre-receive.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\prepare-commit-msg.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\hooks\update.sample" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\index" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\info\exclude" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\logs\HEAD" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\logs\refs\heads\master" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\logs\refs\remotes\origin\HEAD" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\logs\refs\remotes\origin\master" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\1d\99d0e66722d5d564248bbc8748d6d7fe058b68" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\1e\4e9cbbe720d789de4ecaf3ffeeaf2dc051ee1e" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\7b\5c837dd1b22e8966eb9ebabb02fdac3543c7c7" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\a2\96ca2bee0e146c55f2fed50e82a57dfafabf85" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\b4\f571cd295e6402360f57a47bccea37e8ea6dd0" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\d9\f9d8f789b0458a0972dd4618a9fc0f4a898932" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\f7\d73ff553c236a24f2d73282717649e80959909" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\pack\pack-1439c9f7c26b7b45144b52d8ab2277d83b1f95b3.idx" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\pack\pack-1439c9f7c26b7b45144b52d8ab2277d83b1f95b3.pack" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\pack\pack-f8485907cdd866fe8631af8cf7283683ca5d5a9e.idx" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\objects\pack\pack-f8485907cdd866fe8631af8cf7283683ca5d5a9e.pack" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\ORIG_HEAD" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\packed-refs" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\refs\heads\master" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\refs\remotes\origin\HEAD" />
-    <None Include="wwwroot\admin\hzyAdminUI\.git\refs\remotes\origin\master" />
     <None Include="wwwroot\admin\hzyAdminUI\css\fontawesome-free\webfonts\fa-brands-400.svg" />
     <None Include="wwwroot\admin\hzyAdminUI\css\fontawesome-free\webfonts\fa-brands-400.woff2" />
     <None Include="wwwroot\admin\hzyAdminUI\css\fontawesome-free\webfonts\fa-regular-400.svg" />
@@ -504,14 +462,10 @@
     <None Include="wwwroot\admin\hzyAdminUI\libs\bootstrap\js\bootstrap.min.js" />
     <None Include="wwwroot\admin\hzyAdminUI\libs\bootstrap\js\bootstrap.min.js.map" />
     <None Include="wwwroot\admin\hzyAdminUI\libs\hzyBootStrapTabs\index.js" />
-    <None Include="wwwroot\admin\hzyAdminUI\libs\jquery-mousewheel\jquery.mousewheel.js" />
-    <None Include="wwwroot\admin\hzyAdminUI\libs\jquery-mousewheel\jquery.mousewheel.min.js" />
     <None Include="wwwroot\admin\hzyAdminUI\libs\jquery\jquery-3.2.1.js" />
     <None Include="wwwroot\admin\hzyAdminUI\libs\jquery\jquery-3.2.1.min.js" />
     <None Include="wwwroot\admin\hzyAdminUI\libs\metismenu-master\metisMenu.js" />
     <None Include="wwwroot\admin\hzyAdminUI\libs\metismenu-master\metisMenu.min.js" />
-    <None Include="wwwroot\admin\hzyAdminUI\LICENSE" />
-    <None Include="wwwroot\admin\hzyAdminUI\README.md" />
     <None Include="wwwroot\website\js\coordtransform.js" />
     <None Include="wwwroot\website\js\main.js" />
     <None Include="wwwroot\website\js\router.js" />
@@ -4031,11 +3985,6 @@
     <ProjectReference Include="..\Entitys\Entitys.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
     <ProjectReference Include="..\Toolkit\Toolkit.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\admin\hzyAdminUI\.git\objects\info\" />
-    <Folder Include="wwwroot\admin\hzyAdminUI\.git\refs\tags\" />
   </ItemGroup>
 
   <ItemGroup>

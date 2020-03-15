@@ -228,7 +228,7 @@ namespace Logic.SysClass
                     {
                         _StringBuilder.Append($"<li hzy-id='{item.Menu_ID}' hzy-href='{item.Menu_Url}' hzy-title='{item.Menu_Name}'>");
 
-                        _StringBuilder.Append($"<a href='javascript:;var url='{item.Menu_Url}';' aria-expanded='false'><i class='{item.Menu_Icon}'></i><span>{item.Menu_Name}</span></a>");
+                        _StringBuilder.Append($"<a href='javascript:;' title='{item.Menu_Url}' aria-expanded='false'><i class='{item.Menu_Icon}'></i><span>{item.Menu_Name}</span></a>");
 
                         _StringBuilder.Append("</li>");
                     }

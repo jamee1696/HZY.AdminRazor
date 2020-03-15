@@ -138,9 +138,17 @@
                     setTimeout(function () {
                         document.getElementById('text').scrollTop = document.getElementById('text').scrollHeight;
                     }, 300);
-                    //播放音频
-                    var newmsg = $('#newmsg')[0];
-                    newmsg.play();
+
+                    try {
+                        setTimeout(function () {
+                            //播放音频
+                            var newmsg = $('#newmsg')[0];
+                            if(newmsg) newmsg.play();
+                        },500);
+                    } catch (e) {
+                        console.log('音频播放失败', e);
+                    }
+
 
                 }
             }
