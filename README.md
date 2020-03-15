@@ -12,11 +12,9 @@
 
  **有兴趣看看 Vue 版本单页程序基于 : https://gitee.com/hzy6/HZY.AdminSpa** 
 
- **文档、演示：http://hzyadmin.milaizhijie.com**
+ **文档、演示：http://hzyadmin.milaizhijie.com/website/index.html**
 
  **vue单页预览地址 ：http://hzyadmin.milaizhijie.com/index.html** 
-
-> .NetCore 2.2 版本请查看分支master : https://gitee.com/hzy6/HzyAdmin/tree/master/
 
 
 #### 软件架构
