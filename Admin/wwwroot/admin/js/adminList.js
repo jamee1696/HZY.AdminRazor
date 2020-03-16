@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
  * *******************************************************
  *
  * 作者：hzy
@@ -8,34 +7,34 @@
  *
  * *******************************************************
  */
-window.adminList = (function () {
+window.adminList = (function() {
     var domButton = {
-        panelSearch: function () {
+        panelSearch: function() {
             return $('#panelSearch');
         },
-        btnAdd: function () {
+        btnAdd: function() {
             return $('*[name=add]');
         },
-        btnEdit: function () {
+        btnEdit: function() {
             return $('*[name=edit]');
         },
-        btnDelete: function () {
+        btnDelete: function() {
             return $('*[name=delete]');
         },
-        findBack: function () {
+        findBack: function() {
             return admin.getQueryString("findback");
         }
     };
 
-    return function (listObject) {
+    return function(listObject) {
         if (listObject) {
             if (listObject.hasOwnProperty('domButton')) domButton = listObject.domButton;
         }
 
         var adminListClass = {
-            tableObject: {},//表格对象
-            tableSelectedIndex: 0,//选中索引
-            tableInit: function (tableParameter) {
+            tableObject: {}, //表格对象
+            tableSelectedIndex: 0, //选中索引
+            tableInit: function(tableParameter) {
                 var defaultsConfigs = {
                     dom: '#adminTable',
                     url: "",
@@ -54,7 +53,7 @@ window.adminList = (function () {
                     showFullscreen: true,
                     pagination: true,
                     clickToSelect: true,
-                    maintainMetaData: true,//点击复选框可多选
+                    maintainMetaData: true, //点击复选框可多选
                     //multipleSelect: true,
                     //ignoreClickToSelectOn: function (e) {
                     //    console.log(e,$(e).hasClass('bs-checkbox'));
@@ -63,15 +62,15 @@ window.adminList = (function () {
                     //},
                     //singleSelect: true,//单选一行
                     showColumns: true,
-                    sortable: true,//是否启用排序
+                    sortable: true, //是否启用排序
                     silentSort: true,
                     sortStable: true,
-                    sortName: null,//定义排序列,通过url方式获取数据填写字段名，否则填写下标
-                    sortOrder: "asc",//定义排序方式 'asc' 或者 'desc'
+                    sortName: null, //定义排序列,通过url方式获取数据填写字段名，否则填写下标
+                    sortOrder: "asc", //定义排序方式 'asc' 或者 'desc'
                     //buttonsToolbar: '#tools',
-                    height: $(window).height() - 75,
+                    height: $(window).height() - 50,
                     data: [],
-                    responseHandler: function (res) {
+                    responseHandler: function(res) {
                         return res;
                     },
                     undefinedText: '',
@@ -85,13 +84,12 @@ window.adminList = (function () {
                 };
 
                 //拼接 一下表格的默认 列
-                var columns_def = [
-                    {
+                var columns_def = [{
                         field: 'adminListIndex',
                         title: 'No.',
                         width: '35px',
                         align: 'center',
-                        formatter: function (value, row, index) {
+                        formatter: function(value, row, index) {
                             var page = tableObject.bootstrapTable("getOptions");
                             return page.pageSize * (page.pageNumber - 1) + index + 1;
                             //return index + 1;
@@ -118,12 +116,12 @@ window.adminList = (function () {
                 //        tableParameter.ajax(params);
                 //    }
                 //};
-                defaultsConfigs.queryParams = function (params) {
+                defaultsConfigs.queryParams = function(params) {
                     params = {
-                        rows: params.pageSize,   //页面大小
-                        page: params.pageNumber,  //页码
-                        sortName: params.sortName,  //排序列名
-                        sortOrder: params.sortOrder//排位命令（desc，asc）
+                        rows: params.pageSize, //页面大小
+                        page: params.pageNumber, //页码
+                        sortName: params.sortName, //排序列名
+                        sortOrder: params.sortOrder //排位命令（desc，asc）
                     };
 
                     //将检索的信息放入进去
@@ -152,7 +150,7 @@ window.adminList = (function () {
                     //console.log(params);
                     return params;
                 };
-                defaultsConfigs.onClickRow = function (row, dom, field) {
+                defaultsConfigs.onClickRow = function(row, dom, field) {
                     tableObject.bootstrapTable('uncheckAll');
                     if (tableParameter.onClickRow) {
                         tableParameter.onClickRow(row, dom, field);
@@ -162,45 +160,45 @@ window.adminList = (function () {
                         adminListClass.btnControl();
                     }
                 };
-                defaultsConfigs.onDblClickRow = function (row, dom, field) {
+                defaultsConfigs.onDblClickRow = function(row, dom, field) {
                     if (tableParameter.onDblClickRow) {
                         tableParameter.onDblClickRow(row, dom, field);
                     } else {
                         if (domButton.findBack()) adminListClass.findBack();
                     }
                 };
-                defaultsConfigs.onCheck = function (row, dom) {//选中复选框
+                defaultsConfigs.onCheck = function(row, dom) { //选中复选框
                     if (tableParameter.onCheck) tableParameter.onCheck(row);
                     adminListClass.btnControl();
                 };
-                defaultsConfigs.onUncheck = function () {//取消复选框
+                defaultsConfigs.onUncheck = function() { //取消复选框
                     adminListClass.btnControl();
                 };
-                defaultsConfigs.onCheckAll = function (row) {//选中所有复选框
+                defaultsConfigs.onCheckAll = function(row) { //选中所有复选框
                     if (tableParameter.onCheckAll) tableParameter.onCheckAll(row);
                     adminListClass.btnControl();
                 };
-                defaultsConfigs.onUncheckAll = function () {//取消选中所有复选框
+                defaultsConfigs.onUncheckAll = function() { //取消选中所有复选框
                     adminListClass.btnControl();
                 };
-                defaultsConfigs.onLoadSuccess = function () {
+                defaultsConfigs.onLoadSuccess = function() {
                     //加载完成 检测一下是否有选中的行id 如果有将行 设置为选中状态
                     if (adminListClass.tableSelectedIndex) {
                         tableObject.bootstrapTable("checkBy", { field: "_ukid", values: [adminListClass.tableSelectedIndex] });
                     }
                     if (tableParameter.onLoadSuccess) tableParameter.onLoadSuccess();
 
-                    setTimeout(function () {
+                    setTimeout(function() {
                         adminListClass.tableObject.bootstrapTable('resetView');
-                    },300);
-                    
+                    }, 300);
+
                 };
 
                 //调用表格插件
                 tableObject = $(defaultsConfigs.dom).bootstrapTable(defaultsConfigs);
 
                 // Add responsive   表格自适应
-                $(window).bind('resize', function () {
+                $(window).bind('resize', function() {
                     tableObject.bootstrapTable('resetView', { height: $(window).height() - 75 });
                 });
 
@@ -208,38 +206,38 @@ window.adminList = (function () {
                 //end
             },
             //得到 用户选中得行
-            selectRows: function () {
+            selectRows: function() {
                 var rows = tableObject.bootstrapTable('getSelections');
                 return rows;
             },
             //按钮控制
-            btnControl: function () {
+            btnControl: function() {
                 var rows = adminListClass.selectRows();
                 if (rows.length > 0) {
                     if (rows.length == 1) {
-                        domButton.btnEdit().css('display', 'block');//.removeAttr('disabled');
-                        domButton.btnDelete().css('display', 'block');//.removeAttr('disabled');
+                        domButton.btnEdit().css('display', 'block'); //.removeAttr('disabled');
+                        domButton.btnDelete().css('display', 'block'); //.removeAttr('disabled');
                     } else {
-                        domButton.btnEdit().css('display', 'none');//.attr('disabled', true);
-                        domButton.btnDelete().css('display', 'block');//.removeAttr('disabled');
+                        domButton.btnEdit().css('display', 'none'); //.attr('disabled', true);
+                        domButton.btnDelete().css('display', 'block'); //.removeAttr('disabled');
                     }
 
                 } else {
-                    domButton.btnEdit().css('display', 'none');//.attr('disabled', true);
-                    domButton.btnDelete().css('display', 'none');//.attr('disabled', true);
+                    domButton.btnEdit().css('display', 'none'); //.attr('disabled', true);
+                    domButton.btnDelete().css('display', 'none'); //.attr('disabled', true);
                 }
             },
             //查询面板
-            panelSearch: function () {
-                domButton.panelSearch().animate({ height: 'toggle' }, 150);//.toggle();
+            panelSearch: function() {
+                domButton.panelSearch().animate({ height: 'toggle' }, 150); //.toggle();
             },
             //重置检索信息
-            resetSearch: function () {
+            resetSearch: function() {
                 domButton.panelSearch().find("form")[0].reset();
                 adminListClass.tableObject.bootstrapTable('selectPage', 1);
             },
             //刷新
-            refresh: function (data) {
+            refresh: function(data) {
                 //refresh 刷新表格 refreshOptions
                 if (data) {
                     adminListClass.tableObject.bootstrapTable('refresh', {
@@ -249,29 +247,29 @@ window.adminList = (function () {
                     adminListClass.tableObject.bootstrapTable('refresh');
                 }
 
-                setTimeout(function () {
+                setTimeout(function() {
                     adminListClass.tableObject.bootstrapTable('resetView');
-                },300);
-                
+                }, 300);
+
                 //检查一下 按钮控制状态
-                setTimeout(function () {
+                setTimeout(function() {
                     adminListClass.btnControl();
                 }, 300);
             },
             //打开 表单页
-            form: function (options) {
-                options.success = function (layero) {
+            form: function(options) {
+                options.success = function(layero) {
                     top.$(layero).find("iframe").attr("parentFrameName", options.parentFrameName);
                 }
                 admin.openWindow(options);
             },
             //删除数据
-            delete: function (url, callBack) {
+            delete: function(url, callBack) {
                 var rows = adminListClass.selectRows();
                 if (rows.length == 0) {
                     return admin.msg("请选择要移除的数据");
                 }
-                admin.confirm("确认删除?", function (index) {
+                admin.confirm("确认删除?", function(index) {
                     var json = [];
                     for (var i = 0; i < rows.length; i++) {
                         json.push(rows[i]._ukid);
@@ -279,7 +277,7 @@ window.adminList = (function () {
                     admin.ajax({
                         url: url,
                         data: { Ids: JSON.stringify(json) },
-                        success: function (r) {
+                        success: function(r) {
                             if (r.status == 1) {
                                 if (callBack) {
                                     callBack();
@@ -289,19 +287,19 @@ window.adminList = (function () {
                             }
                         }
                     });
-                }, function () {
+                }, function() {
 
                 });
             },
             //导出excel
-            exportExcel: function (url, data) {
+            exportExcel: function(url, data) {
                 $(event.srcElement).attr("href", url + "?" + domButton.panelSearch().find('form').serialize() + (data ? data : ""));
             },
             //打印
-            print: function (url, data) {
+            print: function(url, data) {
                 $(event.srcElement).attr("href", url + "?" + domButton.panelSearch().find('form').serialize() + (data ? data : ""));
             },
-            findBack: function () {
+            findBack: function() {
                 var value = domButton.findBack();
                 admin.findBack.close(adminListClass.selectRows());
             }
