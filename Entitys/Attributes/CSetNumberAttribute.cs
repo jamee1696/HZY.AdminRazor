@@ -24,6 +24,7 @@
         /// 编号标记
         /// </summary>
         /// <param name="length">编号长度</param>
+        /// <param name="str">字符串</param>
         public CSetNumberAttribute(int length, char str = '0')
         {
             this.Length = length;

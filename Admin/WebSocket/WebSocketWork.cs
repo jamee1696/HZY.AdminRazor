@@ -197,6 +197,7 @@ namespace Admin
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <param name="Data"></param>
+        /// <param name="Delay">延迟毫秒数</param>
         public static async Task SendAsync<T>(Func<WebSocketMsgModel, bool> predicate, T Data, int Delay = 0)
         {
             try
@@ -214,6 +215,7 @@ namespace Admin
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="Data"></param>
+        /// <param name="Delay">延迟毫秒数</param>
         public static async Task SendAllAsync<T>(T Data, int Delay = 0)
         {
             await WebSocketSend<WebSocketMsgModel>.SendAllAsync(Data, Delay);
