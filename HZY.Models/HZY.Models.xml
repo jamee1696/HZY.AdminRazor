@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HZY.Models</name>
+    </assembly>
+    <members>
+        <member name="P:HZY.Models.Member.Member_Num">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_Name">
+            <summary>
+            会员名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_Phone">
+            <summary>
+            电话
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_Photo">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_Introduce">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_FilePath">
+            <summary>
+            文件地址
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Member.Member_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.AccountInfo.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.AccountInfo.RoleIDList">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.AccountInfo.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.AccountInfo.IsSuperManage">
+            <summary>
+            当前登录人 是否是 超级管理员
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.AccountInfo._Sys_User">
+            <summary>
+            Sys_User
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_Api">
+            <summary>
+            Api
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_IP">
+            <summary>
+            Ip
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_UserID">
+            <summary>
+            UserID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_Form">
+            <summary>
+            表单信息
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_FormBody">
+            <summary>
+            body 信息
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_QueryString">
+            <summary>
+            地址栏信息
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_AppLog.AppLog_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Function.Function_Num">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Function.Function_Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Function.Function_ByName">
+            <summary>
+            英文名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Function.Function_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_Num">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_Name">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_Url">
+            <summary>
+            菜单地址
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_Icon">
+            <summary>
+            菜单图标
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_ParentID">
+            <summary>
+            上级菜单
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_IsShow">
+            <summary>
+            是否显示 =>1 是 2 否
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_IsClose">
+            <summary>
+            是否关闭 => 1=是 0=否 关闭选项卡
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Menu.Menu_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_MenuFunction.MenuFunction_MenuID">
+            <summary>
+            菜单ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_MenuFunction.MenuFunction_FunctionID">
+            <summary>
+            功能ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_MenuFunction.MenuFunction_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Role.Role_Num">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Role.Role_Name">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Role.Role_Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Role.Role_IsDelete">
+            <summary>
+            是否可以删除=>1 是 2 否
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_Role.Role_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_RoleMenuFunction.RoleMenuFunction_RoleID">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_RoleMenuFunction.RoleMenuFunction_FunctionID">
+            <summary>
+            功能ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_RoleMenuFunction.RoleMenuFunction_MenuID">
+            <summary>
+            菜单ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_RoleMenuFunction.RoleMenuFunction_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_User.User_Name">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_User.User_LoginName">
+            <summary>
+            登录名称
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_User.User_Pwd">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_User.User_Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_User.User_IsDelete">
+            <summary>
+            是否删除 => 1 是 2 否
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_User.User_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_UserRole.UserRole_UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_UserRole.UserRole_RoleID">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:HZY.Models.Sys.Sys_UserRole.UserRole_CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+    </members>
+</doc>
