@@ -27,6 +27,7 @@ namespace HZY.Admin
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using HZY.Services.Sys;
     using UEditor.Core;
+    using Microsoft.Extensions.Logging;
 
     public class Startup
     {
@@ -40,6 +41,8 @@ namespace HZY.Admin
 
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; }
+
+        public static readonly ILoggerFactory efLogger = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -57,7 +60,10 @@ namespace HZY.Admin
 
             services.AddDbContext<HZYAppContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString(nameof(HZYAppContext)));
+                options
+                .UseSqlServer(Configuration.GetConnectionString(nameof(HZYAppContext)))
+                .UseLoggerFactory(efLogger)
+                ;
                 //ÎÞ¸ú×Ù
                 // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });

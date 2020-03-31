@@ -15,6 +15,7 @@ namespace HZY.EFCore
     using Microsoft.Data.SqlClient;
     using System.Data.Common;
     using HZY.EFCore.Repository.Interface;
+    using Microsoft.Extensions.Logging;
 
     public class HZYAppContext : DbContext, IUnitOfWork
     {
@@ -230,7 +231,7 @@ order by a.id,a.colorder
 ";
 
             var dbParameter = new SqlParameter("TableName", TableName);
-            
+
             return await this.AsListAsync<TABLES_COLUMNS>(SqlString, dbParameter);
         }
 
