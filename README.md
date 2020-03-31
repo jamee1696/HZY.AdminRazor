@@ -1,4 +1,4 @@
-# HzyAdmin-Core
+# HZY.AdminRazor
 
 
 #### 捐赠 大哥们，如果觉得还行就请我喝瓶水吧
@@ -26,7 +26,7 @@
 
 后端：NetCore 3.1.100 一定要安装等于或者大于该版本的SDK
 
-数据库脚本位置：HzyAdmin/wwwroot/AppDb/appdb.sql
+数据库脚本位置：根目录/HzyAdminRazor.sql
 
 
 #### 部分界面截图
