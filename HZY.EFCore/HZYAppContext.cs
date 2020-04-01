@@ -16,6 +16,7 @@ namespace HZY.EFCore
     using System.Data.Common;
     using HZY.EFCore.Repository.Interface;
     using Microsoft.Extensions.Logging;
+    using System.Collections;
 
     public class HZYAppContext : DbContext, IUnitOfWork
     {
@@ -142,14 +143,13 @@ namespace HZY.EFCore
 
             #endregion
 
-            #region 和数据转换为 list dic
+            #region 和数据转换为 list Hashtable
             foreach (var item in Datas)
             {
-                var dic = new Dictionary<string, object>();
-                foreach (var field in fields) dic[field.Name] = field.GetValue(item);
-                _tableViewModel.DataSource.Add(dic);
+                var hashTable = new Hashtable();
+                foreach (var field in fields) hashTable[field.Name] = field.GetValue(item);
+                _tableViewModel.DataSource.Add(hashTable);
             }
-
             #endregion
 
             return _tableViewModel;

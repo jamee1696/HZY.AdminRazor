@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace HZY.EFCore.Base
         /// <summary>
         /// 转换后数据
         /// </summary>
-        public List<Dictionary<string, object>> DataSource { get; set; } = new List<Dictionary<string, object>>();
+        public List<Hashtable> DataSource { get; set; } = new List<Hashtable>();
 
         /// <summary>
         /// 总数
