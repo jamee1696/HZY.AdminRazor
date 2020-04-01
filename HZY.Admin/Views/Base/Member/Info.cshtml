@@ -155,7 +155,7 @@
                     <img width="150" class="rounded" :src="form.vm.Model.Member_Photo" v-show="form.vm.Model.Member_Photo" />
                 </div>
                 <div class="col-sm-6">
-                    <h4 class="example-title">头像</h4>
+                    <h4 class="example-title">文件</h4>
                     <input type="file" @@change="fielsChange" multiple="multiple" />
                     <ul class="list-group">
                         <li class="list-group-item" v-for="(item,index) in form.vm.FilesName" :key="index"><a :href="item" target="_blank">{{item}}</a></li>
