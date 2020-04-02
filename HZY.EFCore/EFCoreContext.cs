@@ -17,17 +17,18 @@ namespace HZY.EFCore
     using HZY.EFCore.Repository.Interface;
     using Microsoft.Extensions.Logging;
     using System.Collections;
+    using System.Diagnostics.CodeAnalysis;
 
-    public class HZYAppContext : DbContext, IUnitOfWork
+    public class EFCoreContext : DbContext, IUnitOfWork
     {
-        public HZYAppContext(DbContextOptions<HZYAppContext> options)
-            : base(options)
-        {
 
-        }
+        public EFCoreContext(DbContextOptions<EFCoreContext> options) : base(options) { }
 
         #region DbSet
-
+        //
+        public DbSet<TABLES_COLUMNS> TABLES_COLUMNS_DbSet { get; set; }
+        public DbSet<TABLE_NAME> TABLE_NAME_DbSet { get; set; }
+        //
         public DbSet<Sys_AppLog> Sys_AppLogs { get; set; }
         public DbSet<Sys_Function> Sys_Functions { get; set; }
         public DbSet<Sys_Menu> Sys_Menus { get; set; }
@@ -36,7 +37,6 @@ namespace HZY.EFCore
         public DbSet<Sys_RoleMenuFunction> Sys_RoleMenuFunctions { get; set; }
         public DbSet<Sys_User> Sys_Users { get; set; }
         public DbSet<Sys_UserRole> Sys_UserRoles { get; set; }
-
         //
         public DbSet<Member> Members { get; set; }
 
@@ -45,6 +45,9 @@ namespace HZY.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TABLES_COLUMNS>().HasNoKey();
+            modelBuilder.Entity<TABLE_NAME>().HasNoKey();
+            //
             //modelBuilder.Entity<Sys_AppLog>().ToTable("Sys_AppLog");
             //modelBuilder.Entity<User>().ToTable("User");
 
@@ -52,7 +55,6 @@ namespace HZY.EFCore
             var types = modelBuilder.Model.GetEntityTypes().Select(item => item.ClrType).ToList();
             ModelCache.Set(types);
             #endregion
-
         }
 
         #region IUnitOfWork
@@ -155,12 +157,13 @@ namespace HZY.EFCore
             return _tableViewModel;
         }
 
+
         /// <summary>
         /// 根据表名称 获取列
         /// </summary>
         /// <param name="TableName"></param>
         /// <returns></returns>
-        public async Task<List<TABLES_COLUMNS>> GetColsByTableNameAsync(string TableName)
+        public virtual async Task<List<TABLES_COLUMNS>> GetColsByTableNameAsync(string TableName)
         {
             // SELECT 
             //     表名       = case when a.colorder=1 then d.name else '' end,
@@ -226,81 +229,24 @@ inner join sysobjects d on a.id=d.id  and d.xtype='U' and  d.name<>'dtproperties
 left join syscomments e on a.cdefault=e.id
 left join sys.extended_properties g on a.id=G.major_id and a.colid=g.minor_id  
 left join sys.extended_properties f on d.id=f.major_id and f.minor_id=0
-where d.name=@TableName
+where d.name='{TableName}'
 order by a.id,a.colorder
 ";
 
-            var dbParameter = new SqlParameter("TableName", TableName);
-
-            return await this.AsListAsync<TABLES_COLUMNS>(SqlString, dbParameter);
+            return await this.TABLES_COLUMNS_DbSet.FromSqlRaw(SqlString).ToListAsync();
         }
 
         /// <summary>
         /// 获取所有的表名称
         /// </summary>
         /// <returns></returns>
-        public async Task<List<string>> GetAllTableAsync()
+        public virtual async Task<List<TABLE_NAME>> GetAllTableAsync()
         {
-            string SqlString = @"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES order by TABLE_NAME";
+            string SqlString = @"SELECT TABLE_NAME AS Name FROM INFORMATION_SCHEMA.TABLES order by TABLE_NAME";
 
-            return (await this.AsListAsync<string>(SqlString));
+            return await this.TABLE_NAME_DbSet.FromSqlRaw(SqlString).ToListAsync();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="Sql"></param>
-        /// <param name="sqlParameter"></param>
-        /// <returns></returns>
-        public async Task<List<T>> AsListAsync<T>(string Sql, params DbParameter[] sqlParameter)
-        {
-            var list = new List<T>();
-
-            using (var conn = (SqlConnection)this.Database.GetDbConnection())
-            {
-                if (conn.State == ConnectionState.Closed) await conn.OpenAsync();
-
-                var command = new SqlCommand(Sql, conn);
-                command.Parameters.Add(sqlParameter);
-                var sqlDataReader = await command.ExecuteReaderAsync();
-
-                List<string> field = new List<string>(sqlDataReader.FieldCount);
-                for (int i = 0; i < sqlDataReader.FieldCount; i++)
-                {
-                    field.Add(sqlDataReader.GetName(i));
-                }
-
-                if (typeof(T).IsValueType)
-                {
-                    while (await sqlDataReader.ReadAsync())
-                    {
-                        var model = HZYEFCoreExtensions.CreateInstance<T>();
-
-                        var propertyInfos = model.GetType().GetPropertyInfos();
-
-                        foreach (var item in propertyInfos)
-                        {
-                            if (!field.Contains(item.Name)) continue;
-                            item.SetValue(model, sqlDataReader[item.Name]);
-                        }
-                        list.Add(model);
-                    }
-                }
-                else
-                {
-                    while (await sqlDataReader.ReadAsync())
-                    {
-                        list.Add((T)sqlDataReader[0]);
-                    }
-                }
-
-                await sqlDataReader.CloseAsync();
-                await conn.CloseAsync();
-            }
-
-            return list;
-        }
 
 
     }

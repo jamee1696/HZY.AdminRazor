@@ -58,10 +58,10 @@ namespace HZY.Admin
 
             #region ×¢Èë EFCore
 
-            services.AddDbContext<HZYAppContext>(options =>
+            services.AddDbContext<EFCoreContext>(options =>
             {
                 options
-                .UseSqlServer(Configuration.GetConnectionString(nameof(HZYAppContext)))
+                .UseSqlServer(Configuration.GetConnectionString(nameof(EFCoreContext)))
                 .UseLoggerFactory(efLogger)
                 ;
                 //ÎÞ¸ú×Ù

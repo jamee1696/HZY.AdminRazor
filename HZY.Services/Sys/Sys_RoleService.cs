@@ -17,12 +17,12 @@ namespace HZY.Services.Sys
 
     public class Sys_RoleService : ServiceBase
     {
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Sys_Role> roleDb;
 
 
         public Sys_RoleService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Sys_Role> _roleDb
             )
         {

@@ -7,11 +7,11 @@ namespace HZY.EFCore.Repository
 {
     using HZY.EFCore.Repository.Interface;
 
-    public class DefaultRepository<T> : HZYRepositoryBase<T, HZYAppContext>
+    public class DefaultRepository<T> : HZYRepositoryBase<T, EFCoreContext>
         where T : class, new()
     {
 
-        public DefaultRepository(HZYAppContext _context) : base(_context) { }
+        public DefaultRepository(EFCoreContext _context) : base(_context) { }
 
 
     }

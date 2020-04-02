@@ -19,14 +19,14 @@ namespace HZY.Services.Sys
     {
         public HttpContext httpContext { get; }
         public AccountInfo info { get; }
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Sys_User> userDb;
         protected readonly DefaultRepository<Sys_UserRole> userRoleDb;
         protected readonly DefaultRepository<Sys_AppLog> appLogDb;
         protected readonly string Key;
 
         public AccountService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Sys_User> _userDb,
             DefaultRepository<Sys_UserRole> _userRoleDb,
             DefaultRepository<Sys_AppLog> _appLogDb,

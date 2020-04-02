@@ -19,11 +19,11 @@ namespace HZY.Services
 
     public class MemberService : ServiceBase
     {
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Member> memberDb;
 
         public MemberService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Member> _memberDb
             )
         {

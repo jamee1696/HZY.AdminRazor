@@ -12,7 +12,7 @@ namespace HZY.EFCore.Repository
 
     public abstract class HZYRepositoryBase<T, TDbContext> : IRepository<T, TDbContext>
         where T : class, new()
-        where TDbContext : HZYAppContext
+        where TDbContext : EFCoreContext
     {
         protected HZYRepositoryBase(TDbContext context)
         {

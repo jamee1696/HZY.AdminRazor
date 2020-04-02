@@ -24,7 +24,7 @@ namespace HZY.Services.Sys
     public class Sys_MenuService : ServiceBase
     {
 
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Sys_Menu> menuDb;
         protected readonly DefaultRepository<Sys_Function> functionDb;
         protected readonly DefaultRepository<Sys_MenuFunction> menuFunctionDb;
@@ -32,7 +32,7 @@ namespace HZY.Services.Sys
         protected readonly AccountService accountService;
 
         public Sys_MenuService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Sys_Menu> _menuDb,
             DefaultRepository<Sys_Function> _functionDb,
             DefaultRepository<Sys_MenuFunction> _menuFunctionDb,

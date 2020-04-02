@@ -18,11 +18,11 @@ namespace HZY.Services.Sys
 
     public class Sys_FunctionService : ServiceBase
     {
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Sys_Function> functionDb;
 
         public Sys_FunctionService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Sys_Function> _functionDb
             )
         {

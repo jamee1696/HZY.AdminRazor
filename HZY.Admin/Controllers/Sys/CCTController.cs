@@ -24,11 +24,11 @@ namespace HZY.Admin.Controllers.Sys
     {
         private string _WebRootPath { get; } = string.Empty;
         protected readonly CCTService service;
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
 
         public CCTController(
             CCTService _service,
-            HZYAppContext _db,
+            EFCoreContext _db,
             IWebHostEnvironment IWebHostEnvironment)
         {
             this.service = _service;
@@ -212,27 +212,27 @@ namespace HZY.Admin.Controllers.Sys
 
                 if (CodeType == "Model")
                 {
-                    _StringBuilder.Append(await this.service.CreateModelCode(item, Temp));
+                    _StringBuilder.Append(await this.service.CreateModelCode(item.Name, Temp));
                 }
 
                 if (CodeType == "Logic")
                 {
-                    _StringBuilder.Append(await this.service.CreateLogicCode(item, Temp));
+                    _StringBuilder.Append(await this.service.CreateLogicCode(item.Name, Temp));
                 }
 
                 if (CodeType == "Controller")
                 {
-                    _StringBuilder.Append(await this.service.CreateControllersCode(item, Temp));
+                    _StringBuilder.Append(await this.service.CreateControllersCode(item.Name, Temp));
                 }
 
                 if (CodeType == "Form")
                 {
                     //获取表下面的所有 字段
-                    var _Cols = await this.db.GetColsByTableNameAsync(item);
+                    var _Cols = await this.db.GetColsByTableNameAsync(item.Name);
                     var list = new List<string>();
                     foreach (var _Col in _Cols)
                     {
-                        list.Add($"{item}/{_Col.ColName}");
+                        list.Add($"{item.Name}/{_Col.ColName}");
                     }
                     _StringBuilder.Append(await this.service.CreateFormCode(list, Temp));
                 }

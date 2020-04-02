@@ -72,7 +72,7 @@ namespace HZY.Admin
 
             //     try
             //     {
-            //         var context = services.GetRequiredService<HZYAppContext>();
+            //         var context = services.GetRequiredService<EFCoreContext>();
             //         context.Database.EnsureCreated();
             //     }
             //     catch (Exception ex)

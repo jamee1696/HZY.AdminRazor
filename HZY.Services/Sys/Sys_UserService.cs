@@ -20,12 +20,12 @@ namespace HZY.Services.Sys
     public class Sys_UserService : ServiceBase
     {
 
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Sys_User> userDb;
         protected readonly DefaultRepository<Sys_UserRole> userRoleDb;
 
         public Sys_UserService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Sys_User> _userDb,
             DefaultRepository<Sys_UserRole> _userRoleDb
             )

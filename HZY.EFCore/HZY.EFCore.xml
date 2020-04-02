@@ -132,26 +132,17 @@
             </summary>
             <value></value>
         </member>
-        <member name="M:HZY.EFCore.HZYAppContext.GetColsByTableNameAsync(System.String)">
+        <member name="M:HZY.EFCore.EFCoreContext.GetColsByTableNameAsync(System.String)">
             <summary>
             根据表名称 获取列
             </summary>
             <param name="TableName"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.EFCore.HZYAppContext.GetAllTableAsync">
+        <member name="M:HZY.EFCore.EFCoreContext.GetAllTableAsync">
             <summary>
             获取所有的表名称
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HZY.EFCore.HZYAppContext.AsListAsync``1(System.String,System.Data.Common.DbParameter[])">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="Sql"></param>
-            <param name="sqlParameter"></param>
             <returns></returns>
         </member>
         <member name="M:HZY.EFCore.Repository.HZYEFCoreExtensions.GetPropertyInfos(System.Type,System.Reflection.BindingFlags)">

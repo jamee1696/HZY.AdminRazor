@@ -18,12 +18,12 @@ namespace HZY.Services.Sys
 
     public class Sys_AppLogService : ServiceBase
     {
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Sys_AppLog> appLogDb;
         protected readonly DefaultRepository<Sys_User> userDb;
 
         public Sys_AppLogService(
-            HZYAppContext _db,
+            EFCoreContext _db,
             DefaultRepository<Sys_AppLog> _appLogDb,
             DefaultRepository<Sys_User> _userDb
             )

@@ -15,9 +15,9 @@ namespace HZY.Services.Sys
     public class CCTService : ServiceBase
     {
 
-        protected readonly HZYAppContext db;
+        protected readonly EFCoreContext db;
 
-        public CCTService(HZYAppContext _db)
+        public CCTService(EFCoreContext _db)
         {
             this.db = _db;
 
@@ -37,9 +37,9 @@ namespace HZY.Services.Sys
             for (int i = 0; i < _TableNames.Count; i++)
             {
                 var item = _TableNames[i];
-                var _Cols = await db.GetColsByTableNameAsync(item);
+                var _Cols = await db.GetColsByTableNameAsync(item.Name);
 
-                var fieldInfoList = _TableAll[item].ToList();
+                var fieldInfoList = _TableAll[item.Name].ToList();
                 if (fieldInfoList == null) continue;
 
                 foreach (var _Col in _Cols)
@@ -47,7 +47,7 @@ namespace HZY.Services.Sys
                     var _FieldDescribe = fieldInfoList.FirstOrDefault(w => w.Name == _Col.ColName);
                     if (_FieldDescribe != null) _Col.ColRemark = _FieldDescribe.Remark;
                 }
-                dic[item] = _Cols;
+                dic[item.Name] = _Cols;
             }
 
             return dic;
