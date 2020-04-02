@@ -62,7 +62,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync(Sys_UserDto Model)
         {
             return this.ResultOk(await this.service.SaveAsync(Model));

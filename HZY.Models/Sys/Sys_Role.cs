@@ -21,6 +21,7 @@ namespace HZY.Models.Sys
         /// <summary>
         /// 角色名称
         /// </summary>
+        [Required(ErrorMessage = "角色名称不能为空!")]
         public string Role_Name { get; set; }
 
         /// <summary>

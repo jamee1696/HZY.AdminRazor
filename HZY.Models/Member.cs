@@ -27,8 +27,9 @@ namespace HZY.Models
         /// <summary>
         /// 电话
         /// </summary>
-        [Display(Name = "电话")]
-        public int Member_Phone { get; set; }
+        [Required(ErrorMessage = "电话不能为空!")]
+        [MinLength(11, ErrorMessage = "电话长度只能11位!")]
+        public int? Member_Phone { get; set; }
 
         /// <summary>
         /// 性别
@@ -43,6 +44,7 @@ namespace HZY.Models
         /// <summary>
         /// 头像
         /// </summary>
+        [Required(ErrorMessage = "请上传头像!")]
         public string Member_Photo { get; set; }
 
         /// <summary>
@@ -53,6 +55,7 @@ namespace HZY.Models
         /// <summary>
         /// 简介
         /// </summary>
+        [Required(ErrorMessage = "简介不能为空!")]
         public string Member_Introduce { get; set; }
 
         /// <summary>

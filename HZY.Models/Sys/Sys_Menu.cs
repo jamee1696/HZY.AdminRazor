@@ -17,11 +17,13 @@ namespace HZY.Models.Sys
         /// <summary>
         /// 编号
         /// </summary>
-        public int Menu_Num { get; set; }
+        [Required(ErrorMessage = "编号不能为空!")]
+        public int? Menu_Num { get; set; }
 
         /// <summary>
         /// 菜单名称
         /// </summary>
+        [Required(ErrorMessage = "菜单名称不能为空!")]
         public string Menu_Name { get; set; }
 
         /// <summary>

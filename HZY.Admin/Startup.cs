@@ -177,7 +177,6 @@ namespace HZY.Admin
             .AddMvcOptions(options =>
             {
                 options.MaxModelValidationErrors = 50;
-                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => $"此内容不能为空.");
             })
             .AddNewtonsoftJson(options =>
             {

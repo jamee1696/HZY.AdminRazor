@@ -17,16 +17,19 @@ namespace HZY.Models.Sys
         /// <summary>
         /// 编号
         /// </summary>
-        public int Function_Num { get; set; }
+        [Required(ErrorMessage = "编号不能为空!")]
+        public int? Function_Num { get; set; }
 
         /// <summary>
         /// 名称
         /// </summary>
+        [Required(ErrorMessage = "功能名称不能为空!")]
         public string Function_Name { get; set; }
 
         /// <summary>
         /// 英文名称
         /// </summary>
+        [Required(ErrorMessage = "功能英文名称不能为空!")]
         public string Function_ByName { get; set; }
 
         /// <summary>

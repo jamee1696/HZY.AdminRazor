@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace HZY.Admin.Core
 {
     using HZY.Toolkit;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
     public class HZYAppCheckModelAttribute : ActionFilterAttribute
@@ -22,19 +23,31 @@ namespace HZY.Admin.Core
 
             if (!context.ModelState.IsValid)
             {
+                var messages = new List<string>();
+                var keys = context.ModelState.Keys;
                 var values = context.ModelState.Values;
-                foreach (var item in values)
+                foreach (var item in keys)
                 {
-                    foreach (var error in item.Errors)
+                    var value = context.ModelState.FirstOrDefault(w => w.Key == item).Value;
+                    foreach (var err in value.Errors)
                     {
-                        if (error.ErrorMessage.Contains("此内容不能为空"))
+                        if (err.ErrorMessage.Contains("内容不能为空"))
                         {
-                            throw new MessageBox($"{item} {error.ErrorMessage}");
+                            messages.Add($"{item} {err.ErrorMessage}");
                         }
-                        throw new MessageBox(error.ErrorMessage);
+                        else
+                        {
+                            messages.Add($"{err.ErrorMessage}");
+                        }
                     }
                 }
+
+                context.Result = new JsonResult(new ApiResult((int)StatusCodeEnum.失败, string.Join("<br /><br />", messages)));
+
             }
+
+
+
 
         }
 

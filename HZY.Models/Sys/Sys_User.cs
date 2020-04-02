@@ -16,11 +16,13 @@ namespace HZY.Models.Sys
         /// <summary>
         /// 用户名称
         /// </summary>
+        [Required(ErrorMessage = "用户名称不能为空!")]
         public string User_Name { get; set; }
 
         /// <summary>
         /// 登录名称
         /// </summary>
+        [Required(ErrorMessage = "登录名称不能为空!")]
         public string User_LoginName { get; set; }
 
         /// <summary>
@@ -31,6 +33,7 @@ namespace HZY.Models.Sys
         /// <summary>
         /// 邮箱
         /// </summary>
+        [Required(ErrorMessage = "邮件不能为空!"), EmailAddress(ErrorMessage = "邮件格式不正确!")]
         public string User_Email { get; set; }
 
         /// <summary>

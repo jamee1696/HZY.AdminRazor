@@ -72,11 +72,13 @@ var hzyAdmin = {
     alert: function (text, type = 'info', title = '消息提示') {
         console.log(type);
         var _this = this;
+
         if (type == '成功') {
             _this.vuePro.$message({
                 message: text,
                 type: 'success',
-                duration: 5000
+                duration: 5000,
+                dangerouslyUseHTMLString: true,
             });
             return;
         }
@@ -84,7 +86,8 @@ var hzyAdmin = {
             _this.vuePro.$message({
                 message: text,
                 type: 'error',
-                duration: 5000
+                duration: 5000,
+                dangerouslyUseHTMLString: true,
             });
             return;
         }
@@ -92,13 +95,15 @@ var hzyAdmin = {
             _this.vuePro.$message({
                 message: text,
                 type: 'warning',
-                duration: 5000
+                duration: 5000,
+                dangerouslyUseHTMLString: true,
             });
             return;
         }
         _this.vuePro.$message({
             message: text,
-            duration: 5000
+            duration: 5000,
+            dangerouslyUseHTMLString: true,
         });
     },
     post: function (url, data, success, loading = true) {
