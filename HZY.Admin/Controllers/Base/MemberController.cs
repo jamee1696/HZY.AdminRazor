@@ -70,13 +70,15 @@ namespace HZY.Admin.Controllers.Base
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck]
-        public async Task<ApiResult> SaveAsync([FromForm]Member Model, [FromForm]IFormFile Photo)
+        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        public async Task<ApiResult> SaveAsync([FromForm]Member Model)
         {
             var Files = new List<IFormFile>();
+            IFormFile Photo = null;
             if (Request.Form.Files.Count > 0)
             {
                 Files = Request.Form.Files.Where(w => w.Name.Contains("Files")).ToList();
+                Photo = Request.Form.Files.FirstOrDefault(w => w.Name == "Photo");
             }
             return this.ResultOk(await this.service.SaveAsync(Model, this.webRootPath, Photo, Files));
         }

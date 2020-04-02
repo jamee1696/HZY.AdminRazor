@@ -28,6 +28,7 @@ namespace HZY.Admin
     using HZY.Services.Sys;
     using UEditor.Core;
     using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Startup
     {
@@ -171,6 +172,12 @@ namespace HZY.Admin
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<HZY.Admin.Core.HZYAppExceptionFilter>();
+                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            })
+            .AddMvcOptions(options =>
+            {
+                options.MaxModelValidationErrors = 50;
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => $"此内容不能为空.");
             })
             .AddNewtonsoftJson(options =>
             {
@@ -208,6 +215,10 @@ namespace HZY.Admin
                     isCacheConfig: false,
                     basePath: WebHostEnvironment.WebRootPath + "/admin/libs/neditor/net/"
                 );
+            #endregion
+
+            #region 取消默认验证Api 接收参数模型 的 验证特性 如有 [ApiController]
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
             #endregion
 
         }

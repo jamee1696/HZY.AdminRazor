@@ -21,11 +21,11 @@
                         saveState: false,
                         vm: {
                             Id: '@Model',
-                            Model: {},
-                            Photo: {},
-                            Files: [],
-                            FilesName: []
+                            Model: {}
                         },
+                        Photo: null,
+                        Files: [],
+                        FilesName: [],
                         editor: {}
                     }
                 }
@@ -50,7 +50,7 @@
                         if (r.status != 1) return;
                         _this.form.vm = r.data;
                         //处理文件
-                        _this.form.vm.FilesName = _this.form.vm.Model.Member_FilePath.split(',');
+                        if (_this.form.vm.Model.Member_FilePath) _this.form.FilesName = _this.form.vm.Model.Member_FilePath.split(',');
                         //处理编辑器值
                         setTimeout(function () {
                             _this.form.editor.setContent(_this.form.vm.Model.Member_Introduce ? _this.form.vm.Model.Member_Introduce.replace(/'/g, '\'') : "");
@@ -67,16 +67,19 @@
                     var _this = this;
 
                     //验证
-                    if (!this.form.vm.Model.Member_Name) return hzyAdmin.alert('会员名称不能为空!', '警告');
+                    //if (!this.form.vm.Model.Member_Name) return hzyAdmin.alert('会员名称不能为空!', '警告');
 
                     //组装数据
                     var formData = new FormData();
                     for (var key in this.form.vm.Model) {
-                        formData.append(key, this.form.vm.Model[key]);
+                        var value = this.form.vm.Model[key];
+                        formData.append(key, value ? value : '');
                     }
-                    formData.append('Photo', this.form.vm.Photo);
-                    for (var i = 0; i < this.form.vm.Files.length; i++) {
-                        var item = this.form.vm.Files[i];
+
+                    if (this.form.Photo) formData.append('Photo', this.form.Photo);
+
+                    for (var i = 0; i < this.form.Files.length; i++) {
+                        var item = this.form.Files[i];
                         formData.append('Files[' + i + ']', item);
                     }
 
@@ -94,7 +97,7 @@
                     var files = e.target.files;
                     if (files.length > 0) {
                         this.form.vm.Model.Member_Photo = hzyAdmin.getObjectUrl(files[0]);//显示
-                        this.form.vm.Photo = files[0];
+                        this.form.Photo = files[0];
                     }
                 },
                 fielsChange: function (e) {
@@ -102,9 +105,9 @@
                     if (files.length > 0) {
                         //for (var i = 0; i < files.length; i++) {
                         //    var item = files[i];
-                        //    this.form.vm.FielsName.push(item.filename);
+                        //    this.form.FielsName.push(item.filename);
                         //}
-                        this.form.vm.Files = files;
+                        this.form.Files = files;
                     }
                 }
             }
@@ -158,7 +161,7 @@
                     <h4 class="example-title">文件</h4>
                     <input type="file" @@change="fielsChange" multiple="multiple" />
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="(item,index) in form.vm.FilesName" :key="index"><a :href="item" target="_blank">{{item}}</a></li>
+                        <li class="list-group-item" v-for="(item,index) in form.FilesName" :key="index"><a :href="item" target="_blank">{{item}}</a></li>
                     </ul>
                 </div>
             </div>

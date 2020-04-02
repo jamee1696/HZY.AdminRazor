@@ -21,11 +21,13 @@ namespace HZY.Models
         /// <summary>
         /// 会员名称
         /// </summary>
+        [Required(ErrorMessage = "会员名称不能为空!")]
         public string Member_Name { get; set; }
 
         /// <summary>
         /// 电话
         /// </summary>
+        [Display(Name = "电话")]
         public int Member_Phone { get; set; }
 
         /// <summary>

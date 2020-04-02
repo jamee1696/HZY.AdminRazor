@@ -13,7 +13,6 @@ namespace HZY.Admin.Controllers
     using Microsoft.AspNetCore.Http;
     using System.IO;
 
-    [ApiController]
     //[Microsoft.AspNetCore.Authorization.Authorize]
     [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin)), Core.HZYApiAuthorizationCheck]
     public class ApiBaseController : BaseController

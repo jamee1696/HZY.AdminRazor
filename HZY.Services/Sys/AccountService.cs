@@ -164,13 +164,14 @@ namespace HZY.Services.Sys
             try
             {
                 //读取 body 信息
-                // var reader = new StreamReader(httpContext.Request.Body);
-                // body = await reader.ReadToEndAsync();
+                var reader = new StreamReader(httpContext.Request.Body);
+                body = await reader.ReadToEndAsync();
+                httpContext.Request.Body.Position = 0;//必须存在
 
-                Stream stream = httpContext.Request.Body;
-                byte[] buffer = new byte[httpContext.Request.ContentLength.Value];
-                await stream.ReadAsync(buffer, 0, buffer.Length);
-                body = Encoding.UTF8.GetString(buffer);
+                //Stream stream = httpContext.Request.Body;
+                //byte[] buffer = new byte[httpContext.Request.ContentLength.Value];
+                //await stream.ReadAsync(buffer, 0, buffer.Length);
+                //body = Encoding.UTF8.GetString(buffer);
             }
             catch (Exception)
             {

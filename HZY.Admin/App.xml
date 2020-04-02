@@ -36,7 +36,7 @@
             <param name="Search"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Base.MemberController.SaveAsync(HZY.Models.Member,Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:HZY.Admin.Controllers.Base.MemberController.SaveAsync(HZY.Models.Member)">
             <summary>
             保存数据
             </summary>
@@ -335,6 +335,12 @@
             </summary>
         </member>
         <member name="M:HZY.Admin.Core.HZYApiAuthorizationCheckAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            每次请求Action之前发生，，在行为方法执行前执行
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:HZY.Admin.Core.HZYAppCheckModelAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
             每次请求Action之前发生，，在行为方法执行前执行
             </summary>

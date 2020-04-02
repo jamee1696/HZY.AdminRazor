@@ -10,6 +10,7 @@
 var hzyAdmin = {
     layer: null,
     vuePro: null,
+    guidEmpty:'00000000-0000-0000-0000-000000000000',
     init: function () {
         this.layer = top.layer;
         this.vuePro = top.Vue.prototype;
