@@ -22,7 +22,7 @@
 
 交流群: 534584927
 
-前端：BootStrap 4、Layer、Jquery、Vue
+前端：BootStrap 4、Layer、Jquery、Vue 、Element UI
 
 后端：NetCore 3.1.100 一定要安装等于或者大于该版本的SDK
 
@@ -32,6 +32,7 @@
 #### 部分界面截图
 ![登录](https://images.gitee.com/uploads/images/2020/0314/224558_f569321d_1242080.png "屏幕截图.png")
 ![主页](https://images.gitee.com/uploads/images/2020/0314/224650_0a8ccd0f_1242080.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0402/230527_78e1faba_1242080.png "屏幕截图.png")
 ![会员管理](https://images.gitee.com/uploads/images/2020/0401/104952_b7ce1127_1242080.png "屏幕截图.png")
 ![操作日志](https://images.gitee.com/uploads/images/2020/0401/105054_baff171a_1242080.png "屏幕截图.png")
 ![换肤](https://images.gitee.com/uploads/images/2020/0401/105141_f38425ce_1242080.png "屏幕截图.png")
