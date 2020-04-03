@@ -6,9 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.Base
 {
+    using HZY.Services.Sys;
+
     public class OtherController : ApiBaseController
     {
+        public OtherController(Sys_MenuService _menuService)
+            : base(_menuService)
+        {
 
+        }
 
         #region 页面 Views
 

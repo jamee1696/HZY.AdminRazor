@@ -17,7 +17,8 @@ namespace HZY.Admin.Controllers.Sys
     {
         protected readonly Sys_AppLogService service;
 
-        public AppLogController(Sys_AppLogService _service)
+        public AppLogController(Sys_MenuService _menuService, Sys_AppLogService _service)
+            :base(_menuService)
         {
             this.service = _service;
         }

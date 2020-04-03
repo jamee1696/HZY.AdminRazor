@@ -21,13 +21,15 @@ namespace HZY.Admin.Controllers.Base
     /// </summary>
     public class MemberController : ApiBaseController
     {
-
-
         protected readonly MemberService service;
         protected readonly IWebHostEnvironment webHostEnvironment;
         protected readonly string webRootPath;
 
-        public MemberController(MemberService _service, IWebHostEnvironment _webHostEnvironment)
+        public MemberController(
+            Sys_MenuService _menuService,
+            MemberService _service,
+            IWebHostEnvironment _webHostEnvironment)
+            : base(_menuService)
         {
             this.service = _service;
             this.webHostEnvironment = _webHostEnvironment;

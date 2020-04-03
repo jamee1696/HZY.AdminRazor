@@ -18,7 +18,8 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly Sys_RoleMenuFunctionService srevice;
         protected readonly Sys_RoleService roleService;
 
-        public RoleFunctionController(Sys_RoleMenuFunctionService _srevice, Sys_RoleService _roleService)
+        public RoleFunctionController(Sys_MenuService _menuService, Sys_RoleMenuFunctionService _srevice, Sys_RoleService _roleService)
+            : base(_menuService)
         {
             this.srevice = _srevice;
             this.roleService = _roleService;
@@ -50,7 +51,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"),  Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Role Search)
         {
             var tableVM = await this.roleService.FindListAsync(Page, Rows, Search);
@@ -61,7 +62,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"),  Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_RoleMenuFunctionDto Model)
         {
             await this.srevice.SaveAsync(Model);
@@ -100,7 +101,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 获取菜单功能树
         /// </summary>
         /// <returns></returns>
-        [HttpPost("RoleMenuFunctionTree/{RoleId}"),  Core.HZYApiAuthorizationCheck]
+        [HttpPost("RoleMenuFunctionTree/{RoleId}"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> RoleMenuFunctionTree(Guid RoleId)
         {
             var tuple = await this.srevice.GetRoleMenuFunctionTreeAsync(RoleId);

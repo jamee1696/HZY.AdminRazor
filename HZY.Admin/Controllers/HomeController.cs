@@ -15,15 +15,14 @@ namespace HZY.Admin.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : ApiBaseController
     {
-        protected readonly Sys_MenuService menuService;
         protected readonly AccountService accountService;
 
         public HomeController(
             Sys_MenuService _menuService,
             AccountService _accountService
             )
+            : base(_menuService)
         {
-            this.menuService = _menuService;
             this.accountService = _accountService;
         }
 

@@ -340,6 +340,11 @@
             </summary>
             <param name="context"></param>
         </member>
+        <member name="T:HZY.Admin.Core.HZYAppCheckModelAttribute">
+            <summary>
+            实体模型验证
+            </summary>
+        </member>
         <member name="M:HZY.Admin.Core.HZYAppCheckModelAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
             每次请求Action之前发生，，在行为方法执行前执行

@@ -9,6 +9,9 @@ namespace HZY.Admin.Core
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
+    /// <summary>
+    /// 实体模型验证
+    /// </summary>
     public class HZYAppCheckModelAttribute : ActionFilterAttribute
     {
 
@@ -45,9 +48,6 @@ namespace HZY.Admin.Core
                 context.Result = new JsonResult(new ApiResult((int)StatusCodeEnum.失败, string.Join("<br /><br />", messages)));
 
             }
-
-
-
 
         }
 

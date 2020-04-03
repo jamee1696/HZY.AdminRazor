@@ -27,9 +27,11 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly EFCoreContext db;
 
         public CCTController(
+            Sys_MenuService _menuService,
             CCTService _service,
             EFCoreContext _db,
             IWebHostEnvironment IWebHostEnvironment)
+            :base(_menuService)
         {
             this.service = _service;
             this.db = _db;

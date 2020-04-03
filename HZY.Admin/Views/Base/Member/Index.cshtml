@@ -3,10 +3,12 @@
 }
 @section Scripts{
     <script type="text/javascript">
+        var power = JSON.parse('@ViewData["power"]');
         var app = new Vue({
             el: "#app",
             data: function () {
                 return {
+                    power,
                     search: {
                         state:false,
                         vm: {
@@ -107,9 +109,9 @@
         <div class="card-body">
             <div class="row mb-15">
                 <div class="col-sm-12">
-                    <button class="btn btn-primary" @@click="search.state=!search.state">高级检索</button>
-                    <button class="btn btn-primary" @@click="openForm()">新建</button>
-                    <button class="btn btn-danger" @@click="remove()">删除</button>
+                    <button class="btn btn-primary" @@click="search.state=!search.state" v-if="power.Search">高级检索</button>
+                    <button class="btn btn-primary" @@click="openForm()" v-if="power.Insert">新建</button>
+                    <button class="btn btn-danger" @@click="remove()" v-if="power.Delete">删除</button>
                 </div>
             </div>
             <div class="row">
@@ -128,12 +130,12 @@
                                 </template>
                             </el-table-column>
                             <el-table-column :prop="item.DataIndex" :label="item.Title" :key="index" v-else ></el-table-column>
-                        </template>                        
+                        </template>
                         <!--根据查询接口自动加载头部信息 end-->
-                        <el-table-column fixed="right" label="操作" width="100">
+                        <el-table-column fixed="right" label="操作" width="100" v-if="!power.Update && !power.Delete">
                             <template slot-scope="scope">
-                                <el-link type="primary" @@click="openForm(scope.row._ukid)">编辑</el-link>
-                                <el-link type="danger" @@click="remove(scope.row._ukid)">删除</el-link>
+                                <el-link type="primary" @@click="openForm(scope.row._ukid)" v-if="power.Update">编辑</el-link>
+                                <el-link type="danger" @@click="remove(scope.row._ukid)" v-if="power.Delete">删除</el-link>
                             </template>
                         </el-table-column>
                     </el-table>

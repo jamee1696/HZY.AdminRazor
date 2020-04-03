@@ -332,7 +332,7 @@ namespace HZY.Services.Sys
                 foreach (var item in _Sys_FunctionList)
                 {
                     var ispower = _Sys_MenuFunctionList.Any(w => w.MenuFunction_MenuID == _Sys_Menu.Menu_ID && w.MenuFunction_FunctionID == item.Function_ID);
-                    if (item.Function_ByName == "Have" | _Sys_Menu.Menu_ParentID == AppConfig.AdminConfig.SysMenuID) ispower = true;
+                    if (item.Function_ByName == "Have" || _Sys_Menu.Menu_ParentID == AppConfig.AdminConfig.SysMenuID) ispower = true;
                     _PowerState.Add(item.Function_ByName, ispower);
                 }
                 return _PowerState;
@@ -356,6 +356,9 @@ namespace HZY.Services.Sys
 
             return _PowerState;
         }
+
+        public async Task<Sys_Menu> GetMenuByPathAsync(string path)
+            => await this.menuDb.FindAsync(w => w.Menu_Url.ToLower().StartsWith(path));
 
         #endregion  左侧菜单
 

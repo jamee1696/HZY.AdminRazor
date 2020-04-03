@@ -20,7 +20,8 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly Sys_MenuService service;
         protected readonly AccountService accountService;
 
-        public MenusController(Sys_MenuService _service, AccountService _accountService)
+        public MenusController(Sys_MenuService _menuService, Sys_MenuService _service, AccountService _accountService)
+            : base(_menuService)
         {
             this.service = _service;
             this.accountService = _accountService;

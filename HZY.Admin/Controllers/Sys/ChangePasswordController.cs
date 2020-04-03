@@ -17,7 +17,8 @@ namespace HZY.Admin.Controllers.Sys
     {
         protected readonly AccountService service;
 
-        public ChangePasswordController(AccountService _service)
+        public ChangePasswordController(Sys_MenuService _menuService, AccountService _service)
+            : base(_menuService)
         {
             this.service = _service;
         }

@@ -20,7 +20,8 @@ namespace HZY.Admin.Controllers.Sys
 
         protected readonly Sys_RoleService service;
 
-        public RoleController(Sys_RoleService _service)
+        public RoleController(Sys_MenuService _menuService, Sys_RoleService _service)
+            : base(_menuService)
         {
             this.service = _service;
         }

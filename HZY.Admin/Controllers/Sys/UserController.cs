@@ -16,13 +16,15 @@ namespace HZY.Admin.Controllers.Sys
     public class UserController : ApiBaseController
     {
         protected readonly Sys_UserService service;
-        protected readonly Sys_MenuService menuService;
         protected readonly AccountService accountService;
 
-        public UserController(Sys_UserService _service, Sys_MenuService _menuService, AccountService _accountService)
+        public UserController(
+            Sys_MenuService _menuService,
+            Sys_UserService _service,
+            AccountService _accountService)
+            : base(_menuService)
         {
             this.service = _service;
-            this.menuService = _menuService;
             this.accountService = _accountService;
         }
 

@@ -20,7 +20,8 @@ namespace HZY.Admin.Controllers.Sys
     {
         protected readonly Sys_FunctionService service;
 
-        public FunctionController(Sys_FunctionService _service)
+        public FunctionController(Sys_MenuService _menuService, Sys_FunctionService _service)
+            : base(_menuService)
         {
             this.service = _service;
         }
