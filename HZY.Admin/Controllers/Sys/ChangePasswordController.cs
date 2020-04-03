@@ -26,10 +26,7 @@ namespace HZY.Admin.Controllers.Sys
         #region 页面 Views
 
         [HttpGet(nameof(Index))]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         #endregion
 
@@ -40,10 +37,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("Save"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> UpdatePassword([FromBody]UpdatePasswordDto Model)
-        {
-            await this.service.ChangePwd(Model.OldPwd, Model.NewPwd);
-            return this.ResultOk();
-        }
+            => this.ResultOk(await this.service.ChangePwd(Model.OldPwd, Model.NewPwd));
 
 
     }

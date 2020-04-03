@@ -75,7 +75,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Keys"></param>
         /// <returns></returns>
-        public async Task DeleteAsync(List<Guid> Ids)
+        public async Task<int> DeleteAsync(List<Guid> Ids)
             => await functionDb.DeleteAsync(w => Ids.Contains(w.Function_ID));
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<object> LoadFormAsync(Guid Id)
+        public async Task<Dictionary<string, object>> LoadFormAsync(Guid Id)
         {
             var res = new Dictionary<string, object>();
 

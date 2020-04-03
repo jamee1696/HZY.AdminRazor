@@ -29,16 +29,10 @@ namespace HZY.Admin.Controllers.Sys
         #region 页面 Views
 
         [HttpGet(nameof(Index))]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         [HttpGet("Info/{Id?}")]
-        public IActionResult Info(Guid Id)
-        {
-            return View(Id);
-        }
+        public IActionResult Info(Guid Id) => View(Id);
 
         #endregion
 
@@ -53,10 +47,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Function Search)
-        {
-            var tableVM = await this.service.FindListAsync(Page, Rows, Search);
-            return this.ResultOk(tableVM);
-        }
+            => this.ResultOk(await this.service.FindListAsync(Page, Rows, Search));
 
         /// <summary>
         /// 保存数据
@@ -64,9 +55,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_Function Model)
-        {
-            return this.ResultOk(await this.service.SaveAsync(Model));
-        }
+            => this.ResultOk(await this.service.SaveAsync(Model));
 
         /// <summary>
         /// 删除数据
@@ -75,10 +64,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("Delete"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> DeleteAsync([FromBody] List<Guid> Ids)
-        {
-            await this.service.DeleteAsync(Ids);
-            return this.ResultOk();
-        }
+            => this.ResultOk(await this.service.DeleteAsync(Ids));
 
         /// <summary>
         /// 根据Id 加载表单数据
@@ -87,9 +73,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("LoadForm/{Id?}"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> LoadFormAsync(Guid Id)
-        {
-            return this.ResultOk(await this.service.LoadFormAsync(Id));
-        }
+            => this.ResultOk(await this.service.LoadFormAsync(Id));
 
         #endregion
 

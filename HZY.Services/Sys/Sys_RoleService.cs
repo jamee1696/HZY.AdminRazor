@@ -73,7 +73,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Keys"></param>
         /// <returns></returns>
-        public async Task DeleteAsync(List<Guid> Ids)
+        public async Task<int> DeleteAsync(List<Guid> Ids)
             => await roleDb.DeleteAsync(w => Ids.Contains(w.Role_ID) && w.Role_IsDelete != 2);
 
         /// <summary>

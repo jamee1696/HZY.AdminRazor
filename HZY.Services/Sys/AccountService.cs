@@ -134,7 +134,7 @@ namespace HZY.Services.Sys
         /// <param name="oldpwd"></param>
         /// <param name="newpwd"></param>
         /// <param name="newlypwd"></param>
-        public async Task ChangePwd(string oldpwd, string newpwd)
+        public async Task<int> ChangePwd(string oldpwd, string newpwd)
         {
             if (string.IsNullOrEmpty(oldpwd)) throw new MessageBox("旧密码不能为空");
             if (string.IsNullOrEmpty(newpwd)) throw new MessageBox("新密码不能为空");
@@ -142,7 +142,7 @@ namespace HZY.Services.Sys
             if (_Sys_User.User_Pwd != oldpwd) throw new MessageBox("旧密码不正确");
 
             _Sys_User.User_Pwd = newpwd;
-            await userDb.UpdateByIdAsync(_Sys_User);
+            return await userDb.UpdateByIdAsync(_Sys_User);
         }
 
         /// <summary>

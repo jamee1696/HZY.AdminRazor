@@ -56,7 +56,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Dto"></param>
         /// <returns></returns>
-        public async Task SaveAsync(Sys_RoleMenuFunctionDto Dto)
+        public async Task<Guid> SaveAsync(Sys_RoleMenuFunctionDto Dto)
         {
             var RoleId = Dto.RoleId;
             var MenuId = Dto.MenuId;
@@ -77,13 +77,15 @@ namespace HZY.Services.Sys
             }
 
             await db.CommitAsync();
+
+            return RoleId;
         }
 
         /// <summary>
         /// 加载表单 数据
         /// </summary>
         /// <returns></returns>
-        public async Task<object> LoadFormAsync()
+        public async Task<Dictionary<string, object>> LoadFormAsync()
         {
             var res = new Dictionary<string, object>();
 

@@ -111,7 +111,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Keys"></param>
         /// <returns></returns>
-        public async Task DeleteAsync(List<Guid> Ids)
+        public async Task<int> DeleteAsync(List<Guid> Ids)
         {
             db.CommitOpen();
 
@@ -123,7 +123,7 @@ namespace HZY.Services.Sys
                 await userDb.DeleteAsync(userModel);
             }
 
-            await db.CommitAsync();
+            return await db.CommitAsync();
         }
 
         /// <summary>

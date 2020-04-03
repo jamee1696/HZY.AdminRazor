@@ -28,10 +28,7 @@ namespace HZY.Admin.Controllers.Sys
         #region 页面 Views
 
         [HttpGet(nameof(Index))]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         [HttpGet("Info/{Id?}")]
         public IActionResult Info(Guid? Id, Guid? PId)
@@ -53,10 +50,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Role Search)
-        {
-            var tableVM = await this.roleService.FindListAsync(Page, Rows, Search);
-            return this.ResultOk(tableVM);
-        }
+            => this.ResultOk(await this.roleService.FindListAsync(Page, Rows, Search));
 
         /// <summary>
         /// 保存数据
@@ -64,10 +58,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_RoleMenuFunctionDto Model)
-        {
-            await this.srevice.SaveAsync(Model);
-            return this.ResultOk();
-        }
+            => this.ResultOk(await this.srevice.SaveAsync(Model));
 
         ///// <summary>
         ///// 删除数据

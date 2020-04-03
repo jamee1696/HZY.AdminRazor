@@ -47,7 +47,7 @@ namespace HZY.Services.Sys
         {
             var query = (
                     from appLog in db.Sys_AppLogs
-                    //左连接
+                        //左连接
                     from user in db.Sys_Users.Where(user => user.User_ID == appLog.AppLog_UserID).DefaultIfEmpty()
                     select new { appLog, user.User_Name }
                 )
@@ -67,7 +67,7 @@ namespace HZY.Services.Sys
                 })
                 ;
 
-            return await this.db.AsTableViewModelAsync(query, Page, Rows,typeof(Sys_AppLog));
+            return await this.db.AsTableViewModelAsync(query, Page, Rows, typeof(Sys_AppLog));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Keys"></param>
         /// <returns></returns>
-        public async Task DeleteAsync(List<Guid> Ids)
+        public async Task<int> DeleteAsync(List<Guid> Ids)
             => await appLogDb.DeleteAsync(w => Ids.Contains(w.AppLog_ID));
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<object> LoadFormAsync(Guid Id)
+        public async Task<Dictionary<string, object>> LoadFormAsync(Guid Id)
         {
             var res = new Dictionary<string, object>();
 
