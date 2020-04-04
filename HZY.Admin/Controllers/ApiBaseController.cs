@@ -29,11 +29,6 @@ namespace HZY.Admin.Controllers
             this.menuService = _menuService;
         }
 
-        public ApiBaseController()
-        {
-
-        }
-
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
@@ -47,7 +42,7 @@ namespace HZY.Admin.Controllers
             {
                 if (context.HttpContext.IsAjaxRequest())
                 {
-                    throw new MessageBox(StatusCodeEnum.未授权, $"{StatusCodeEnum.未授权.ToString()}");
+                    context.Result = Json(new ApiResult((int)StatusCodeEnum.未授权, StatusCodeEnum.未授权.ToString()));
                 }
                 else
                 {
@@ -68,13 +63,13 @@ namespace HZY.Admin.Controllers
 
             var power = this.menuService.GetPowerStateByMenuId(this.MenuId).Result;
 
-            if (!power["Have"].ToBool())
+            if (!power["Have"].ToBool() && !context.HttpContext.IsAjaxRequest())
             {
                 context.Result = new ContentResult() { Content = "您无权访问!", ContentType = "text/html;charset=utf-8;" };
                 return;
             }
 
-            ViewData["power"] =JsonConvert.SerializeObject(power);
+            ViewData["power"] = JsonConvert.SerializeObject(power);
 
             #endregion
 
