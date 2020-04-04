@@ -21,7 +21,7 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly Sys_RoleService service;
 
         public RoleController(Sys_MenuService _menuService, Sys_RoleService _service)
-            : base(_menuService)
+            : base(Guid.Parse("60ae9382-31ab-4276-a379-d3876e9bb783"), _menuService)
         {
             this.service = _service;
         }
@@ -47,7 +47,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}")]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Role Search)
             => this.ResultOk(await this.service.FindListAsync(Page, Rows, Search));
 
@@ -55,7 +55,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody] Sys_Role Model)
             => this.ResultOk(await this.service.SaveAsync(Model));
 
@@ -64,7 +64,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
-        [HttpPost("Delete"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody]List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));
 
@@ -73,7 +73,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpPost("LoadForm/{Id?}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("LoadForm/{Id?}")]
         public async Task<ApiResult> LoadFormAsync(Guid Id)
             => this.ResultOk(await this.service.LoadFormAsync(Id));
 

@@ -22,7 +22,7 @@ namespace HZY.Admin.Controllers.Sys
             Sys_MenuService _menuService,
             Sys_UserService _service,
             AccountService _accountService)
-            : base(_menuService)
+            : base(Guid.Parse("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d"), _menuService)
         {
             this.service = _service;
             this.accountService = _accountService;
@@ -47,7 +47,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}")]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody]Sys_User Search)
             => this.ResultOk(await this.service.FindListAsync(Page, Rows, Search));
 
@@ -55,7 +55,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync(Sys_UserDto Model)
             => this.ResultOk(await this.service.SaveAsync(Model));
 
@@ -64,7 +64,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
-        [HttpPost("Delete"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody]List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));
 
@@ -73,7 +73,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpPost("LoadForm/{Id?}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("LoadForm/{Id?}")]
         public async Task<ApiResult> LoadFormAsync(Guid Id)
             => this.ResultOk(await this.service.LoadFormAsync(Id));
 
@@ -86,7 +86,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("ExportExcel"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("ExportExcel")]
         public async Task<FileContentResult> ExportExcel([FromBody] Sys_User Search)
             => this.File(await this.service.ExportExcel(Search), Tools.GetFileContentType[".xls"].ToStr(), $"{Guid.NewGuid()}.xls");
 
@@ -99,7 +99,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="MenuId"></param>
         /// <returns></returns>
-        [HttpPost("GetPowerState/{MenuId}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("GetPowerState/{MenuId}")]
         public async Task<ApiResult> GetPowerState(Guid MenuId)
         {
             if (MenuId == Guid.Empty) throw new MessageBox("参数MenuId不能为空!");

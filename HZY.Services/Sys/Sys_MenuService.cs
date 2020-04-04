@@ -191,7 +191,7 @@ namespace HZY.Services.Sys
                     from function in db.Sys_Functions.Where(w => w.Function_ID == roleMenuFunction.RoleMenuFunction_FunctionID).DefaultIfEmpty()
                         //左连接 menu
                     from menu in db.Sys_Menus.Where(w => w.Menu_ID == roleMenuFunction.RoleMenuFunction_MenuID).DefaultIfEmpty()
-                    where this.accountService.info.RoleIDList.Contains(roleMenuFunction.RoleMenuFunction_FunctionID) && function.Function_ByName == "Have"
+                    where this.accountService.info.RoleIDList.Contains(roleMenuFunction.RoleMenuFunction_RoleID) && function.Function_ByName == "Have"
                     select menu
                 ).ToListAsync()
                 ;
@@ -357,8 +357,8 @@ namespace HZY.Services.Sys
             return _PowerState;
         }
 
-        public async Task<Sys_Menu> GetMenuByPathAsync(string path)
-            => await this.menuDb.FindAsync(w => w.Menu_Url.ToLower().StartsWith(path));
+        public async Task<Sys_Menu> GetMenuByIdAsync(Guid MenuId)
+            => await this.menuDb.FindAsync(w => w.Menu_ID == MenuId);
 
         #endregion  左侧菜单
 

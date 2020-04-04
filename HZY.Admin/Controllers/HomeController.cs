@@ -11,8 +11,6 @@ namespace HZY.Admin.Controllers
     using HZY.EFCore.Repository;
     using HZY.Services.Sys;
 
-    //该标记用于 忽略添加到 swagger 接口文档中
-    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : ApiBaseController
     {
         protected readonly AccountService accountService;
@@ -21,7 +19,7 @@ namespace HZY.Admin.Controllers
             Sys_MenuService _menuService,
             AccountService _accountService
             )
-            : base(_menuService)
+            : base(Guid.Parse("0b7f8e2c-9faa-4496-9068-80b87ba1b64e"), _menuService)
         {
             this.accountService = _accountService;
         }

@@ -8,10 +8,12 @@
 }
 @section Scripts{
     <script type="text/javascript">
+        var power = JSON.parse('@Html.Raw(ViewData["power"])');
         var app = new Vue({
             el: "#app",
             data: function () {
                 return {
+                    power,
                     form: {
                         saveState: false,
                         vm: {

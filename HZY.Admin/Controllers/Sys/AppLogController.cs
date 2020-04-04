@@ -17,8 +17,8 @@ namespace HZY.Admin.Controllers.Sys
     {
         protected readonly Sys_AppLogService service;
 
-        public AppLogController(Sys_MenuService _menuService, Sys_AppLogService _service)
-            : base(_menuService)
+        public AppLogController(Sys_MenuService _menuservice, Sys_AppLogService _service)
+            : base(Guid.Parse("74b837ae-d24f-4f57-b107-e20dbe70f5d3"), _menuservice)
         {
             this.service = _service;
         }
@@ -42,7 +42,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}")]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_AppLog Search)
             => this.ResultOk(await this.service.FindListAsync(Page, Rows, Search));
 
@@ -50,7 +50,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_AppLog Model)
             => this.ResultOk(await this.service.SaveAsync(Model));
 
@@ -59,7 +59,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
-        [HttpPost("Delete"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody] List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));
 
@@ -68,7 +68,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpPost("LoadForm/{Id?}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("LoadForm/{Id?}")]
         public async Task<ApiResult> LoadFormAsync(Guid Id)
             => this.ResultOk(await this.service.LoadFormAsync(Id));
 

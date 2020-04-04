@@ -13,44 +13,73 @@ namespace HZY.Admin.Controllers
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using Newtonsoft.Json;
     using System.IO;
     using System.Text;
 
-    [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin)), Core.HZYApiAuthorizationCheck]
+    [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin), IgnoreApi = true)]
     public class ApiBaseController : BaseController
     {
+        protected readonly Guid MenuId;
         protected readonly Sys_MenuService menuService;
-        public ApiBaseController(Sys_MenuService _menuService)
+
+        public ApiBaseController(Guid menuId, Sys_MenuService _menuService)
         {
+            this.MenuId = menuId;
             this.menuService = _menuService;
+        }
+
+        public ApiBaseController()
+        {
+
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
 
-            var menu = menuService.GetMenuByPathAsync(context.HttpContext.Request.PathBase).Result;
+            #region 检查是否登录 授权
 
-            if (menu != null && !context.HttpContext.IsAjaxRequest())
+            //获取 token
+            var token = AccountService.GetToken(context.HttpContext);
+
+            if (string.IsNullOrWhiteSpace(token))
             {
-                var dicPower = menuService.GetPowerStateByMenuId(menu.Menu_ID).Result;
-
-                if (!dicPower["Have"].ToBool())
+                if (context.HttpContext.IsAjaxRequest())
                 {
-                    var result = new ContentResult();
-                    result.Content = "无权访问!";
-                    result.ContentType = "text/html; charset=utf-8";
-                    context.Result = result;
-                    return;
+                    throw new MessageBox(StatusCodeEnum.未授权, $"{StatusCodeEnum.未授权.ToString()}");
                 }
-
-                ViewData["power"] = dicPower;
+                else
+                {
+                    var Alert = $@"<script type='text/javascript'>
+                                        alert('{StatusCodeEnum.未授权.ToString()}！请重新登录授权！');
+                                        top.window.location='/Authorization/Index';
+                                    </script>";
+                    context.Result = new ContentResult() { Content = Alert, ContentType = "text/html;charset=utf-8;" };
+                }
+                return;
             }
 
+            #endregion
 
+            #region 检查页面权限信息
 
+            if (MenuId == Guid.Empty) return;
+
+            var power = this.menuService.GetPowerStateByMenuId(this.MenuId).Result;
+
+            if (!power["Have"].ToBool())
+            {
+                context.Result = new ContentResult() { Content = "您无权访问!", ContentType = "text/html;charset=utf-8;" };
+                return;
+            }
+
+            ViewData["power"] =JsonConvert.SerializeObject(power);
+
+            #endregion
 
         }
+
 
     }
 }

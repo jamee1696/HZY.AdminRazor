@@ -14,12 +14,14 @@ namespace HZY.Admin.Controllers.Sys
 
     public class RoleFunctionController : ApiBaseController
     {
-
         protected readonly Sys_RoleMenuFunctionService srevice;
         protected readonly Sys_RoleService roleService;
 
-        public RoleFunctionController(Sys_MenuService _menuService, Sys_RoleMenuFunctionService _srevice, Sys_RoleService _roleService)
-            : base(_menuService)
+        public RoleFunctionController(
+            Sys_MenuService _menuService,
+            Sys_RoleMenuFunctionService _srevice,
+            Sys_RoleService _roleService)
+            : base(Guid.Parse("bd024f3a-99a7-4407-861c-a016f243f222"), _menuService)
         {
             this.srevice = _srevice;
             this.roleService = _roleService;
@@ -48,7 +50,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}")]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Role Search)
             => this.ResultOk(await this.roleService.FindListAsync(Page, Rows, Search));
 
@@ -56,7 +58,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_RoleMenuFunctionDto Model)
             => this.ResultOk(await this.srevice.SaveAsync(Model));
 
@@ -65,7 +67,7 @@ namespace HZY.Admin.Controllers.Sys
         ///// </summary>
         ///// <param name="idsDto"></param>
         ///// <returns></returns>
-        //[HttpPost("Delete"), Core.HZYApiAuthorizationCheckFilter]
+        //[HttpPost("Delete")CheckFilter]
         //public async Task<ApiResult> DeleteAsync([FromBody]IdsDto<Guid> idsDto)
         //{
         //    await this.srevice.DeleteAsync(idsDto);
@@ -77,7 +79,7 @@ namespace HZY.Admin.Controllers.Sys
         ///// </summary>
         ///// <param name="Id"></param>
         ///// <returns></returns>
-        //[HttpPost("LoadForm/{Id}"), Core.HZYApiAuthorizationCheckFilter]
+        //[HttpPost("LoadForm/{Id}")CheckFilter]
         //public async Task<ApiResult> LoadFormAsync(Guid Id)
         //{
         //    await this.srevice.LoadFormAsync(Id);
@@ -92,7 +94,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 获取菜单功能树
         /// </summary>
         /// <returns></returns>
-        [HttpPost("RoleMenuFunctionTree/{RoleId}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("RoleMenuFunctionTree/{RoleId}")]
         public async Task<ApiResult> RoleMenuFunctionTree(Guid RoleId)
         {
             var tuple = await this.srevice.GetRoleMenuFunctionTreeAsync(RoleId);

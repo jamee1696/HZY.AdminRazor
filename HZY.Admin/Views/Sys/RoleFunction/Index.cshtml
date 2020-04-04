@@ -3,10 +3,12 @@
 }
 @section Scripts{
     <script type="text/javascript">
+        var power = JSON.parse('@Html.Raw(ViewData["power"])');
         var app = new Vue({
             el: "#app",
             data: function () {
                 return {
+                    power,
                     search: {
                         state:false,
                         vm: {
@@ -141,7 +143,7 @@
                 <div class="card-body">
                     <div class="row mb-15">
                         <div class="col-sm-12">
-                            <button class="btn btn-primary" @@click="search.state=!search.state">高级检索</button>
+                            <button class="btn btn-primary" @@click="search.state=!search.state" v-if="power.Search">高级检索</button>
                         </div>
                     </div>
                     <div class="row">

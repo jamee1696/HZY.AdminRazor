@@ -8,10 +8,12 @@
 }
 @section Scripts{
     <script type="text/javascript">
+        var power = JSON.parse('@Html.Raw(ViewData["power"])');
         var app = new Vue({
             el: "#app",
             data: function () {
                 return {
+                    power,
                     form: {
                         saveState: false,
                         vm: {
@@ -99,7 +101,7 @@
         <div class="row">
             <div class="col-sm-6"></div>
             <div class="col-sm-6 text-right">
-                <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState">保存</button>
+                <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
                 <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
             </div>
         </div>

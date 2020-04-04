@@ -20,8 +20,8 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly Sys_MenuService service;
         protected readonly AccountService accountService;
 
-        public MenusController(Sys_MenuService _menuService, Sys_MenuService _service, AccountService _accountService)
-            : base(_menuService)
+        public MenusController(Sys_MenuService _service, AccountService _accountService)
+            : base(Guid.Parse("e5d4da6b-aab0-4aaa-982f-43673e8152c0"), _service)
         {
             this.service = _service;
             this.accountService = _accountService;
@@ -50,7 +50,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}")]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Menu Search)
             => this.ResultOk(await this.service.FindListAsync(Page, Rows, Search));
 
@@ -58,7 +58,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_MenuDto Model)
             => this.ResultOk(await this.service.SaveAsync(Model));
 
@@ -67,7 +67,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
-        [HttpPost("Delete"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody]List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));
 
@@ -76,7 +76,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpPost("LoadForm/{Id?}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("LoadForm/{Id?}")]
         public async Task<ApiResult> LoadFormAsync(Guid Id)
             => this.ResultOk(await this.service.LoadFormAsync(Id));
 
@@ -88,7 +88,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 获取菜单列表 以及 页面按钮权限
         /// </summary>
         /// <returns></returns>
-        [HttpPost(nameof(SysTree)), Core.HZYApiAuthorizationCheck]
+        [HttpPost(nameof(SysTree))]
         public async Task<ApiResult> SysTree()
         {
             var allList = await service.GetMenuByRoleIDAsync();
@@ -106,7 +106,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 获取菜单功能树
         /// </summary>
         /// <returns></returns>
-        [HttpPost(nameof(MenuFunctionTree)), Core.HZYApiAuthorizationCheck]
+        [HttpPost(nameof(MenuFunctionTree))]
         public async Task<ApiResult> MenuFunctionTree()
         {
             var menuFunctionTree = await this.service.GetMenuFunctionTreeAsync();

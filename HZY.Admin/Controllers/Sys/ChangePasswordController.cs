@@ -18,7 +18,7 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly AccountService service;
 
         public ChangePasswordController(Sys_MenuService _menuService, AccountService _service)
-            : base(_menuService)
+            : base(Guid.Parse("f35d64ae-ecb7-4d06-acfb-d91595966d9e"), _menuService)
         {
             this.service = _service;
         }
@@ -35,7 +35,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Model"></param>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Save")]
         public async Task<ApiResult> UpdatePassword([FromBody]UpdatePasswordDto Model)
             => this.ResultOk(await this.service.ChangePwd(Model.OldPwd, Model.NewPwd));
 

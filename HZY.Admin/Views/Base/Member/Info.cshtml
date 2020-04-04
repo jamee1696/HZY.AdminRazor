@@ -13,7 +13,7 @@
     <script src="~/admin/libs/neditor/neditor.all.min.js"></script>
     <script src="~/admin/libs/neditor/i18n/zh-cn/zh-cn.js"></script>
     <script type="text/javascript">
-        var power = JSON.parse('@ViewData["power"]');
+        var power = JSON.parse('@Html.Raw(ViewData["power"])');
         var app = new Vue({
             el: "#app",
             data: function () {

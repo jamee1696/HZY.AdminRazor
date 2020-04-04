@@ -21,7 +21,7 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly Sys_FunctionService service;
 
         public FunctionController(Sys_MenuService _menuService, Sys_FunctionService _service)
-            : base(_menuService)
+            : base(Guid.Parse("d721fc55-2174-40eb-bb37-5c54a158525a"), _menuService)
         {
             this.service = _service;
         }
@@ -45,7 +45,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <param name="Rows"></param>
         /// <param name="Search"></param>
         /// <returns></returns>
-        [HttpPost("FindList/{Page}/{Rows}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("FindList/{Page}/{Rows}")]
         public async Task<ApiResult> FindListAsync(int Page, int Rows, [FromBody] Sys_Function Search)
             => this.ResultOk(await this.service.FindListAsync(Page, Rows, Search));
 
@@ -53,7 +53,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Save"), Core.HZYApiAuthorizationCheck, Core.HZYAppCheckModel]
+        [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_Function Model)
             => this.ResultOk(await this.service.SaveAsync(Model));
 
@@ -62,7 +62,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
-        [HttpPost("Delete"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody] List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));
 
@@ -71,7 +71,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpPost("LoadForm/{Id?}"), Core.HZYApiAuthorizationCheck]
+        [HttpPost("LoadForm/{Id?}")]
         public async Task<ApiResult> LoadFormAsync(Guid Id)
             => this.ResultOk(await this.service.LoadFormAsync(Id));
 
