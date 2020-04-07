@@ -34,18 +34,11 @@ namespace HZY.Admin.Core
                     var value = context.ModelState.FirstOrDefault(w => w.Key == item).Value;
                     foreach (var err in value.Errors)
                     {
-                        if (err.ErrorMessage.Contains("内容不能为空"))
-                        {
-                            messages.Add($"{item} {err.ErrorMessage}");
-                        }
-                        else
-                        {
-                            messages.Add($"{err.ErrorMessage}");
-                        }
+                        messages.Add($"{err.ErrorMessage}");
                     }
                 }
-
-                context.Result = new JsonResult(new ApiResult((int)StatusCodeEnum.失败, string.Join("<br /><br />", messages)));
+                var apiResult = new ApiResult((int)StatusCodeEnum.失败, string.Join("<br /><br />", messages));
+                context.Result = new JsonResult(apiResult);
 
             }
 
