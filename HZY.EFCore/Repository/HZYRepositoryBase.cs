@@ -154,8 +154,8 @@ namespace HZY.EFCore.Repository
         #endregion
 
         #region 查询 复杂型
-        public virtual IQueryable<T> Query()
-            => this.Set.AsQueryable().AsNoTracking();
+        public virtual IQueryable<T> Query(bool IsTracking = false)
+            => IsTracking ? this.Set.AsQueryable() : this.Set.AsQueryable().AsNoTracking();
         #endregion
 
         #region 查询 单条

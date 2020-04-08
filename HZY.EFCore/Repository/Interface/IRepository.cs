@@ -57,7 +57,7 @@ namespace HZY.EFCore.Repository.Interface
         #endregion
 
         #region 查询 复杂型
-        IQueryable<T> Query();
+        IQueryable<T> Query(bool IsTracking);
         #endregion
 
         #region 查询 单条
