@@ -15,7 +15,7 @@ namespace HZY.EFCore.Repository
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
-    /// 
+    /// 基础仓储
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TDbContext"></typeparam>
@@ -195,6 +195,11 @@ namespace HZY.EFCore.Repository
         #endregion
 
         #region 查询 复杂型
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="IsTracking">是否追踪</param>
+        /// <returns></returns>
         public virtual IQueryable<T> Query(bool IsTracking = false)
             => IsTracking ? this.Set.AsQueryable() : this.Set.AsQueryable().AsNoTracking();
         #endregion
