@@ -18,6 +18,7 @@ namespace HZY.EFCore
     using Microsoft.Extensions.Logging;
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
+    using Microsoft.EntityFrameworkCore.Storage;
 
     public class EFCoreContext : DbContext, IUnitOfWork
     {
@@ -63,19 +64,23 @@ namespace HZY.EFCore
 
         public virtual void CommitOpen() => this.SaveState = false;
 
-        public int Commit()
+        public virtual int Commit()
         {
             this.SaveState = true;
             return this.Save();
         }
 
-        public Task<int> CommitAsync()
+        public virtual Task<int> CommitAsync()
         {
             this.SaveState = true;
             return this.SaveAsync();
         }
 
-        public int Save()
+        public virtual IDbContextTransaction BeginTransaction() => this.Database.BeginTransaction();
+
+        public virtual Task<IDbContextTransaction> BeginTransactionAsync() => this.Database.BeginTransactionAsync();
+
+        public virtual int Save()
         {
             if (this.SaveState)
                 return this.SaveChanges();
@@ -83,7 +88,7 @@ namespace HZY.EFCore
                 return 1;
         }
 
-        public Task<int> SaveAsync()
+        public virtual Task<int> SaveAsync()
         {
             if (this.SaveState)
                 return this.SaveChangesAsync();

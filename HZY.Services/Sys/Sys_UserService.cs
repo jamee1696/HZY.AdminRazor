@@ -71,37 +71,40 @@ namespace HZY.Services.Sys
 
             if (string.IsNullOrWhiteSpace(model.User_Pwd)) throw new MessageBox("密码不能为空!");
 
-            db.CommitOpen();
-
-            if (model.User_ID == Guid.Empty)
+            using (var transaction = await db.BeginTransactionAsync())
             {
-                model.User_Pwd = string.IsNullOrWhiteSpace(model.User_Pwd) ? "123" : model.User_Pwd; //Tools.MD5Encrypt("123");
-                model = await userDb.InsertAsync(model);
-            }
-            else
-            {
-                await userDb.UpdateByIdAsync(model);
-            }
-
-            //
-            if (roleIds.Count > 0)
-            {
-                var _Sys_UserRoleList = await userRoleDb.ToListAsync(w => w.UserRole_UserID == model.User_ID);
-
-                await userRoleDb.DeleteAsync(w => w.UserRole_UserID == model.User_ID);
-                foreach (var item in roleIds)
+                //db.CommitOpen();
+                if (model.User_ID == Guid.Empty)
                 {
-                    var _Sys_UserRole = _Sys_UserRoleList.FirstOrDefault(w => w.UserRole_RoleID == item);
-
-                    var userRoleModel = new Sys_UserRole();
-                    userRoleModel.UserRole_ID = _Sys_UserRole == null ? Guid.NewGuid() : _Sys_UserRole.UserRole_ID;
-                    userRoleModel.UserRole_RoleID = item;
-                    userRoleModel.UserRole_UserID = model.User_ID;
-                    await userRoleDb.InsertAsync(userRoleModel);
+                    model.User_Pwd = string.IsNullOrWhiteSpace(model.User_Pwd) ? "123" : model.User_Pwd; //Tools.MD5Encrypt("123");
+                    model = await userDb.InsertAsync(model);
                 }
-            }
+                else
+                {
+                    await userDb.UpdateByIdAsync(model);
+                }
 
-            await db.CommitAsync();
+                //变更用户角色
+                if (roleIds.Count > 0)
+                {
+                    var _Sys_UserRoleList = await userRoleDb.ToListAsync(w => w.UserRole_UserID == model.User_ID);
+
+                    await userRoleDb.DeleteAsync(w => w.UserRole_UserID == model.User_ID);
+                    foreach (var item in roleIds)
+                    {
+                        var _Sys_UserRole = _Sys_UserRoleList.FirstOrDefault(w => w.UserRole_RoleID == item);
+
+                        var userRoleModel = new Sys_UserRole();
+                        userRoleModel.UserRole_ID = _Sys_UserRole == null ? Guid.NewGuid() : _Sys_UserRole.UserRole_ID;
+                        userRoleModel.UserRole_RoleID = item;
+                        userRoleModel.UserRole_UserID = model.User_ID;
+                        await userRoleDb.InsertAsync(userRoleModel);
+                    }
+                }
+
+                //await db.CommitAsync();
+                await transaction.CommitAsync();
+            }
 
             return model.User_ID;
         }

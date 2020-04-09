@@ -1,4 +1,7 @@
-﻿using System;
+﻿//
+//https://github.com/borisdj/EFCore.BulkExtensions
+//
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,9 +10,15 @@ using System.Threading.Tasks;
 
 namespace HZY.EFCore.Repository
 {
+    using global::EFCore.BulkExtensions;
     using HZY.EFCore.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TDbContext"></typeparam>
     public abstract class HZYRepositoryBase<T, TDbContext> : IRepository<T, TDbContext>
         where T : class, new()
         where TDbContext : EFCoreContext
@@ -81,6 +90,14 @@ namespace HZY.EFCore.Repository
             this.Context.Entry(oldModel).CurrentValues.SetValues(newModel);
             return this.Context.Save();
         }
+        /// <summary>
+        /// 批量更新 如果使用事务 请使用 db.BeginTransaction() 不能使用 db.Commit()
+        /// </summary>
+        /// <param name="updateExpression"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual int BatchUpdate(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate)
+            => this.Set.Where(predicate).BatchUpdate(updateExpression);
 
         public virtual Task<int> UpdateAsync(T model)
         {
@@ -99,6 +116,14 @@ namespace HZY.EFCore.Repository
             this.Context.Entry(oldModel).CurrentValues.SetValues(newModel);
             return this.Context.SaveAsync();
         }
+        /// <summary>
+        /// 批量更新 异步 如果使用事务 请使用 db.BeginTransactionAsync() 不能使用 db.CommitAsync()
+        /// </summary>
+        /// <param name="updateExpression"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate)
+            => this.Set.Where(predicate).BatchUpdateAsync(updateExpression);
         #endregion
 
         #region 插入或者更新

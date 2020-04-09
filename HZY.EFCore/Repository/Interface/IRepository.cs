@@ -34,10 +34,12 @@ namespace HZY.EFCore.Repository.Interface
         int Update(T model);
         int UpdateById(T model);
         int Update(T oldModel, T newModel);
+        int BatchUpdate(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate);
 
         Task<int> UpdateAsync(T model);
         Task<int> UpdateByIdAsync(T model);
         Task<int> UpdateAsync(T oldModel, T newModel);
+        Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate);
         #endregion
 
         #region 插入或者更新

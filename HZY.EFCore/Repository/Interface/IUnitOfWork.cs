@@ -5,6 +5,7 @@ using System.Text;
 namespace HZY.EFCore.Repository.Interface
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Storage;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
@@ -18,6 +19,14 @@ namespace HZY.EFCore.Repository.Interface
         int Commit();
 
         Task<int> CommitAsync();
+        #endregion
+
+        #region 事务
+
+        IDbContextTransaction BeginTransaction();
+
+        Task<IDbContextTransaction> BeginTransactionAsync();
+
         #endregion
 
         int Save();
