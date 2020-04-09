@@ -98,6 +98,14 @@ namespace HZY.EFCore.Repository
         /// <returns></returns>
         public virtual int BatchUpdate(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate)
             => this.Set.Where(predicate).BatchUpdate(updateExpression);
+        /// <summary>
+        /// 批量更新 [更新全字段] 如果使用事务 请使用 db.BeginTransaction() 不能使用 db.Commit()
+        /// </summary>
+        /// <param name="updateExpression"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual int BatchUpdate(T updateExpression, Expression<Func<T, bool>> predicate)
+            => this.Set.Where(predicate).BatchUpdate(updateExpression);
 
         public virtual Task<int> UpdateAsync(T model)
         {
@@ -123,6 +131,14 @@ namespace HZY.EFCore.Repository
         /// <param name="predicate"></param>
         /// <returns></returns>
         public virtual Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate)
+            => this.Set.Where(predicate).BatchUpdateAsync(updateExpression);
+        /// <summary>
+        /// 批量更新 [更新全字段] 异步 如果使用事务 请使用 db.BeginTransactionAsync() 不能使用 db.CommitAsync()
+        /// </summary>
+        /// <param name="updateExpression"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual Task<int> BatchUpdateAsync(T updateExpression, Expression<Func<T, bool>> predicate)
             => this.Set.Where(predicate).BatchUpdateAsync(updateExpression);
         #endregion
 

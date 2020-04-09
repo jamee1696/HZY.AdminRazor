@@ -231,9 +231,25 @@
             <param name="predicate"></param>
             <returns></returns>
         </member>
+        <member name="M:HZY.EFCore.Repository.HZYRepositoryBase`2.BatchUpdate(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            批量更新 [更新全字段] 如果使用事务 请使用 db.BeginTransaction() 不能使用 db.Commit()
+            </summary>
+            <param name="updateExpression"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
         <member name="M:HZY.EFCore.Repository.HZYRepositoryBase`2.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             批量更新 异步 如果使用事务 请使用 db.BeginTransactionAsync() 不能使用 db.CommitAsync()
+            </summary>
+            <param name="updateExpression"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.EFCore.Repository.HZYRepositoryBase`2.BatchUpdateAsync(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            批量更新 [更新全字段] 异步 如果使用事务 请使用 db.BeginTransactionAsync() 不能使用 db.CommitAsync()
             </summary>
             <param name="updateExpression"></param>
             <param name="predicate"></param>
