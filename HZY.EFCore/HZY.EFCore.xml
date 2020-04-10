@@ -218,7 +218,7 @@
         </member>
         <member name="T:HZY.EFCore.Repository.HZYRepositoryBase`2">
             <summary>
-            
+            基础仓储
             </summary>
             <typeparam name="T"></typeparam>
             <typeparam name="TDbContext"></typeparam>
@@ -253,6 +253,13 @@
             </summary>
             <param name="updateExpression"></param>
             <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.EFCore.Repository.HZYRepositoryBase`2.Query(System.Boolean)">
+            <summary>
+            查询
+            </summary>
+            <param name="IsTracking">是否追踪</param>
             <returns></returns>
         </member>
     </members>
