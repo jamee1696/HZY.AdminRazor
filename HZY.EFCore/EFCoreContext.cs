@@ -19,6 +19,7 @@ namespace HZY.EFCore
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.EntityFrameworkCore.Storage;
+    using System.Linq.Dynamic;
 
     public class EFCoreContext : DbContext, IUnitOfWork
     {
@@ -106,7 +107,7 @@ namespace HZY.EFCore
             _tableViewModel.Rows = Rows;
             _tableViewModel.TotalCount = await query.CountAsync();
             _tableViewModel.TotalPage = (_tableViewModel.TotalCount / Rows);
-
+            //DynamicQueryable.OrderBy(query, "name asc");
             var Datas = await query.Skip((Page - 1) * Rows).Take(Rows).ToListAsync();
 
             var type = typeof(T);
