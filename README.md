@@ -12,6 +12,8 @@
 
  **有兴趣看看 Vue 版本单页程序基于 : https://gitee.com/hzy6/HZY.AdminSpa** 
 
+ **旧版本分支 : https://gitee.com/hzy6/HZY.AdminRazor/tree/Core3.1/** 
+
  **文档、演示：http://hzyadmin.milaizhijie.com/website/index.html**
 
  **vue单页预览地址 ：http://hzyadmin.milaizhijie.com/index.html** 
