@@ -14,7 +14,6 @@ namespace HZY.Services.Sys
     using HZY.EFCore.Base;
     using HZY.Services.Core;
     using HZY.EFCore;
-    using NPOI.SS.Formula.Functions;
 
     public class Sys_FunctionService : ServiceBase
     {

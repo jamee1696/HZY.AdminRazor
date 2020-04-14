@@ -1,5 +1,5 @@
 ﻿@section Styles{
-
+    <link href="~/admin/css/hzyCCT.css" rel="stylesheet" />
 }
 @section Scripts{
     <script type="text/javascript">
@@ -7,86 +7,122 @@
             el: "#app",
             data: function () {
                 return {
-                    search: {
-                        state:false,
-                        vm: {
-                            AppLog_Api: null,
-                            AppLog_IP: null,
-                            AppLog_Form: null,
-                            AppLog_FormBody: null,
-                            AppLog_QueryString: null
-                        }
-                    },
-                    table: {
-                        columns: [],
-                        data: [],
-                        page: 1,
-                        rows: 15,
-                        totalCount: 0,
-                        selecteds: []//选中的行
-                    }
+                    tablesAndFields: {},
+                    tables: [],
+                    selectedTable: '',
+                    fields: [],
+                    selectedTab: 1,
+                    code:''
                 }
             },
             created: function () {
-                this.findList();
+                this.getTableNameAndFields();
             },
             mounted: function () {
 
             },
             methods: {
-                //获取列表
-                findList: function () {
+                //获取表及字段
+                getTableNameAndFields: function () {
                     var _this = this;
-                    var path = `@Url.Action("FindList")/${_this.table.page}/${_this.table.rows}`;
+                    var path = `@Url.Action("GetTableNameAndFields")`;
 
-                    hzyAdmin.post(path, _this.search.vm, function (r) {
-                        if (r.status != 1) return;
-                        _this.table.data = r.data.DataSource;
-                        _this.table.totalCount = r.data.TotalCount;
-                        _this.table.columns = r.data.Cols;
+                    hzyAdmin.post(path, {}, function (r) {
+                        _this.tablesAndFields = r.data;
+                        for (var item in _this.tablesAndFields) {
+                            _this.tables.push(item);
+                        }
+                        _this.onSelectedTable(_this.tables[0]);
+                        _this.onSelectedTab(1);
                     });
                 },
-                //重置
-                reset: function () {
-                    for (var item in this.search.vm) this.search.vm[item] = null;
-                    this.findList();
+                onSelectedTable: function (table) {
+                    this.selectedTable = table;
+                    this.fields = this.tablesAndFields[this.selectedTable];
                 },
-                //删除
-                remove: function (id) {
-                    var _this = this;
-                    var ids = [];
-                    if (id) {
-                        ids.push(id);
-                    } else {
-                        var selecteds = this.table.selecteds;
-                        if (selecteds.length == 0) return top.hzyAdmin.alert("请勾选要删除得数据!", "错误");
-                        for (var i = 0; i < selecteds.length; i++) {
-                            ids.push(selecteds[i]._ukid);
-                        }
+                onSelectedTab: function (tab) {
+                    this.selectedTab = tab;
+                    if (tab == 1) {
+                        this.getModelCode();
                     }
-                    if (confirm("确定要删除吗?")) {
-                        //请求接口删除
-                        var path = `@Url.Action("Delete")`;
-
-                        hzyAdmin.post(path, ids, function (r) {
-                            if (r.status != 1) return;
-                            top.hzyAdmin.alert("删除成功!", "成功");
-                            _this.findList();
-                        });
+                    if (tab == 2) {
+                        this.getDbSetCode();
+                    }
+                    if (tab == 3) {
+                        this.getServicesCode();
+                    }
+                    if (tab == 4) {
+                        this.getServicesRegister();
                     }
                 },
-                openForm: function (id) {
-                    var path = `@Url.Action("Info")/${(id ? id : '')}`;
+                //获取代码
+                getCode: function (path) {
                     var _this = this;
-
-                    hzyAdmin.openPage(id ? '编辑' : '新建', path, function () {
-                        _this.findList();//刷新列表
-                    }, 800, 800);
+                    hzyAdmin.post(path, {}, function (r) {
+                        console.log('getCode', r);
+                        _this.code = r.data;
+                    });
+                },
+                //获取 model
+                getModelCode: function () {
+                    var path = `@Url.Action("GetModelCode")/${this.selectedTable}`;
+                    this.getCode(path);
+                },
+                //获取 efcore 使用的 dbset
+                getDbSetCode: function () {
+                    var path = `@Url.Action("GetDbSetCode")`;
+                    this.getCode(path);
+                },
+                //获取 service 服务代码
+                getServicesCode: function () {
+                    var path = `@Url.Action("GetServicesCode")/${this.selectedTable}`;
+                    this.getCode(path);
+                },
+                //获取 服务 注入代码
+                getServicesRegister: function () {
+                    var path = `@Url.Action("GetServicesRegister")`;
+                    this.getCode(path);
                 }
             }
         });
     </script>
 }
-<div class="container-fluid" id="app">
-    代码创建工具正在开发中
+<div class="m-0" id="app">
+    <div class="container-fluid">
+        <div class="cct">
+            <div class="cct-tables">
+                <ul>
+                    <li v-for="(item,index) in tables" @@click="onSelectedTable(item);" :class="selectedTable==item?'cctActive':''">{{item}}</li>
+                </ul>
+            </div>
+            <div class="cct-fields">
+                <ul>
+                    <li v-for="(item,index) in fields">
+                        <el-row type="flex">
+                            <el-col :span="10">{{item.ColName}}</el-col>
+                            <el-col :span="7"> <el-divider direction="vertical"></el-divider>{{item.ColType}}</el-col>
+                            <el-col :span="7">
+                                <div v-if="item.ColIsKey==1"> <el-divider direction="vertical"></el-divider><el-tag type="success">主键</el-tag></div>
+                                <div v-else> <el-divider direction="vertical"></el-divider>{{item.ColRemark}}</div>
+                            </el-col>
+                        </el-row>
+                    </li>
+                </ul>
+            </div>
+            <div class="cct-tools">
+                <ul>
+                    <li @@click="onSelectedTab(1)" :class="selectedTab==1?'cctActive':''">1&nbsp;>&nbsp;HZY.Models</li>
+                    <li @@click="onSelectedTab(2)" :class="selectedTab==2?'cctActive':''">2&nbsp;>&nbsp;HZY.EFCore.DbSet</li>
+                    <li @@click="onSelectedTab(3)" :class="selectedTab==3?'cctActive':''">3&nbsp;>&nbsp;HZY.Services</li>
+                    <li @@click="onSelectedTab(4)" :class="selectedTab==4?'cctActive':''">4&nbsp;>&nbsp;HZY.Services.Register</li>
+                    <li @@click="onSelectedTab(5)" :class="selectedTab==5?'cctActive':''">5&nbsp;>&nbsp;HZY.Admin.Controllers</li>
+                    <li @@click="onSelectedTab(6)" :class="selectedTab==6?'cctActive':''">6&nbsp;>&nbsp;HZY.Admin.Index.cshtml</li>
+                    <li @@click="onSelectedTab(7)" :class="selectedTab==7?'cctActive':''">7&nbsp;>&nbsp;HZY.Admin.Info.cshtml</li>
+                </ul>
+            </div>
+            <div class="cct-codes">
+                <textarea v-model="code"></textarea>
+            </div>
+        </div>
+    </div>
 </div>

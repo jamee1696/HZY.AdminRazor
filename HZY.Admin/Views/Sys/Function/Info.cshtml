@@ -65,27 +65,29 @@
         });
     </script>
 }
-<div class="container-fluid hzyAdminForm" id="app">
-    <div class="row">
-        <div class="col-sm-12">
-            <h4 class="example-title">编号</h4>
-            <input type="text" class="form-control" placeholder="请输入 编号" v-model="form.vm.Model.Function_Num" autocomplete="off" />
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">功能名称</h4>
-            <input type="text" class="form-control" placeholder="请输入 功能名称" v-model="form.vm.Model.Function_Name" autocomplete="off" />
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">英文名称</h4>
-            <input type="text" class="form-control" placeholder="请输入 英文名称" v-model="form.vm.Model.Function_ByName" autocomplete="off" />
-        </div>
-    </div>
-    <div class="hzyAdminForm-footer">
+<div class="m-20 hzyAdminForm" id="app">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6 text-right">
-                <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
-                <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+            <div class="col-sm-12">
+                <h4 class="example-title">编号</h4>
+                <input type="text" class="form-control" placeholder="请输入 编号" v-model="form.vm.Model.Function_Num" autocomplete="off" />
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">功能名称</h4>
+                <input type="text" class="form-control" placeholder="请输入 功能名称" v-model="form.vm.Model.Function_Name" autocomplete="off" />
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">英文名称</h4>
+                <input type="text" class="form-control" placeholder="请输入 英文名称" v-model="form.vm.Model.Function_ByName" autocomplete="off" />
+            </div>
+        </div>
+        <div class="hzyAdminForm-footer">
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
+                    <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+                </div>
             </div>
         </div>
     </div>

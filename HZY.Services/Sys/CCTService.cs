@@ -176,12 +176,12 @@ namespace HZY.Services.Sys
         /// <param name="TableName"></param>
         /// <param name="Temp"></param>
         /// <returns></returns>
-        public async Task<string> CreateLogicCode(string TableName, string Temp)
+        public async Task<string> CreateServiceCode(string TableName, string Temp)
         {
             var _Cols = await db.GetColsByTableNameAsync(TableName);
 
             var _Code = Temp.ToString();
-            var _ClassName = TableName + "Logic";
+            var _ClassName = TableName;
             var _KeyName = _Cols.Find(w => w.ColIsKey == 1);
             //
             var _NameCol = _Cols.Count > 2 ? _Cols[1] : null;
@@ -189,24 +189,48 @@ namespace HZY.Services.Sys
 
             var _Select = _Cols.FindAll(w => w.ColIsKey == 0);
 
-            var _QueryCode = new StringBuilder().Append($@"
-                var query = db.Query<{TableName}>()
-                    .Where(w => w.t1.Role_Name.Contains(Search.{_Name}), !string.IsNullOrWhiteSpace(Search.{_Name}))
-                    .Select(w => new
-                    {{
-                        {(_Select == null ? "" : "w.t1." + string.Join(",w.t1.", _Select.Select(w => w.ColName)))},
-                        _ukid = w.t1.{_KeyName.ColName}
-                    }})
-                    .TakePage(Page, Rows, out int TotalCount)
-                    ;
-            ");
+            //var _QueryCode = new StringBuilder().Append($@"
+            //    var query = db.Query<{TableName}>()
+            //        .Where(w => w.t1.Role_Name.Contains(Search.{_Name}), !string.IsNullOrWhiteSpace(Search.{_Name}))
+            //        .Select(w => new
+            //        {{
+            //            {(_Select == null ? "" : "w.t1." + string.Join(",w.t1.", _Select.Select(w => w.ColName)))},
+            //            _ukid = w.t1.{_KeyName.ColName}
+            //        }})
+            //        .TakePage(Page, Rows, out int TotalCount)
+            //        ;
+            //");
 
+
+
+            var _SelectString = $@"{(_Select == null ? "" : "w.t1." + string.Join(",w.t1.", _Select.Select(w => w.ColName)))},
+                        _ukid = w.t1.{ _KeyName.ColName}
+            ";
+
+            _Code = _Code.Replace("<#Select#>", _SelectString);
             _Code = _Code.Replace("<#ClassName#>", _ClassName);
+            _Code = _Code.Replace("<#className#>", _ClassName.First().ToString().ToLower() + _ClassName.Substring(1));
             _Code = _Code.Replace("<#TableName#>", TableName);
             _Code = _Code.Replace("<#KeyName#>", _KeyName.ColName);
-            _Code = _Code.Replace("<#QueryCode#>", _QueryCode.ToString());
+            //_Code = _Code.Replace("<#QueryCode#>", _QueryCode.ToString());
 
             return _Code.ToString();
+        }
+
+        /// <summary>
+        /// Services Register
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> CreateServicesRegister()
+        {
+            StringBuilder _StringBuilder = new StringBuilder();
+            var _TableNames = await db.GetAllTableAsync();
+            foreach (var item in _TableNames)
+            {
+                _StringBuilder.Append($@"services.AddScoped<{item.Name}Service>();
+");
+            }
+            return _StringBuilder.ToString();
         }
 
         /// <summary>
@@ -241,8 +265,8 @@ namespace HZY.Services.Sys
             var _TableNames = await db.GetAllTableAsync();
             foreach (var item in _TableNames)
             {
-                _StringBuilder.Append($@"ModelSet.GetOrCacheFieldInfo<{item}>();
-                ");
+                _StringBuilder.Append($@"public DbSet<{item.Name}> {item.Name}s {{ get; set; }}
+");
             }
             return _StringBuilder.ToString();
         }

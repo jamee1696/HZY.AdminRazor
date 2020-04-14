@@ -1,0 +1,13 @@
+﻿using System;
+
+namespace HZY.Models
+{
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+	[Table("<#TableName#>")]
+    public class <#ClassName#>
+    {
+<#Fields#>
+    }
+}

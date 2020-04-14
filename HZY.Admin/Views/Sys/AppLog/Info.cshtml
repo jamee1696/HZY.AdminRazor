@@ -66,38 +66,40 @@
         });
     </script>
 }
-<div class="container-fluid hzyAdminForm" id="app">
-    <div class="row">
-        <div class="col-sm-12">
-            <h4 class="example-title">Api</h4>
-            <textarea class="form-control" v-model="form.vm.Model.AppLog_Api" autocomplete="off" readonly="readonly"></textarea>
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">Ip</h4>
-            <textarea class="form-control" v-model="form.vm.Model.AppLog_IP" autocomplete="off" readonly="readonly"></textarea>
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">用户名称</h4>
-            <textarea class="form-control" v-model="form.vm.Model.User_Name" autocomplete="off" readonly="readonly"></textarea>
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">Form</h4>
-            <textarea class="form-control" v-model="form.vm.Model.AppLog_Form" autocomplete="off" readonly="readonly"></textarea>
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">FormBody</h4>
-            <textarea class="form-control" v-model="form.vm.Model.AppLog_FormBody" autocomplete="off" readonly="readonly"></textarea>
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">地址栏参数</h4>
-            <textarea class="form-control" v-model="form.vm.Model.AppLog_QueryString" autocomplete="off" readonly="readonly"></textarea>
-        </div>
-    </div>
-    <div class="hzyAdminForm-footer">
+<div class="m-20 hzyAdminForm" id="app">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6 text-right">
-                <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+            <div class="col-sm-12">
+                <h4 class="example-title">Api</h4>
+                <textarea class="form-control" v-model="form.vm.Model.AppLog_Api" autocomplete="off" readonly="readonly"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">Ip</h4>
+                <textarea class="form-control" v-model="form.vm.Model.AppLog_IP" autocomplete="off" readonly="readonly"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">用户名称</h4>
+                <textarea class="form-control" v-model="form.vm.Model.User_Name" autocomplete="off" readonly="readonly"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">Form</h4>
+                <textarea class="form-control" v-model="form.vm.Model.AppLog_Form" autocomplete="off" readonly="readonly"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">FormBody</h4>
+                <textarea class="form-control" v-model="form.vm.Model.AppLog_FormBody" autocomplete="off" readonly="readonly"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">地址栏参数</h4>
+                <textarea class="form-control" v-model="form.vm.Model.AppLog_QueryString" autocomplete="off" readonly="readonly"></textarea>
+            </div>
+        </div>
+        <div class="hzyAdminForm-footer">
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+                </div>
             </div>
         </div>
     </div>

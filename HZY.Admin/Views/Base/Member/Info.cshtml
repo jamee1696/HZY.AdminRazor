@@ -116,71 +116,73 @@
         });
     </script>
 }
-<div class="container-fluid hzyAdminForm" id="app">
-    <div class="row">
-        <div class="col-sm-4">
-            <h4 class="example-title">编号</h4>
-            <input type="text" class="form-control" placeholder="请输入 编号" v-model="form.vm.Model.Member_Num" autocomplete="off" />
-        </div>
-        <div class="col-sm-4">
-            <h4 class="example-title">会员名称</h4>
-            <input type="text" class="form-control" placeholder="请输入 会员名称" v-model="form.vm.Model.Member_Name" autocomplete="off" />
-        </div>
-        <div class="col-sm-4">
-            <h4 class="example-title">联系电话</h4>
-            <input type="text" class="form-control" placeholder="请输入 联系电话" v-model="form.vm.Model.Member_Phone" autocomplete="off" />
-        </div>
-        <div class="col-sm-4">
-            <h4 class="example-title">生日</h4>
-            <el-date-picker type="date" placeholder="请选择 生日" v-model="form.vm.Model.Member_Birthday" format="yyyy-MM-dd" style="width:100%"></el-date-picker>
-        </div>
-        <div class="col-sm-4">
-            <h4 class="example-title">性别</h4>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="Member_Sex1" name="Member_Sex" class="custom-control-input" v-model="form.vm.Model.Member_Sex" value="男">
-                        <label class="custom-control-label" for="Member_Sex1">男</label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="Member_Sex2" name="Member_Sex" class="custom-control-input" v-model="form.vm.Model.Member_Sex" value="女">
-                        <label class="custom-control-label" for="Member_Sex2">女</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h4 class="example-title">头像</h4>
-                    <input type="file" @@change="photoChange" />
-                    <br />
-                    <img width="150" class="rounded" :src="form.vm.Model.Member_Photo" v-show="form.vm.Model.Member_Photo" />
-                </div>
-                <div class="col-sm-6">
-                    <h4 class="example-title">文件</h4>
-                    <input type="file" @@change="fielsChange" multiple="multiple" />
-                    <ul class="list-group">
-                        <li class="list-group-item" v-for="(item,index) in form.FilesName" :key="index"><a :href="item" target="_blank">{{item}}</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <h4 class="example-title">简介</h4>
-            <script id="Member_Introduce" name="Member_Introduce" style="width:100%;height:300px" type="text/plain">
-            </script>
-        </div>
-
-    </div>
-    <div class="hzyAdminForm-footer">
+<div class="m-20 hzyAdminForm" id="app">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6 text-right">
-                <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
-                <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+            <div class="col-sm-4">
+                <h4 class="example-title">编号</h4>
+                <input type="text" class="form-control" placeholder="请输入 编号" v-model="form.vm.Model.Member_Num" autocomplete="off" />
+            </div>
+            <div class="col-sm-4">
+                <h4 class="example-title">会员名称</h4>
+                <input type="text" class="form-control" placeholder="请输入 会员名称" v-model="form.vm.Model.Member_Name" autocomplete="off" />
+            </div>
+            <div class="col-sm-4">
+                <h4 class="example-title">联系电话</h4>
+                <input type="text" class="form-control" placeholder="请输入 联系电话" v-model="form.vm.Model.Member_Phone" autocomplete="off" />
+            </div>
+            <div class="col-sm-4">
+                <h4 class="example-title">生日</h4>
+                <el-date-picker type="date" placeholder="请选择 生日" v-model="form.vm.Model.Member_Birthday" format="yyyy-MM-dd" style="width:100%"></el-date-picker>
+            </div>
+            <div class="col-sm-4">
+                <h4 class="example-title">性别</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="Member_Sex1" name="Member_Sex" class="custom-control-input" v-model="form.vm.Model.Member_Sex" value="男">
+                            <label class="custom-control-label" for="Member_Sex1">男</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="Member_Sex2" name="Member_Sex" class="custom-control-input" v-model="form.vm.Model.Member_Sex" value="女">
+                            <label class="custom-control-label" for="Member_Sex2">女</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4 class="example-title">头像</h4>
+                        <input type="file" @@change="photoChange" />
+                        <br />
+                        <img width="150" class="rounded" :src="form.vm.Model.Member_Photo" v-show="form.vm.Model.Member_Photo" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="example-title">文件</h4>
+                        <input type="file" @@change="fielsChange" multiple="multiple" />
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="(item,index) in form.FilesName" :key="index"><a :href="item" target="_blank">{{item}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h4 class="example-title">简介</h4>
+                <script id="Member_Introduce" name="Member_Introduce" style="width:100%;height:300px" type="text/plain">
+                </script>
+            </div>
+
+        </div>
+        <div class="hzyAdminForm-footer">
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
+                    <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+                </div>
             </div>
         </div>
     </div>

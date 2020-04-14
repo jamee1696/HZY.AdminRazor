@@ -109,11 +109,17 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetLogicCode(System.String)">
+        <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetServicesCode(System.String)">
             <summary>
             获取 Logic 代码
             </summary>
             <param name="TableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetServicesRegister">
+            <summary>
+            服务 注入 代码
+            </summary>
             <returns></returns>
         </member>
         <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetControllersCode(System.String)">

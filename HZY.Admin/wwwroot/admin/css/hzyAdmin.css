@@ -12,12 +12,13 @@ html, body {
     background: #F2F6FC;
 }
 
-.vxe-toolbar {
-    min-height: auto;
+.container, .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
 }
 
-#app {
-    padding: 18px;
+.vxe-toolbar {
+    min-height: auto;
 }
 
 .line {

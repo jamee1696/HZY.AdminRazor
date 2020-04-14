@@ -213,18 +213,19 @@ namespace HZY.EFCore
             //     a.id,a.colorder
 
             string SqlString = $@"
+
 SELECT 
     d.name AS TabName,
 	isnull(f.value,'') AS TabNameRemark,
-	a.colorder AS ColOrder,
+	convert(int,a.colorder) AS ColOrder,
 	a.name AS ColName,
 	case when COLUMNPROPERTY( a.id,a.name,'IsIdentity')=1 then 1 else 0 end ColIsIdentity,
 	case when exists(SELECT 1 FROM sysobjects where xtype='PK' and parent_obj=a.id and name in (
                      SELECT name FROM sysindexes WHERE indid in( SELECT indid FROM sysindexkeys WHERE id = a.id AND colid=a.colid))) then 1 else 0 end ColIsKey,
 	b.name AS ColType,
-	a.length AS ColLength,
-	COLUMNPROPERTY(a.id,a.name,'PRECISION') AS ColMaxLength,
-	isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0) AS ColScale,
+	convert(int,a.length) AS ColLength,
+	convert(int,COLUMNPROPERTY(a.id,a.name,'PRECISION')) AS ColMaxLength,
+	convert(int,isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0)) AS ColScale,
 	case when a.isnullable=1 then 1 else 0 end ColIsNull,
 	isnull(e.text,'') AS ColDefaultValue,
     isnull(g.[value],'') AS ColRemark
@@ -236,6 +237,7 @@ left join sys.extended_properties g on a.id=G.major_id and a.colid=g.minor_id
 left join sys.extended_properties f on d.id=f.major_id and f.minor_id=0
 where d.name='{TableName}'
 order by a.id,a.colorder
+
 ";
 
             return await this.TABLES_COLUMNS_DbSet.FromSqlRaw(SqlString).ToListAsync();

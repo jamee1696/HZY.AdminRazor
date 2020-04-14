@@ -26,7 +26,7 @@ namespace HZY.EFCore
         /// 列序号
         /// </summary>
         /// <value></value>
-        public int ColOrder { get; set; }
+        public Int32 ColOrder { get; set; }
 
         /// <summary>
         /// 列名
@@ -38,13 +38,13 @@ namespace HZY.EFCore
         /// 是否自增 1 是 0 否
         /// </summary>
         /// <value></value>
-        public int ColIsIdentity { get; set; }
+        public Int32 ColIsIdentity { get; set; }
 
         /// <summary>
         /// 是否主键 1 是 0 否
         /// </summary>
         /// <value></value>
-        public int ColIsKey { get; set; }
+        public Int32 ColIsKey { get; set; }
 
         /// <summary>
         /// 类型
@@ -56,25 +56,25 @@ namespace HZY.EFCore
         /// 暂用字节数
         /// </summary>
         /// <value></value>
-        public int ColLength { get; set; }
+        public Int32 ColLength { get; set; }
 
         /// <summary>
         /// 允许占用最大字长度
         /// </summary>
         /// <value></value>
-        public int ColMaxLength { get; set; }
+        public Int32 ColMaxLength { get; set; }
 
         /// <summary>
         /// 小数位数
         /// </summary>
         /// <value></value>
-        public int ColScale { get; set; }
+        public Int32 ColScale { get; set; }
 
         /// <summary>
         /// 列能否为 Null
         /// </summary>
         /// <value></value>
-        public int ColIsNull { get; set; }
+        public Int32 ColIsNull { get; set; }
 
         /// <summary>
         /// 列默认值

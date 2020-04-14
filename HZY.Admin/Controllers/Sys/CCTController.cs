@@ -86,16 +86,23 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="TableName"></param>
         /// <returns></returns>
-        [HttpPost(nameof(GetLogicCode) + "/{TableName}")]
-        public async Task<ApiResult> GetLogicCode([FromRoute]string TableName)
+        [HttpPost(nameof(GetServicesCode) + "/{TableName}")]
+        public async Task<ApiResult> GetServicesCode([FromRoute]string TableName)
         {
-            var TempUrl = _WebRootPath + "/Content/CodeTemp/Logic.txt";
+            var TempUrl = _WebRootPath + "/Content/CodeTemp/Services.txt";
 
             if (!System.IO.File.Exists(TempUrl))
                 throw new MessageBox("模板文件不存在");
 
-            return this.ResultOk(data: await this.service.CreateLogicCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
+            return this.ResultOk(data: await this.service.CreateServiceCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
         }
+
+        /// <summary>
+        /// 服务 注入 代码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost(nameof(GetServicesRegister))]
+        public async Task<ApiResult> GetServicesRegister() => this.ResultOk(data: await this.service.CreateServicesRegister());
 
         /// <summary>
         /// 获取 Logic 代码
@@ -219,7 +226,7 @@ namespace HZY.Admin.Controllers.Sys
 
                 if (CodeType == "Logic")
                 {
-                    _StringBuilder.Append(await this.service.CreateLogicCode(item.Name, Temp));
+                    _StringBuilder.Append(await this.service.CreateServiceCode(item.Name, Temp));
                 }
 
                 if (CodeType == "Controller")

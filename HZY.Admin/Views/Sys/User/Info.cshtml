@@ -79,42 +79,44 @@
         });
     </script>
 }
-<div class="container-fluid hzyAdminForm" id="app">
-    <div class="row">
-        <div class="col-sm-6">
-            <h4 class="example-title">用户名称</h4>
-            <input type="text" class="form-control" placeholder="请输入 用户名称" v-model="form.vm.Model.User_Name" autocomplete="off" />
-        </div>
-        <div class="col-sm-6">
-            <h4 class="example-title">登录名称</h4>
-            <input type="text" class="form-control" placeholder="请输入 登录名称" v-model="form.vm.Model.User_LoginName" autocomplete="off" />
-        </div>
-        <div class="col-sm-6">
-            <h4 class="example-title">密码</h4>
-            <input type="password" class="form-control" placeholder="请输入 密码" v-model="form.vm.Model.User_Pwd" autocomplete="off" />
-        </div>
-        <div class="col-sm-6">
-            <h4 class="example-title">邮件</h4>
-            <input type="email" class="form-control" placeholder="请输入 邮件" v-model="form.vm.Model.User_Email" autocomplete="off" />
-        </div>
-        <div class='col-sm-12'>
-            <h4 class='example-title'>角色</h4>
-            <div class="row">
-                <div class="col-sm-3" v-for="(item,index) in form.vm.AllRoleList" :key="index">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" :id="item.Role_ID" :value="item.Role_ID" v-model="form.vm.RoleIds">
-                        <label class="custom-control-label" :for="item.Role_ID">{{item.Role_Name}}</label>
+<div class="m-20 hzyAdminForm" id="app">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4 class="example-title">用户名称</h4>
+                <input type="text" class="form-control" placeholder="请输入 用户名称" v-model="form.vm.Model.User_Name" autocomplete="off" />
+            </div>
+            <div class="col-sm-6">
+                <h4 class="example-title">登录名称</h4>
+                <input type="text" class="form-control" placeholder="请输入 登录名称" v-model="form.vm.Model.User_LoginName" autocomplete="off" />
+            </div>
+            <div class="col-sm-6">
+                <h4 class="example-title">密码</h4>
+                <input type="password" class="form-control" placeholder="请输入 密码" v-model="form.vm.Model.User_Pwd" autocomplete="off" />
+            </div>
+            <div class="col-sm-6">
+                <h4 class="example-title">邮件</h4>
+                <input type="email" class="form-control" placeholder="请输入 邮件" v-model="form.vm.Model.User_Email" autocomplete="off" />
+            </div>
+            <div class='col-sm-12'>
+                <h4 class='example-title'>角色</h4>
+                <div class="row">
+                    <div class="col-sm-3" v-for="(item,index) in form.vm.AllRoleList" :key="index">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" :id="item.Role_ID" :value="item.Role_ID" v-model="form.vm.RoleIds">
+                            <label class="custom-control-label" :for="item.Role_ID">{{item.Role_Name}}</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="hzyAdminForm-footer">
-        <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6 text-right">
-                <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
-                <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+        <div class="hzyAdminForm-footer">
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-primary" @@click="save" v-bind:disabled="form.saveState" v-if="power.Save">保存</button>
+                    <button class="btn btn-danger" @@click="closeWindow()">关闭</button>
+                </div>
             </div>
         </div>
     </div>
