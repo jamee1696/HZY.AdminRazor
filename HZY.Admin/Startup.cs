@@ -18,7 +18,7 @@ namespace HZY.Admin
     using Microsoft.EntityFrameworkCore;
     using HZY.EFCore.Repository;
     using HZY.EFCore;
-    using HZY.Admin.Core;
+    using HZY.Admin.Core; 
     using HZY.Toolkit;
     using HZY.Toolkit.Entitys;
     using HZY.EFCore.Repository.Interface;
