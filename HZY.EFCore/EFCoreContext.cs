@@ -19,7 +19,6 @@ namespace HZY.EFCore
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.EntityFrameworkCore.Storage;
-    using System.Linq.Dynamic;
 
     public class EFCoreContext : DbContext, IUnitOfWork
     {
