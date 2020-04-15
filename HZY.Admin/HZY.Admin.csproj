@@ -11,9 +11,17 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <Compile Remove="wwwroot\Content\CodeTemp\Codes\**" />
+    <Compile Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
     <Content Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <Content Remove="wwwroot\Content\CodeTemp\Codes\**" />
+    <Content Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
     <EmbeddedResource Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <EmbeddedResource Remove="wwwroot\Content\CodeTemp\Codes\**" />
+    <EmbeddedResource Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
     <None Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <None Remove="wwwroot\Content\CodeTemp\Codes\**" />
+    <None Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,6 +115,12 @@
     <None Include="wwwroot\admin\libs\neditor\third-party\zeroclipboard\ZeroClipboard.js" />
     <None Include="wwwroot\admin\libs\neditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
     <None Include="wwwroot\admin\libs\neditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <None Include="wwwroot\admin\libs\qs\dist\qs.js" />
+    <None Include="wwwroot\admin\libs\qs\lib\formats.js" />
+    <None Include="wwwroot\admin\libs\qs\lib\index.js" />
+    <None Include="wwwroot\admin\libs\qs\lib\parse.js" />
+    <None Include="wwwroot\admin\libs\qs\lib\stringify.js" />
+    <None Include="wwwroot\admin\libs\qs\lib\utils.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -130,6 +144,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\admin\libs\neditor\net\upload\image\" />
+    <Folder Include="wwwroot\Content\Codes\" />
+    <Folder Include="wwwroot\Content\ZipFile\" />
   </ItemGroup>
 
 

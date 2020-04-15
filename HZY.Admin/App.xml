@@ -111,33 +111,40 @@
         </member>
         <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetServicesCode(System.String)">
             <summary>
-            获取 Logic 代码
+            获取 Service 代码
             </summary>
             <param name="TableName"></param>
             <returns></returns>
         </member>
         <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetServicesRegister">
             <summary>
-            服务 注入 代码
+            获取 Service 注入 代码
             </summary>
             <returns></returns>
         </member>
         <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetControllersCode(System.String)">
             <summary>
-            获取 Logic 代码
+            获取 控制器 代码
             </summary>
             <param name="TableName"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetFormCode(System.String,System.Collections.Generic.List{System.String})">
+        <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetIndexCode(System.String)">
             <summary>
-            获取 Form 代码
+            获取 Index.cshtml 代码
+            </summary>
+            <param name="TableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Controllers.Sys.CCTController.GetInfoCode(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            获取 Info.cshtml 代码
             </summary>
             <param name="TableName"></param>
             <param name="Fields"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Controllers.Sys.CCTController.Download(System.String,System.String,System.String)">
+        <member name="M:HZY.Admin.Controllers.Sys.CCTController.Download(HZY.DTO.Sys.CCTDownloadDto)">
             <summary>
             下载当前代码
             </summary>

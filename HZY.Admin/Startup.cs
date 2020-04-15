@@ -18,7 +18,7 @@ namespace HZY.Admin
     using Microsoft.EntityFrameworkCore;
     using HZY.EFCore.Repository;
     using HZY.EFCore;
-    using HZY.Admin.Core; 
+    using HZY.Admin.Core;
     using HZY.Toolkit;
     using HZY.Toolkit.Entitys;
     using HZY.EFCore.Repository.Interface;
@@ -29,6 +29,7 @@ namespace HZY.Admin
     using UEditor.Core;
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http.Features;
 
     public class Startup
     {
@@ -112,24 +113,24 @@ namespace HZY.Admin
                     };
 
                     #region SignalR 配置 jwt
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            var token = AccountService.GetToken(context.HttpContext);
+                    //options.Events = new JwtBearerEvents
+                    //{
+                    //    OnMessageReceived = context =>
+                    //    {
+                    //        var token = AccountService.GetToken(context.HttpContext);
 
-                            // If the request is for our hub...
-                            var path = context.HttpContext.Request.Path;
+                    //        // If the request is for our hub...
+                    //        var path = context.HttpContext.Request.Path;
 
-                            if (!string.IsNullOrEmpty(token) && path.StartsWithSegments("/chatHub"))
-                            {
-                                // Read the token out of the query string
-                                context.Token = token;
-                            }
+                    //        if (!string.IsNullOrEmpty(token) && path.StartsWithSegments("/chatHub"))
+                    //        {
+                    //            // Read the token out of the query string
+                    //            context.Token = token;
+                    //        }
 
-                            return Task.CompletedTask;
-                        }
-                    };
+                    //        return Task.CompletedTask;
+                    //    }
+                    //};
                     #endregion
 
                 });
@@ -219,6 +220,15 @@ namespace HZY.Admin
             #region 取消默认验证Api 接收参数模型 的 验证特性 如有 [ApiController]
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
             #endregion
+
+            //配置文件大小限制
+           //services.Configure<FormOptions>(options =>
+           //{
+           //    options.ValueLengthLimit = int.MaxValue;
+           //    options.MultipartBodyLengthLimit = int.MaxValue;// 60000000; 
+           //    options.MultipartHeadersLengthLimit = int.MaxValue;
+           //});
+
 
         }
 

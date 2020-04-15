@@ -7,49 +7,78 @@
  *
  * *******************************************************
  */
+var qs = Qs;
+
 var hzyAdmin = {
     layer: null,
     vuePro: null,
-    guidEmpty:'00000000-0000-0000-0000-000000000000',
+    guidEmpty: '00000000-0000-0000-0000-000000000000',
+    //axios:null,
     init: function () {
         this.layer = top.layer;
         this.vuePro = top.Vue.prototype;
+        //this.axios = top.axios;
         var _this = this;
-        //ajax 全局 拦截
-        $.ajaxSetup({
-            dataType: "json",
-            cache: false,
-            xhrFields: {
-                withCredentials: true
-            },
-            complete: function (xhr) {
-                var resJson = xhr.responseJSON;
-                console.log('拦截器', resJson);
-                if (resJson.hasOwnProperty('status')) {
-                    if (resJson.status == -1) { //接口授权码无效
-                        if (confirm(resJson.msg + ',请重新登录授权!'))
-                            window.location = "/Authorization/Out";
-                        return;
-                    }
-                    if (resJson.status == -2) { //服务端异常
-                        _this.alert(resJson.msg, '错误');
-                        return;
-                    }
-                    if (resJson.status == 0) { //失败
-                        _this.alert(resJson.msg, '警告');
-                        return;
-                    }
+
+        //
+        axios.defaults.timeout = 100 * 1000;
+        axios.defaults.baseURL = '';
+
+        //http request 拦截器
+        axios.interceptors.request.use(config => {
+            config.headers['x-requested-width'] = 'XMLHttpRequest';
+            //config.headers['Authorization'] = tools.getCookie('Authorization');
+            var contentType = config.headers['Content-Type'];
+            if (!contentType) {
+                config.headers['Content-Type'] = 'application/json; charset=UTF-8';
+            }
+
+            if (!config.data) return config;
+
+            if (config.data.isUpload) {
+                config.headers['Content-Type'] = 'multipart/form-data; charset=UTF-8';
+            }
+
+            return config;
+        }, error => {
+            console.log(error);
+            return Promise.reject(error);
+        });
+
+        //http response 拦截器
+        axios.interceptors.response.use(response => {
+            _this.loading.stop();
+            var data = response.data;
+            console.log(data);
+
+            if (!data) return;
+
+            if (data.hasOwnProperty('status')) {
+                //     程序异常 = -2,
+                // 未授权 = -1,
+                // 失败 = 0,
+                // 成功 = 1,
+
+                if (data.status == -1) { //接口授权码无效
+                    if (confirm(data.msg + ',请重新登录授权!')) window.location = "/Authorization/Out";
                 }
-            },
-            error: function (event, xhr, options, exc) {
-                //event - 包含 event 对象
-                //xhr - 包含 XMLHttpRequest 对象
-                //options - 包含 AJAX 请求中使用的选项
-                //exc - 包含 JavaScript exception
-                if (xhr.status != 200) {
-                    console.log(event, xhr, options, exc);
-                    _this.loading.stop();
+                else if (data.status == -2) { //服务端异常
+                    _this.alert(data.msg, '错误');
                 }
+                else if (data.status == 0) { //失败
+                    _this.alert(data.msg, '警告');
+                }
+            }
+
+            return response;
+        }, error => {
+            _this.loading.stop();
+            console.log(error);
+            if (error.response.status === 401) {
+                _this.alert(data.msg, '请重新登录授权!');
+                window.location = "/Authorization/Out";
+            } else {
+                return Promise.reject(error)
             }
         });
     },
@@ -59,13 +88,13 @@ var hzyAdmin = {
     },
     loading: {
         index: null,
-        start: function (id = 'hzyadmin-loading') {
+        start: function () {
             this.index = hzyAdmin.vuePro.$loading({
                 fullscreen: true,
                 background: 'rgba(255,255,255,.1)'
             });
         },
-        stop: function (id = 'hzyadmin-loading') {
+        stop: function () {
             if (this.index) this.index.close();
         }
     },
@@ -106,80 +135,119 @@ var hzyAdmin = {
             dangerouslyUseHTMLString: true,
         });
     },
-    post: function (url, data, success, loading = true) {
-        var _this = this;
-        if (loading) top.hzyAdmin.loading.start();
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            contentType: 'application/json;charset=UTF-8',
-            url: url,
-            data: JSON.stringify(data),
-            success: function (r) {
-                if (loading) top.hzyAdmin.loading.stop();
-                if (success) success(r);
-            }
-        });
-    },
-    upload: function (url, data, success, loading = true) {
+    // http get 请求
+    get: function (url, data = {}, success, loading = true, config = {}) {
         var _this = this;
         if (loading) _this.loading.start();
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            contentType: 'multipart/form-data',
-            url: url,
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (r) {
-                if (loading) _this.loading.stop();
-                if (success) success(r);
-            }
+
+        if (data) url += `?${qs.stringify(data)}`;
+
+        var promise = new Promise((resolve, reject) => {
+            axios.get(url, config)
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(err => {
+                    reject(err)
+                })
         });
+
+        promise.then(res => {
+            if (loading) _this.loading.stop();
+            if (success) success(res.data);
+        });
+
+        return promise;
     },
+    // http post 请求
+    post: function (url, data = {}, success, loading = true, config = {}) {
+        var _this = this;
+        if (loading) _this.loading.start();
+
+        var promise = new Promise((resolve, reject) => {
+            axios.post(url, data, config)
+                .then(response => {
+                    if (response != undefined) {
+                        resolve(response);
+                    }
+                }, err => {
+                    reject(err)
+                })
+        });
+
+        promise.then(res => {
+            if (loading) _this.loading.stop();
+            if (success) success(res.data);
+        });
+
+        return promise;
+    },
+    // 上传文件 请求
+    upload: function (url, data = {}, success, loading = true, config = {}) {
+        var _this = this;
+        if (loading) _this.loading.start();
+
+        data.isUpload = true;
+
+        var promise = new Promise((resolve, reject) => {
+            axios.post(url, data, config)
+                .then(response => {
+                    if (response != undefined) {
+                        resolve(response);
+                    }
+                }, err => {
+                    reject(err)
+                })
+        });
+
+        promise.then(res => {
+            if (loading) _this.loading.stop();
+            if (success) success(res.data);
+        });
+
+        return promise;
+    },
+    //下载文件请求
     download: function (url, data, loading = true) {
         var _this = this;
         if (loading) _this.loading.start();
-        $.ajax({
-            type: "get",
-            contentType: 'application/json; charset=UTF-8',
-            xhrFields: {
-                responseType: 'blob'
-            },
-            url: url,
-            data: JSON.stringify(data),
-            success: function (data) {
-                if (loading) _this.loading.stop();
-                var headers = res.headers;
-                //"attachment; filename=6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls;filename*=UTF-8''6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls"
-                var contentDisposition = headers['content-disposition'];
-                var contentType = headers['content-type'];
-                var attachmentInfoArrary = contentDisposition.split(';');
-                var fileName = '';
-                if (attachmentInfoArrary.length > 1) {
-                    fileName = attachmentInfoArrary[1].split('=')[1];
-                }
-                var blob = new Blob([data], { type: contentType });
 
-                if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE
-                    window.navigator.msSaveOrOpenBlob(blob, fileName);
-                } else {
-                    var url = (window.URL || window.webkitURL).createObjectURL(blob);
-                    // window.open(url, "_blank"); //下载
-                    // window.URL.revokeObjectURL(url) // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
+        hzyAdmin.post(url, data, null, loading, {
+            // responseType: 'stream',
+            responseType: 'blob',
+            // responseType: 'arraybuffer',
+        }).then(res => {
+            console.log('res', res);
+            if (loading) _this.loading.stop();
+            var resData = res.data;
 
-                    var a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.setAttribute('download', fileName);
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a); // 下载完成移除元素
-                    // window.location.href = url
-                    window.URL.revokeObjectURL(url); // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
-                }
+            var headers = res.headers;
+            //"attachment; filename=6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls;filename*=UTF-8''6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls"
+            var contentDisposition = headers['content-disposition'];
+            var contentType = headers['content-type'];
+            var attachmentInfoArrary = contentDisposition.split(';');
+            var fileName = '';
+            if (attachmentInfoArrary.length > 1) {
+                fileName = attachmentInfoArrary[1].split('=')[1];
+            }
+            var blob = new Blob([resData], { type: contentType });
+
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE
+                window.navigator.msSaveOrOpenBlob(blob, fileName);
+            } else {
+                var url = (window.URL || window.webkitURL).createObjectURL(blob);
+                // window.open(url, "_blank"); //下载
+                // window.URL.revokeObjectURL(url) // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
+
+                var a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.setAttribute('download', fileName);
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a); // 下载完成移除元素
+                // window.location.href = url
+                window.URL.revokeObjectURL(url); // 只要映射存在，Blob就不能进行垃圾回收，因此一旦不再需要引用，就必须小心撤销URL，释放掉blob对象。
             }
         });
     },

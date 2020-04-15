@@ -11,16 +11,17 @@ namespace HZY.Services.Sys
     using HZY.Services.Core;
     using HZY.EFCore;
     using System.Linq;
+    using System.IO;
+    using Microsoft.AspNetCore.Hosting;
+    using HZY.Toolkit;
 
     public class CCTService : ServiceBase
     {
-
         protected readonly EFCoreContext db;
 
         public CCTService(EFCoreContext _db)
         {
             this.db = _db;
-
         }
 
         /// <summary>
@@ -159,8 +160,15 @@ namespace HZY.Services.Sys
 
                     }
                 }
+                if (_Key == 1 && (_Type == "Guid" || _Type == "Guid?"))
+                {
+                    _Fields.Append($"\tpublic {_Type} {item.ColName} {{ get; set; }} = Guid.Empty;\r\n");
 
-                _Fields.Append($"\tpublic {_Type} {item.ColName} {{ get; set; }}\r\n");
+                }
+                else
+                {
+                    _Fields.Append($"\tpublic {_Type} {item.ColName} {{ get; set; }}\r\n");
+                }
             }
 
             _Code = _Code.Replace("<#ClassName#>", _ClassName);
@@ -168,6 +176,22 @@ namespace HZY.Services.Sys
             _Code = _Code.Replace("<#Fields#>", _Fields.ToString());
 
             return _Code.ToString();
+        }
+
+        /// <summary>
+        /// 生产 DbSet 代码
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> CreateDbSetCode()
+        {
+            StringBuilder _StringBuilder = new StringBuilder();
+            var _TableNames = await db.GetAllTableAsync();
+            foreach (var item in _TableNames)
+            {
+                _StringBuilder.Append($@"public DbSet<{item.Name}> {item.Name}s {{ get; set; }}
+");
+            }
+            return _StringBuilder.ToString();
         }
 
         /// <summary>
@@ -200,8 +224,6 @@ namespace HZY.Services.Sys
             //        .TakePage(Page, Rows, out int TotalCount)
             //        ;
             //");
-
-
 
             var _SelectString = $@"{(_Select == null ? "" : "w.t1." + string.Join(",w.t1.", _Select.Select(w => w.ColName)))},
                         _ukid = w.t1.{ _KeyName.ColName}
@@ -244,66 +266,129 @@ namespace HZY.Services.Sys
             //var _Cols = await this.GetColsByTableName(TableName);
             var _Code = Temp.ToString();
 
-            await Task.Run(() =>
-            {
-                var _ClassName = TableName + "Controller";
+            var _ClassName = TableName;
 
-                _Code = _Code.Replace("<#ClassName#>", _ClassName);
-                _Code = _Code.Replace("<#TableName#>", TableName);
-            });
+            _Code = _Code.Replace("<#ClassName#>", _ClassName);
+            _Code = _Code.Replace("<#TableName#>", TableName);
 
-            return _Code.ToString();
+            return await Task.FromResult(_Code.ToString());
         }
 
         /// <summary>
-        /// 生产 DbSet 代码
+        /// 创建 Index.cshtml 代码
         /// </summary>
+        /// <param name="TableName"></param>
+        /// <param name="Temp"></param>
         /// <returns></returns>
-        public async Task<string> CreateDbSetCode()
+        public async Task<string> CreateIndexCode(string TableName, string Temp)
         {
-            StringBuilder _StringBuilder = new StringBuilder();
-            var _TableNames = await db.GetAllTableAsync();
-            foreach (var item in _TableNames)
-            {
-                _StringBuilder.Append($@"public DbSet<{item.Name}> {item.Name}s {{ get; set; }}
-");
-            }
-            return _StringBuilder.ToString();
+            var _Code = Temp.ToString();
+
+            var _ClassName = TableName;
+
+            _Code = _Code.Replace("<#ClassName#>", _ClassName);
+            _Code = _Code.Replace("<#TableName#>", TableName);
+
+            return await Task.FromResult(_Code.ToString());
         }
 
         /// <summary>
-        /// 创建 Form 代码
+        /// 创建 Info.cshtml 代码
         /// </summary>
         /// <param name="Fields"></param>
         /// <param name="Temp"></param>
         /// <returns></returns>
-        public async Task<string> CreateFormCode(List<string> Fields, string Temp)
+        public async Task<string> CreateInfoCode(List<string> Fields, string Temp)
         {
             StringBuilder _Codes = new StringBuilder();
             await Task.Run(() =>
             {
                 var _TableAll = ModelCache.All();
+
                 foreach (var item in Fields)
                 {
                     var _TableName = item.Split('/')[0];
                     var _FieldName = item.Split('/')[1];
-                    var fieldInfos = _TableAll[item].ToList();
+                    var fieldInfos = _TableAll[_TableName].ToList();
 
                     if (fieldInfos == null) continue;
 
                     var fieldInfo = fieldInfos.FirstOrDefault(w => w.Name == _FieldName);
                     if (fieldInfo == null) continue;
 
-                    var _Code = Temp;
-                    _Code = _Code.Replace("<#FieldAlias#>", fieldInfo.Remark);
-                    _Code = _Code.Replace("<#Field#>", fieldInfo.Name);
-                    _Codes.Append(_Code + "\r\n");
+                    _Codes.Append(@$"
+            <div class=""col-sm-12"">
+                <h4 class=""example-title"">{fieldInfo.Remark}</h4>
+                <input type=""text"" class=""form-control"" placeholder=""请输入 {fieldInfo.Remark}"" v-model=""form.vm.Model.{fieldInfo.Name}"" autocomplete=""off"" />
+            </div>
+");
                 }
             });
-            return _Codes.ToString();
+            Temp = Temp.Replace("<#Form#>", _Codes.ToString());
+            return Temp;
         }
 
+        /// <summary>
+        /// 创建文件
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> CreateAllFiles(string webRootPath, string CodeType, string TableName, string Temp)
+        {
+            var path = $"{webRootPath}/Content/Codes/";
 
+            if (CodeType == "Model")
+            {
+                var code = await this.CreateModelCode(TableName, Temp);
+                path += $"{CodeType}";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                await File.WriteAllTextAsync($"{path}/{TableName}.cs", code, Encoding.UTF8);
+            }
+
+            if (CodeType == "Service")
+            {
+                var code = await this.CreateServiceCode(TableName, Temp);
+                path += $"{CodeType}";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                await File.WriteAllTextAsync($"{path}/{TableName}Service.cs", code, Encoding.UTF8);
+            }
+
+            if (CodeType == "Controller")
+            {
+                var code = await this.CreateControllersCode(TableName, Temp);
+                path += $"{CodeType}";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                await File.WriteAllTextAsync($"{path}/{TableName}Controller.cs", code, Encoding.UTF8);
+            }
+
+            if (CodeType == "Index")
+            {
+                var code = await this.CreateIndexCode(TableName, Temp);
+                path += $"Views";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                path += $"/{TableName}";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                await File.WriteAllTextAsync($"{path}/Index.cshtml", code, Encoding.UTF8);
+            }
+
+            if (CodeType == "Info")
+            {
+                //获取表下面的所有 字段
+                var _Cols = await this.db.GetColsByTableNameAsync(TableName);
+                var list = new List<string>();
+                foreach (var _Col in _Cols)
+                {
+                    list.Add($"{TableName}/{_Col.ColName}");
+                }
+                var code = await this.CreateInfoCode(list, Temp);
+                path += $"Views";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                path += $"/{TableName}";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                await File.WriteAllTextAsync($"{path}/Info.cshtml", code, Encoding.UTF8);
+            }
+
+            return path;
+        }
 
 
 

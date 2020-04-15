@@ -28,8 +28,9 @@ namespace HZY.Models
         /// 电话
         /// </summary>
         [Required(ErrorMessage = "电话不能为空!")]
-        [MinLength(11, ErrorMessage = "电话长度只能11位!")]
-        public int? Member_Phone { get; set; }
+        [RegularExpression(@"^\+?\d{0,4}?[1][3-8]\d{9}$", ErrorMessage = "手机号码格式错误")]
+        [StringLength(11, ErrorMessage = "电话长度只能11位!")]
+        public string Member_Phone { get; set; }
 
         /// <summary>
         /// 性别

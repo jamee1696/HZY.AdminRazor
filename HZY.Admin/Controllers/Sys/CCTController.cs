@@ -41,10 +41,7 @@ namespace HZY.Admin.Controllers.Sys
         #region 页面 Views
 
         [HttpGet(nameof(Index))]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         #endregion
 
@@ -54,9 +51,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost(nameof(GetTableNameAndFields))]
         public async Task<ApiResult> GetTableNameAndFields()
-        {
-            return this.ResultOk(await this.service.GetTableNameAndFields());
-        }
+            => this.ResultOk(await this.service.GetTableNameAndFields());
 
         /// <summary>
         /// 获取 Model 代码
@@ -79,10 +74,11 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <returns></returns>
         [HttpPost(nameof(GetDbSetCode))]
-        public async Task<ApiResult> GetDbSetCode() => this.ResultOk(data: await this.service.CreateDbSetCode());
+        public async Task<ApiResult> GetDbSetCode()
+            => this.ResultOk(data: await this.service.CreateDbSetCode());
 
         /// <summary>
-        /// 获取 Logic 代码
+        /// 获取 Service 代码
         /// </summary>
         /// <param name="TableName"></param>
         /// <returns></returns>
@@ -98,14 +94,15 @@ namespace HZY.Admin.Controllers.Sys
         }
 
         /// <summary>
-        /// 服务 注入 代码
+        /// 获取 Service 注入 代码
         /// </summary>
         /// <returns></returns>
         [HttpPost(nameof(GetServicesRegister))]
-        public async Task<ApiResult> GetServicesRegister() => this.ResultOk(data: await this.service.CreateServicesRegister());
+        public async Task<ApiResult> GetServicesRegister()
+            => this.ResultOk(data: await this.service.CreateServicesRegister());
 
         /// <summary>
-        /// 获取 Logic 代码
+        /// 获取 控制器 代码
         /// </summary>
         /// <param name="TableName"></param>
         /// <returns></returns>
@@ -121,20 +118,36 @@ namespace HZY.Admin.Controllers.Sys
         }
 
         /// <summary>
-        /// 获取 Form 代码
+        /// 获取 Index.cshtml 代码
         /// </summary>
         /// <param name="TableName"></param>
-        /// <param name="Fields"></param>
         /// <returns></returns>
-        [HttpPost(nameof(GetFormCode) + "/{FromRoute}")]
-        public async Task<ApiResult> GetFormCode([FromRoute]string TableName, [FromBody]List<string> Fields)
+        [HttpPost(nameof(GetIndexCode) + "/{TableName}")]
+        public async Task<ApiResult> GetIndexCode([FromRoute]string TableName)
         {
-            var TempUrl = _WebRootPath + "/Content/CodeTemp/Form.txt";
+            var TempUrl = _WebRootPath + "/Content/CodeTemp/Index.txt";
 
             if (!System.IO.File.Exists(TempUrl))
                 throw new MessageBox("模板文件不存在");
 
-            if (Fields?.Count == 0)
+            return this.ResultOk(data: await this.service.CreateIndexCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
+        }
+
+        /// <summary>
+        /// 获取 Info.cshtml 代码
+        /// </summary>
+        /// <param name="TableName"></param>
+        /// <param name="Fields"></param>
+        /// <returns></returns>
+        [HttpPost(nameof(GetInfoCode) + "/{TableName}")]
+        public async Task<ApiResult> GetInfoCode([FromRoute]string TableName, [FromBody]List<string> Fields)
+        {
+            var TempUrl = _WebRootPath + "/Content/CodeTemp/Info.txt";
+
+            if (!System.IO.File.Exists(TempUrl))
+                throw new MessageBox("模板文件不存在");
+
+            if (Fields == null || Fields.Count == 0)
             {
                 Fields = new List<string>();
                 var _Cols = await this.db.GetColsByTableNameAsync(TableName);
@@ -144,33 +157,35 @@ namespace HZY.Admin.Controllers.Sys
                 }
             }
 
-            return this.ResultOk(data: await this.service.CreateFormCode(Fields, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
+            return this.ResultOk(data: await this.service.CreateInfoCode(Fields, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
         }
 
         /// <summary>
         /// 下载当前代码
         /// </summary>
         /// <returns></returns>
-        [HttpGet(nameof(Download))]
-        public IActionResult Download(string TableName, string CodeType, string Content)
+        [HttpPost(nameof(Download))]
+        public IActionResult Download([FromBody] CCTDownloadDto downloadDto)
         {
             var Suffix = string.Empty;
-            // var FileType = ".cs";
+            var Name = downloadDto.TableName;
 
-            if (CodeType == "Model") Suffix = ".cs";
-
-            if (CodeType == "Logic") Suffix = "Logic.cs";
-
-            if (CodeType == "Controller") Suffix = "Controller.cs";
-
-            if (CodeType == "Form")
+            if (downloadDto.CodeType == "Model") Suffix = ".cs";
+            if (downloadDto.CodeType == "Service") Suffix = "Service.cs";
+            if (downloadDto.CodeType == "Controller") Suffix = "Controller.cs";
+            if (downloadDto.CodeType == "Index")
             {
-                Suffix = ".vue";
-                // FileType = ".vue";
+                Name = "Index";
+                Suffix = ".cshtml";
+            }
+            if (downloadDto.CodeType == "Info")
+            {
+                Name = "Info";
+                Suffix = ".cshtml";
             }
 
-            var _Bytes = Encoding.UTF8.GetBytes(Content);
-            return File(_Bytes, Tools.GetFileContentType[".cs"], $"{TableName}{Suffix}");
+            var _Bytes = Encoding.UTF8.GetBytes(downloadDto.Content);
+            return File(_Bytes, Tools.GetFileContentType[".cs"], $"{Name}{Suffix}");
         }
 
         /// <summary>
@@ -178,7 +193,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="CodeType">代码类型</param>
         /// <returns></returns>
-        [HttpGet(nameof(DownloadAll) + "/{CodeType}")]
+        [HttpPost(nameof(DownloadAll) + "/{CodeType}")]
         public async Task<IActionResult> DownloadAll([FromRoute]string CodeType)
         {
             var Suffix = string.Empty;
@@ -187,77 +202,64 @@ namespace HZY.Admin.Controllers.Sys
 
             if (CodeType == "Model")
             {
-                Suffix = ".cs";
                 TempUrl = _WebRootPath + "/Content/CodeTemp/Model.txt";
             }
 
             if (CodeType == "Logic")
             {
-                Suffix = "Logic.cs";
-                TempUrl = _WebRootPath + "/Content/CodeTemp/Logic.txt";
+                TempUrl = _WebRootPath + "/Content/CodeTemp/Services.txt";
             }
 
             if (CodeType == "Controller")
             {
-                Suffix = "Controller.cs";
                 TempUrl = _WebRootPath + "/Content/CodeTemp/Controllers.txt";
             }
 
-            if (CodeType == "Form")
-            {
-                Suffix = ".vue";
-                TempUrl = _WebRootPath + "/Content/CodeTemp/Form.txt";
-            }
+            var isViews = CodeType == "Index" || CodeType == "Info";
 
-            Temp = await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8);
-
-            //List<StringBuilder> _Codes = new List<StringBuilder>();
-            Dictionary<string, Stream> _DicStream = new Dictionary<string, Stream>();
+            if (!string.IsNullOrWhiteSpace(TempUrl)) Temp = await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8);
 
             var _TableNames = await this.db.GetAllTableAsync();
             foreach (var item in _TableNames)
             {
-                StringBuilder _StringBuilder = new StringBuilder();
-
-                if (CodeType == "Model")
+                if (isViews)
                 {
-                    _StringBuilder.Append(await this.service.CreateModelCode(item.Name, Temp));
+                    TempUrl = _WebRootPath + "/Content/CodeTemp/Index.txt";
+                    Temp = await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8);
+                    await this.service.CreateAllFiles(this._WebRootPath, "Index", item.Name, Temp);
+                    TempUrl = _WebRootPath + "/Content/CodeTemp/Info.txt";
+                    Temp = await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8);
+                    await this.service.CreateAllFiles(this._WebRootPath, "Info", item.Name, Temp);
                 }
-
-                if (CodeType == "Logic")
+                else
                 {
-                    _StringBuilder.Append(await this.service.CreateServiceCode(item.Name, Temp));
+                    await this.service.CreateAllFiles(this._WebRootPath, CodeType, item.Name, Temp);
                 }
-
-                if (CodeType == "Controller")
-                {
-                    _StringBuilder.Append(await this.service.CreateControllersCode(item.Name, Temp));
-                }
-
-                if (CodeType == "Form")
-                {
-                    //获取表下面的所有 字段
-                    var _Cols = await this.db.GetColsByTableNameAsync(item.Name);
-                    var list = new List<string>();
-                    foreach (var _Col in _Cols)
-                    {
-                        list.Add($"{item.Name}/{_Col.ColName}");
-                    }
-                    _StringBuilder.Append(await this.service.CreateFormCode(list, Temp));
-                }
-
-                //_Codes.Add(_StringBuilder);
-                _DicStream[$"{item}{Suffix}"] = new MemoryStream(Encoding.UTF8.GetBytes(_StringBuilder.ToString()));
             }
 
-            var _Bytes = new byte[] { };
+            var path = $"{_WebRootPath}/Content/Codes/{CodeType}";
+            var pathZip = $"{_WebRootPath}/Content/ZipFile/{CodeType}.zip";
+            if (isViews)
+            {
+                path = $"{_WebRootPath}/Content/Codes/Views";
+                pathZip = $"{_WebRootPath}/Content/ZipFile/Views.zip";
+            }
 
+            //开始压缩
+            await Task.Delay(1000);
+            Zip zip = new Zip(path, pathZip);
+            await Task.Delay(1000);
+            var bytes = await System.IO.File.ReadAllBytesAsync(pathZip);
+
+            //异步延迟删除
             await Task.Run(() =>
             {
-                _Bytes = Tools.PackageManyZip(_DicStream);
+                Task.Delay(10 * 1000);//延迟 5s 删除文件
+                if (System.IO.File.Exists(pathZip)) System.IO.File.Delete(pathZip);
+                if (Directory.Exists(path)) Directory.Delete(path, true);
             });
 
-            return File(_Bytes, Tools.GetFileContentType[".zip"], $"{CodeType}.zip");
+            return File(bytes, Tools.GetFileContentType[".zip"], $"{(isViews ? "Views" : CodeType)}.zip");
         }
 
 

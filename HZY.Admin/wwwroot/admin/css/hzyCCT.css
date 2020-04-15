@@ -61,3 +61,8 @@
 .cctActive {
     background: #4e6e8e;
 }
+
+.download,
+.downloadAll {
+    cursor: pointer;
+}

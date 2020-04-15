@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace HZY.Toolkit
 {
+    using ICSharpCode.SharpZipLib.Checksum;
     //
     using ICSharpCode.SharpZipLib.Zip;
     using Microsoft.AspNetCore.Http;
@@ -766,7 +767,7 @@ namespace HZY.Toolkit
         /// </summary>
         /// <param name="streams">key：文件名；value：文件名对应的要压缩的流</param>
         /// <returns>压缩后的流</returns>
-        public static byte[] PackageManyZip(Dictionary<string, Stream> streams)
+        public static MemoryStream PackageManyZip(Dictionary<string, Stream> streams)
         {
             byte[] buffer = new byte[6500];
             MemoryStream returnStream = new MemoryStream();
@@ -800,7 +801,7 @@ namespace HZY.Toolkit
                 zipMs.CopyTo(returnStream, 5600);
             }
             returnStream.Position = 0;
-            return returnStream.ToArray();
+            return returnStream;
         }
 
         #region Cookie操作

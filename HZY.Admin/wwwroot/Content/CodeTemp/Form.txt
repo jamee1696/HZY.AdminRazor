@@ -1,5 +1,0 @@
-﻿<a-col :span="grid">
-	<a-form-item label="<#FieldAlias#>">
-		<a-input v-model="curd.form.vm.Model.<#Field#>" placeholder="<#FieldAlias#>" />
-	</a-form-item>
-</a-col>
