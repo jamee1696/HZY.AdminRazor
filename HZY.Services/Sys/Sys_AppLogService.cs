@@ -58,9 +58,9 @@ namespace HZY.Services.Sys
                 {
                     w.appLog.AppLog_IP,
                     w.appLog.AppLog_Api,
-                    w.appLog.AppLog_Form,
-                    w.appLog.AppLog_FormBody,
-                    w.appLog.AppLog_QueryString,
+                    //w.appLog.AppLog_Form,
+                    //w.appLog.AppLog_FormBody,
+                    //w.appLog.AppLog_QueryString,
                     操作人 = w.User_Name,
                     AppLog_CreateTime = w.appLog.AppLog_CreateTime.ToString("yyyy-MM-dd"),
                     _ukid = w.appLog.AppLog_ID
