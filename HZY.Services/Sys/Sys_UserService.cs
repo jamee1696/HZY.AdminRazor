@@ -40,8 +40,8 @@ namespace HZY.Services.Sys
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_User Search)
         {
             var query = userDb.Query()
-                .WhereIF(w => w.User_LoginName == Search.User_LoginName, !string.IsNullOrWhiteSpace(Search?.User_LoginName))
-                .WhereIF(w => w.User_Name == Search.User_Name, !string.IsNullOrWhiteSpace(Search?.User_Name))
+                .WhereIF(w => w.User_LoginName.Contains(Search.User_LoginName), !string.IsNullOrWhiteSpace(Search?.User_LoginName))
+                .WhereIF(w => w.User_Name.Contains(Search.User_Name), !string.IsNullOrWhiteSpace(Search?.User_Name))
                 .Select(w => new
                 {
                     w.User_Name,
