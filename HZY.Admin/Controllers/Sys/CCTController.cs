@@ -205,7 +205,7 @@ namespace HZY.Admin.Controllers.Sys
                 TempUrl = _WebRootPath + "/Content/CodeTemp/Model.txt";
             }
 
-            if (CodeType == "Logic")
+            if (CodeType == "Service")
             {
                 TempUrl = _WebRootPath + "/Content/CodeTemp/Services.txt";
             }
