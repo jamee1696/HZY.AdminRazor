@@ -56,7 +56,7 @@ namespace HZY.Services.Sys
                 })
                 ;
 
-            return await db.AsTableViewModelAsync(query, Page, Rows);
+            return await db.AsTableViewModelAsync(query, Page, Rows, typeof(Sys_User));
         }
 
         /// <summary>
