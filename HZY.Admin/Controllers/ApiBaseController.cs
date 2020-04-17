@@ -20,6 +20,13 @@ namespace HZY.Admin.Controllers
     [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin), IgnoreApi = true)]
     public class ApiBaseController : BaseController
     {
+        private List<string> Actions { get; set; } = new List<string>()
+        {
+            //"Save",
+            //"Delete",
+            //"ChangePwd",
+        };
+
         protected readonly Guid MenuId;
         protected readonly Sys_MenuService menuService;
 
@@ -32,6 +39,18 @@ namespace HZY.Admin.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
+
+            #region 阻止编辑操作 CURD
+
+            var _RouteValues = context.ActionDescriptor.RouteValues;
+            //var _AreaName = _RouteValues["area"];
+            var _ControllerName = _RouteValues["controller"];
+            var _ActionName = _RouteValues["action"];
+
+            //阻止进行 添加 修改 删除
+            if (Actions.Select(w => w.ToLower()).Contains(_ActionName.ToLower())) throw new MessageBox("更多操作请下载源代码本地运行!");
+
+            #endregion
 
             #region 检查是否登录 授权
 
