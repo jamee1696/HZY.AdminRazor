@@ -208,7 +208,7 @@ var hzyAdmin = {
         return promise;
     },
     //下载文件请求
-    download: function (url, data, loading = true) {
+    download: function (url, data = {}, loading = true) {
         var _this = this;
         if (loading) _this.loading.start();
 

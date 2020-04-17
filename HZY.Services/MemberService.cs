@@ -21,14 +21,17 @@ namespace HZY.Services
     {
         protected readonly EFCoreContext db;
         protected readonly DefaultRepository<Member> memberDb;
+        protected readonly DefaultRepository<Sys_User> userDb;
 
         public MemberService(
             EFCoreContext _db,
-            DefaultRepository<Member> _memberDb
+            DefaultRepository<Member> _memberDb,
+            DefaultRepository<Sys_User> _userDb
             )
         {
             this.db = _db;
             this.memberDb = _memberDb;
+            this.userDb = _userDb;
         }
 
 
@@ -113,9 +116,11 @@ namespace HZY.Services
             var res = new Dictionary<string, object>();
 
             var Model = await memberDb.FindByIdAsync(Id);
+            var User = await userDb.FindByIdAsync(Model.Member_UserID);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();
+            res[nameof(User)] = User.ToNewByNull();
 
             return res;
         }

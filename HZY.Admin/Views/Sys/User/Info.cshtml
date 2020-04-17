@@ -62,18 +62,6 @@
                             _this.closeWindow();
                         }
                     });
-                },
-                addRow: function () {
-                    if (!this.form.vm.AllRoleList) this.form.vm.AllRoleList = [];
-                    this.form.vm.AllRoleList.push({
-                        UserRole_ID: null,
-                        UserRole_UserID: this.form.vm.Id,
-                        UserRole_RoleID: null,
-                        Role_Name: null,
-                    });
-                },
-                removeRow: function (index) {
-                    this.form.vm.AllRoleList.splice(index, 1);
                 }
             }
         });

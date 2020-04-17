@@ -80,16 +80,28 @@ namespace HZY.Admin.Controllers
 
             if (MenuId == Guid.Empty) return;
 
-            var power = this.menuService.GetPowerStateByMenuId(this.MenuId).Result;
-
-            if (!power["Have"].ToBool() && !context.HttpContext.IsAjaxRequest())
+            //判断是否 查找带回
+            var isFindback = context.HttpContext.Request.Query.ContainsKey("findback");
+            var power = new Dictionary<string, object>();
+            if (isFindback)
             {
-                context.Result = new ContentResult() { Content = "您无权访问!", ContentType = "text/html;charset=utf-8;" };
-                return;
+                //收集用户权限
+                power = this.menuService.GetFindBackPower().Result;
+            }
+            else
+            {
+                //收集用户权限
+                power = this.menuService.GetPowerStateByMenuId(this.MenuId).Result;
+
+                if (!power["Have"].ToBool() && !context.HttpContext.IsAjaxRequest())
+                {
+                    context.Result = new ContentResult() { Content = "您无权访问!", ContentType = "text/html;charset=utf-8;" };
+                    return;
+                }
             }
 
             ViewData["power"] = JsonConvert.SerializeObject(power);
-
+            ViewData["isFindback"] = isFindback ? 1 : 0;
             #endregion
 
         }

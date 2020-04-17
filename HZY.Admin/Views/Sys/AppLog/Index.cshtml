@@ -4,6 +4,7 @@
 @section Scripts{
     <script type="text/javascript">
         var power = JSON.parse('@Html.Raw(ViewData["power"])');
+        var isFindback = '@(ViewData["isFindback"])';
         var app = new Vue({
             el: "#app",
             data: function () {
@@ -84,6 +85,15 @@
                     hzyAdmin.openPage(id ? '编辑' : '新建', path, function () {
                         _this.findList();//刷新列表
                     }, 800, 800);
+                },
+                //双击表格行
+                row_dblclick: function (row, column, event) {
+                    if (isFindback == 1) {
+                        window.localStorage.setItem('findback', JSON.stringify(row));
+                        setTimeout(function () {
+                            hzyAdmin.layer.close(hzyAdmin.layer.getFrameIndex(window.name));
+                        }, 100);
+                    }
                 }
             }
         });
@@ -135,6 +145,7 @@
                     <div class="col-sm-12">
                         <el-table :data="table.data"
                                   @@selection-change="(array)=>{table.selecteds=array;}"
+                                  @@row-dblclick="row_dblclick"
                                   row-key="_ukid">
                             <el-table-column type="index" width="50" fixed></el-table-column>
                             <el-table-column type="selection" width="50" fixed></el-table-column>

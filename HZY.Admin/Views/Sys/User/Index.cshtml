@@ -4,6 +4,7 @@
 @section Scripts{
     <script type="text/javascript">
         var power = JSON.parse('@Html.Raw(ViewData["power"])');
+        var isFindback = '@(ViewData["isFindback"])';
         var app = new Vue({
             el: "#app",
             data: function () {
@@ -74,6 +75,7 @@
                         });
                     }
                 },
+                //打开表单
                 openForm: function (id) {
                     var path = `@Url.Action("Info")/${(id ? id : '')}`;
                     var _this = this;
@@ -81,6 +83,19 @@
                     hzyAdmin.openPage(id ? '编辑' : '新建', path, function () {
                         _this.findList();//刷新列表
                     }, 800);
+                },
+                //双击表格行
+                row_dblclick: function (row, column, event) {
+                    if (isFindback == 1) {
+                        window.localStorage.setItem('findback', JSON.stringify(row));
+                        setTimeout(function () {
+                            hzyAdmin.layer.close(hzyAdmin.layer.getFrameIndex(window.name));
+                        },100);
+                    }
+                },
+                //导出excel
+                exportExcel: function () {
+                    hzyAdmin.download('@Url.Action("ExportExcel")', this.search.vm);
                 }
             }
         });
@@ -117,12 +132,14 @@
                         <button class="btn btn-primary" @@click="search.state=!search.state" v-if="power.Search">高级检索</button>
                         <button class="btn btn-primary" @@click="openForm()" v-if="power.Insert">新建</button>
                         <button class="btn btn-danger" @@click="remove()" v-if="power.Delete">删除</button>
+                        <button class="btn btn-primary" @@click="exportExcel()" v-if="power.GetExcel">导出Excel</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <el-table :data="table.data"
                                   @@selection-change="(array)=>{table.selecteds=array;}"
+                                  @@row-dblclick="row_dblclick"
                                   row-key="_ukid">
                             <el-table-column type="index" width="50" fixed></el-table-column>
                             <el-table-column type="selection" width="50" fixed></el-table-column>

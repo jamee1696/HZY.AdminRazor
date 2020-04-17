@@ -311,6 +311,30 @@ namespace HZY.Services.Sys
         }
 
         /// <summary>
+        /// 获取查找带回权限
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Dictionary<string, object>> GetFindBackPower()
+        {
+            var res = new Dictionary<string, object>();
+            var _Sys_FunctionList = await functionDb.Query().OrderBy(w => w.Function_Num).ToListAsync();
+            foreach (var item in _Sys_FunctionList)
+            {
+                if (item.Function_ByName == "Have" || item.Function_ByName == "Search")
+                {
+                    res[item.Function_ByName] = true;
+
+                }
+                else
+                {
+                    res[item.Function_ByName] = false;
+                }
+            }
+
+            return res;
+        }
+
+        /// <summary>
         /// 根据菜单获取权限
         /// </summary>
         /// <param name="_Sys_Menu"></param>

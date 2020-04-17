@@ -23,7 +23,8 @@
                         saveState: false,
                         vm: {
                             Id: '@Model',
-                            Model: {}
+                            Model: {},
+                            User: {}
                         },
                         Photo: null,
                         Files: [],
@@ -111,7 +112,28 @@
                         //}
                         this.form.Files = files;
                     }
+                },
+                //查找带回
+                findBack_User: function (isRemove) {
+                    if (isRemove) {
+                        //清空信息
+                        this.form.vm.Model.Member_UserID = '';
+                        this.form.vm.User.User_Name = '';
+                        return;
+                    }
+                    //打开页面查找带回信息
+                    var path = `@Url.Action("Index","User")/?findback=1`;
+                    var _this = this;
+
+                    hzyAdmin.openPage('请选择用户', path, function () {
+                        var row = JSON.parse(window.localStorage.getItem('findback'));
+                        console.log('查找带回 行数据',row);
+                        _this.form.vm.Model.Member_UserID = row._ukid;
+                        _this.form.vm.User.User_Name = row.User_Name;
+
+                    }, 1200, 1000);
                 }
+
             }
         });
     </script>
@@ -152,6 +174,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4">
+                <h4 class="example-title">用户</h4>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" readonly="readonly" v-model="form.vm.User.User_Name">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-default btn-outline" @@click="findBack_User()"><i class="fas fa-search"></i></button>
+                            <button type="button" class="btn btn-default btn-outline" @@click="findBack_User(1)"><i class="fas fa-trash-alt text-danger"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-6">
