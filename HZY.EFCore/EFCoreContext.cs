@@ -125,27 +125,24 @@ namespace HZY.EFCore
 
             #region 填充 列 信息
 
-            if (TabAndField.Count > 0)
+            foreach (var field in fields)
             {
-                foreach (var field in fields)
+                var tableName = TabAndField.Find(w => w.Item1 == field.Name).Item2;
+
+                var title = string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(tableName))
                 {
-                    var tableName = TabAndField.Find(w => w.Item1 == field.Name).Item2;
-
-                    var title = string.Empty;
-
-                    if (!string.IsNullOrWhiteSpace(tableName))
-                    {
-                        var modelInfos = ModelCache.GetModelInfos(tableName);
-                        title = modelInfos.FirstOrDefault(w => w.Name == field.Name)?.Remark;
-                    }
-
-                    _tableViewModel.Cols.Add(new TableViewCol()
-                    {
-                        DataIndex = field.Name,
-                        Show = field.Name != "_ukid",
-                        Title = string.IsNullOrWhiteSpace(title) ? field.Name : title
-                    });
+                    var modelInfos = ModelCache.GetModelInfos(tableName);
+                    title = modelInfos.FirstOrDefault(w => w.Name == field.Name)?.Remark;
                 }
+
+                _tableViewModel.Cols.Add(new TableViewCol()
+                {
+                    DataIndex = field.Name,
+                    Show = field.Name != "_ukid",
+                    Title = string.IsNullOrWhiteSpace(title) ? field.Name : title
+                });
             }
 
             #endregion
