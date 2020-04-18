@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * *******************************************************
+ *
+ * 作者：hzy
+ *
+ * 开源地址：https://gitee.com/hzy6
+ *
+ * *******************************************************
+ */
+using System;
 using System.Net;
 
 namespace HZY.Toolkit
