@@ -18,8 +18,7 @@ namespace HZY.Admin.Controllers
         public HomeController(
             Sys_MenuService _menuService,
             AccountService _accountService
-            )
-            : base(Guid.Parse("0b7f8e2c-9faa-4496-9068-80b87ba1b64e"), _menuService)
+            ) : base(Guid.Parse("0b7f8e2c-9faa-4496-9068-80b87ba1b64e"), _menuService)
         {
             this.accountService = _accountService;
         }

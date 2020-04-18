@@ -20,8 +20,8 @@ namespace HZY.Admin.Controllers.Sys
         public RoleFunctionController(
             Sys_MenuService _menuService,
             Sys_RoleMenuFunctionService _srevice,
-            Sys_RoleService _roleService)
-            : base(Guid.Parse("bd024f3a-99a7-4407-861c-a016f243f222"), _menuService)
+            Sys_RoleService _roleService
+            ) : base(Guid.Parse("bd024f3a-99a7-4407-861c-a016f243f222"), _menuService)
         {
             this.srevice = _srevice;
             this.roleService = _roleService;

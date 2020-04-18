@@ -21,8 +21,8 @@ namespace HZY.Admin.Controllers.Sys
         public UserController(
             Sys_MenuService _menuService,
             Sys_UserService _service,
-            AccountService _accountService)
-            : base(Guid.Parse("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d"), _menuService)
+            AccountService _accountService
+            ) : base(Guid.Parse("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d"), _menuService)
         {
             this.service = _service;
             this.accountService = _accountService;
