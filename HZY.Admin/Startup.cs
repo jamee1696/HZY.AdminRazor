@@ -141,7 +141,7 @@ namespace HZY.Admin
             //{
             //    foreach (var item in _VersionList) options.SwaggerDoc(item, new OpenApiInfo { Version = item });
             //    //为 Swagger JSON and UI设置xml文档注释路径
-            //    var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "App.xml");
+            //    var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.xml");
             //    var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Models.xml");
             //    var xmlPath2 = Path.Combine(System.AppContext.BaseDirectory, "HZY.DTO.xml");
             //    options.IncludeXmlComments(xmlPath, true);
