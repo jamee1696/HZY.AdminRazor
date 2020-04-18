@@ -24,17 +24,14 @@ namespace HZY.Admin.Controllers.Sys
     {
         private string _WebRootPath { get; } = string.Empty;
         protected readonly CCTService service;
-        protected readonly EFCoreContext db;
 
         public CCTController(
             Sys_MenuService _menuservice,
             CCTService _service,
-            EFCoreContext _db,
             IWebHostEnvironment IWebHostEnvironment)
             : base(Guid.Parse("4ce21a81-1cae-44d2-b29e-07058ff04b3e"), _menuservice)
         {
             this.service = _service;
-            this.db = _db;
             this._WebRootPath = IWebHostEnvironment.WebRootPath;
         }
 
@@ -150,7 +147,7 @@ namespace HZY.Admin.Controllers.Sys
             if (Fields == null || Fields.Count == 0)
             {
                 Fields = new List<string>();
-                var _Cols = await this.db.GetColsByTableNameAsync(TableName);
+                var _Cols = await this.service.GetColsByTableNameAsync(TableName);
                 foreach (var _Col in _Cols)
                 {
                     Fields.Add($"{TableName}/{_Col.ColName}");
@@ -219,7 +216,7 @@ namespace HZY.Admin.Controllers.Sys
 
             if (!string.IsNullOrWhiteSpace(TempUrl)) Temp = await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8);
 
-            var _TableNames = await this.db.GetAllTableAsync();
+            var _TableNames = await this.service.GetAllTableAsync();
             foreach (var item in _TableNames)
             {
                 if (isViews)

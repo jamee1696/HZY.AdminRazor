@@ -15,6 +15,7 @@ namespace HZY.Services.Sys
     using Microsoft.AspNetCore.Hosting;
     using HZY.Toolkit;
     using HZY.Models.Sys;
+    using HZY.EFCore.Base;
 
     public class CCTService : ServiceBase<Sys_Menu>
     {
@@ -24,6 +25,12 @@ namespace HZY.Services.Sys
         {
 
         }
+
+        public Task<List<TABLE_NAME>> GetAllTableAsync()
+          => db.GetAllTableAsync();
+
+        public Task<List<TABLES_COLUMNS>> GetColsByTableNameAsync(string TableName)
+            => db.GetColsByTableNameAsync(TableName);
 
         /// <summary>
         /// 获取表名和字段
