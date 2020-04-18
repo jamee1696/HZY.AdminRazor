@@ -146,37 +146,40 @@ namespace HZY.Admin
             #endregion
 
             #region Swagger 注册Swagger生成器，定义一个和多个Swagger 文档
-            //services.AddSwaggerGen(options =>
-            //{
-            //    foreach (var item in _VersionList) options.SwaggerDoc(item, new OpenApiInfo { Version = item });
-            //    //为 Swagger JSON and UI设置xml文档注释路径
-            //    var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.xml");
-            //    var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Models.xml");
-            //    var xmlPath2 = Path.Combine(System.AppContext.BaseDirectory, "HZY.DTO.xml");
-            //    options.IncludeXmlComments(xmlPath, true);
-            //    options.IncludeXmlComments(xmlPath1, true);
-            //    options.IncludeXmlComments(xmlPath2, true);
+            services.AddSwaggerGen(options =>
+            {
+                foreach (var item in _VersionList)
+                {
+                    options.SwaggerDoc(item, new OpenApiInfo { Title = "HZY.Admin" });
+                }
+                //为 Swagger JSON and UI设置xml文档注释路径
+                var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.xml");
+                var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Models.xml");
+                var xmlPath2 = Path.Combine(System.AppContext.BaseDirectory, "HZY.DTO.xml");
+                options.IncludeXmlComments(xmlPath, true);
+                options.IncludeXmlComments(xmlPath1, true);
+                options.IncludeXmlComments(xmlPath2, true);
 
-            //    #region Jwt token 配置
-            //    //option.OperationFilter<AppService.SwaggerParameterFilter>(); // 给每个接口配置授权码传入参数文本框
-            //    //
-            //    options.OperationFilter<AddResponseHeadersFilter>();
-            //    options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
-            //    //很重要！这里配置安全校验，和之前的版本不一样
-            //    options.OperationFilter<SecurityRequirementsOperationFilter>();
-            //    //开启 oauth2 安全描述
-            //    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-            //    {
-            //        Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
-            //        In = ParameterLocation.Header,
-            //        Name = "Authorization",
-            //        Type = SecuritySchemeType.ApiKey,
-            //        //Scheme = "basic",
-            //    });
+                #region Jwt token 配置
+                //option.OperationFilter<AppService.SwaggerParameterFilter>(); // 给每个接口配置授权码传入参数文本框
+                //
+                options.OperationFilter<AddResponseHeadersFilter>();
+                options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                //很重要！这里配置安全校验，和之前的版本不一样
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+                //开启 oauth2 安全描述
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    //Scheme = "basic",
+                });
 
-            //    #endregion
+                #endregion
 
-            //});
+            });
             #endregion
 
             services.AddControllersWithViews(options =>
@@ -231,12 +234,12 @@ namespace HZY.Admin
             #endregion
 
             //配置文件大小限制
-           //services.Configure<FormOptions>(options =>
-           //{
-           //    options.ValueLengthLimit = int.MaxValue;
-           //    options.MultipartBodyLengthLimit = int.MaxValue;// 60000000; 
-           //    options.MultipartHeadersLengthLimit = int.MaxValue;
-           //});
+            //services.Configure<FormOptions>(options =>
+            //{
+            //    options.ValueLengthLimit = int.MaxValue;
+            //    options.MultipartBodyLengthLimit = int.MaxValue;// 60000000; 
+            //    options.MultipartHeadersLengthLimit = int.MaxValue;
+            //});
 
 
         }
