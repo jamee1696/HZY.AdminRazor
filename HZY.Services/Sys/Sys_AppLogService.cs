@@ -16,21 +16,17 @@ namespace HZY.Services.Sys
     using HZY.Services.Core;
     using HZY.EFCore;
 
-    public class Sys_AppLogService : ServiceBase
+    public class Sys_AppLogService : ServiceBase<Sys_AppLog>
     {
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Sys_AppLog> appLogDb;
-        protected readonly DefaultRepository<Sys_User> userDb;
+        protected readonly DefaultRepository<Sys_User> dbUser;
 
-        public Sys_AppLogService(
-            EFCoreContext _db,
-            DefaultRepository<Sys_AppLog> _appLogDb,
-            DefaultRepository<Sys_User> _userDb
-            )
+        public Sys_AppLogService(EFCoreContext _db, DefaultRepository<Sys_AppLog> _dbRepository,
+
+            DefaultRepository<Sys_User> _dbUser
+
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.appLogDb = _appLogDb;
-            this.userDb = _userDb;
+            this.dbUser = _dbUser;
 
         }
 
@@ -77,7 +73,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<Guid> SaveAsync(Sys_AppLog model)
         {
-            await appLogDb.InsertOrUpdateAsync(model);
+            await dbRepository.InsertOrUpdateAsync(model);
 
             return model.AppLog_ID;
         }
@@ -88,7 +84,7 @@ namespace HZY.Services.Sys
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await appLogDb.DeleteAsync(w => Ids.Contains(w.AppLog_ID));
+            => await dbRepository.DeleteAsync(w => Ids.Contains(w.AppLog_ID));
 
         /// <summary>
         /// 加载表单 数据
@@ -99,8 +95,8 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await appLogDb.FindByIdAsync(Id);
-            var _Sys_User = await userDb.FindByIdAsync(Model.AppLog_UserID);
+            var Model = await dbRepository.FindByIdAsync(Id);
+            var _Sys_User = await dbUser.FindByIdAsync(Model.AppLog_UserID);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();

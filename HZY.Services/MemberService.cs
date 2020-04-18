@@ -17,24 +17,18 @@ namespace HZY.Services
     using HZY.Models;
     using HZY.DTO;
 
-    public class MemberService : ServiceBase
+    public class MemberService : ServiceBase<Member>
     {
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Member> memberDb;
         protected readonly DefaultRepository<Sys_User> userDb;
 
-        public MemberService(
-            EFCoreContext _db,
-            DefaultRepository<Member> _memberDb,
+        public MemberService(EFCoreContext _db, DefaultRepository<Member> _dbRepository,
+
             DefaultRepository<Sys_User> _userDb
-            )
+
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.memberDb = _memberDb;
             this.userDb = _userDb;
         }
-
-
 
         #region CURD 基础
 
@@ -93,7 +87,7 @@ namespace HZY.Services
                 if (path.Count > 0) model.Member_FilePath = string.Join(",", path);
             }
 
-            await memberDb.InsertOrUpdateAsync(model);
+            await dbRepository.InsertOrUpdateAsync(model);
 
             return model.Member_ID;
         }
@@ -104,7 +98,7 @@ namespace HZY.Services
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await memberDb.DeleteAsync(w => Ids.Contains(w.Member_ID));
+            => await dbRepository.DeleteAsync(w => Ids.Contains(w.Member_ID));
 
         /// <summary>
         /// 加载表单 数据
@@ -115,7 +109,7 @@ namespace HZY.Services
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await memberDb.FindByIdAsync(Id);
+            var Model = await dbRepository.FindByIdAsync(Id);
             var User = await userDb.FindByIdAsync(Model.Member_UserID);
 
             res[nameof(Id)] = Id;

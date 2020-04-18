@@ -15,28 +15,24 @@ namespace HZY.Services.Sys
     using HZY.Services.Core;
     using HZY.EFCore;
 
-    public class AccountService : ServiceBase
+    public class AccountService : ServiceBase<Sys_User>
     {
         public HttpContext httpContext { get; }
         public AccountInfo info { get; }
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Sys_User> userDb;
-        protected readonly DefaultRepository<Sys_UserRole> userRoleDb;
-        protected readonly DefaultRepository<Sys_AppLog> appLogDb;
+        protected readonly DefaultRepository<Sys_UserRole> dbUserRole;
+        protected readonly DefaultRepository<Sys_AppLog> dbAppLog;
         protected readonly string Key;
 
-        public AccountService(
-            EFCoreContext _db,
-            DefaultRepository<Sys_User> _userDb,
-            DefaultRepository<Sys_UserRole> _userRoleDb,
-            DefaultRepository<Sys_AppLog> _appLogDb,
+        public AccountService(EFCoreContext _db, DefaultRepository<Sys_User> _dbRepository,
+
+            DefaultRepository<Sys_UserRole> _dbUserRole,
+            DefaultRepository<Sys_AppLog> _dbAppLog,
             IHttpContextAccessor iHttpContextAccessor
-            )
+
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.userDb = _userDb;
-            this.userRoleDb = _userRoleDb;
-            this.appLogDb = _appLogDb;
+            this.dbUserRole = _dbUserRole;
+            this.dbAppLog = _dbAppLog;
             this.httpContext = iHttpContextAccessor.HttpContext;
 
             this.Key = $"Authorization_{httpContext.Request.Host.Host}_{httpContext.Request.Host.Port}";
@@ -96,7 +92,7 @@ namespace HZY.Services.Sys
             if (string.IsNullOrEmpty(uPwd)) throw new MessageBox("请输入密码");
             //if (string.IsNullOrEmpty(loginCode)) throw new MessageBox("请输入验证码");
 
-            var _Sys_User = await userDb.FindAsync(w => w.User_LoginName == uName);
+            var _Sys_User = await dbRepository.FindAsync(w => w.User_LoginName == uName);
 
             if (_Sys_User == null) throw new MessageBox("用户不存在");
             //Tools.MD5Encrypt(userpwd)))//
@@ -115,9 +111,9 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<AccountInfo> GetAccountByUserId(Guid Id)
         {
-            var _Sys_User = await userDb.FindByIdAsync(Id);
+            var _Sys_User = await dbRepository.FindByIdAsync(Id);
             var _Account = new AccountInfo();
-            var _Sys_UserRole = await userRoleDb.ToListAsync(w => w.UserRole_UserID == _Sys_User.User_ID);
+            var _Sys_UserRole = await dbUserRole.ToListAsync(w => w.UserRole_UserID == _Sys_User.User_ID);
             //
             _Account.RoleIDList = _Sys_UserRole.Select(w => w.UserRole_RoleID).ToList();
             _Account.UserID = _Sys_User.User_ID.ToGuid();
@@ -138,11 +134,11 @@ namespace HZY.Services.Sys
         {
             if (string.IsNullOrEmpty(oldpwd)) throw new MessageBox("旧密码不能为空");
             if (string.IsNullOrEmpty(newpwd)) throw new MessageBox("新密码不能为空");
-            var _Sys_User = await userDb.FindByIdAsync(info.UserID);
+            var _Sys_User = await dbRepository.FindByIdAsync(info.UserID);
             if (_Sys_User.User_Pwd != oldpwd) throw new MessageBox("旧密码不正确");
 
             _Sys_User.User_Pwd = newpwd;
-            return await userDb.UpdateByIdAsync(_Sys_User);
+            return await dbRepository.UpdateByIdAsync(_Sys_User);
         }
 
         /// <summary>
@@ -205,7 +201,7 @@ namespace HZY.Services.Sys
             appLogModel.AppLog_FormBody = body;
             appLogModel.AppLog_UserID = info?.UserID;
 
-            await appLogDb.InsertAsync(appLogModel);
+            await dbAppLog.InsertAsync(appLogModel);
         }
 
 

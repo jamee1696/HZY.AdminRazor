@@ -15,19 +15,13 @@ namespace HZY.Services.Sys
     using HZY.Services.Core;
     using HZY.EFCore;
 
-    public class Sys_RoleService : ServiceBase
+    public class Sys_RoleService : ServiceBase<Sys_Role>
     {
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Sys_Role> roleDb;
+        public Sys_RoleService(EFCoreContext _db, DefaultRepository<Sys_Role> _dbRepository
 
-
-        public Sys_RoleService(
-            EFCoreContext _db,
-            DefaultRepository<Sys_Role> _roleDb
-            )
+            ): base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.roleDb = _roleDb;
+
         }
 
         #region CURD 基础
@@ -41,7 +35,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_Role Search)
         {
-            var query = roleDb.Query()
+            var query = dbRepository.Query()
                 .WhereIF(w => w.Role_Name.Contains(Search.Role_Name), !string.IsNullOrWhiteSpace(Search?.Role_Name))
                 .Select(w => new
                 {
@@ -63,7 +57,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<Guid> SaveAsync(Sys_Role model)
         {
-            await roleDb.InsertOrUpdateAsync(model);
+            await dbRepository.InsertOrUpdateAsync(model);
 
             return model.Role_ID;
         }
@@ -74,7 +68,7 @@ namespace HZY.Services.Sys
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await roleDb.DeleteAsync(w => Ids.Contains(w.Role_ID) && w.Role_IsDelete != 2);
+            => await dbRepository.DeleteAsync(w => Ids.Contains(w.Role_ID) && w.Role_IsDelete != 2);
 
         /// <summary>
         /// 加载表单 数据
@@ -85,7 +79,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await roleDb.FindByIdAsync(Id);
+            var Model = await dbRepository.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();

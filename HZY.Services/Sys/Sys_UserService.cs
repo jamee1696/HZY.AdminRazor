@@ -17,29 +17,24 @@ namespace HZY.Services.Sys
     using HZY.Services.Core;
     using HZY.EFCore;
 
-    public class Sys_UserService : ServiceBase
+    public class Sys_UserService : ServiceBase<Sys_User>
     {
+        protected readonly DefaultRepository<Sys_UserRole> dbUserRole;
 
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Sys_User> userDb;
-        protected readonly DefaultRepository<Sys_UserRole> userRoleDb;
+        public Sys_UserService(EFCoreContext _db, DefaultRepository<Sys_User> _dbRepository,
 
-        public Sys_UserService(
-            EFCoreContext _db,
-            DefaultRepository<Sys_User> _userDb,
-            DefaultRepository<Sys_UserRole> _userRoleDb
-            )
+            DefaultRepository<Sys_UserRole> _dbUserRole
+
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.userDb = _userDb;
-            this.userRoleDb = _userRoleDb;
+            this.dbUserRole = _dbUserRole;
         }
 
         #region CURD 基础
 
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_User Search)
         {
-            var query = userDb.Query()
+            var query = dbRepository.Query()
                 .WhereIF(w => w.User_LoginName.Contains(Search.User_LoginName), !string.IsNullOrWhiteSpace(Search?.User_LoginName))
                 .WhereIF(w => w.User_Name.Contains(Search.User_Name), !string.IsNullOrWhiteSpace(Search?.User_Name))
                 .Select(w => new
@@ -77,19 +72,19 @@ namespace HZY.Services.Sys
                 if (model.User_ID == Guid.Empty)
                 {
                     model.User_Pwd = string.IsNullOrWhiteSpace(model.User_Pwd) ? "123" : model.User_Pwd; //Tools.MD5Encrypt("123");
-                    model = await userDb.InsertAsync(model);
+                    model = await dbRepository.InsertAsync(model);
                 }
                 else
                 {
-                    await userDb.UpdateByIdAsync(model);
+                    await dbRepository.UpdateByIdAsync(model);
                 }
 
                 //变更用户角色
                 if (roleIds.Count > 0)
                 {
-                    var _Sys_UserRoleList = await userRoleDb.ToListAsync(w => w.UserRole_UserID == model.User_ID);
+                    var _Sys_UserRoleList = await dbUserRole.ToListAsync(w => w.UserRole_UserID == model.User_ID);
 
-                    await userRoleDb.DeleteAsync(w => w.UserRole_UserID == model.User_ID);
+                    await dbUserRole.DeleteAsync(w => w.UserRole_UserID == model.User_ID);
                     foreach (var item in roleIds)
                     {
                         var _Sys_UserRole = _Sys_UserRoleList.FirstOrDefault(w => w.UserRole_RoleID == item);
@@ -98,7 +93,7 @@ namespace HZY.Services.Sys
                         userRoleModel.UserRole_ID = _Sys_UserRole == null ? Guid.NewGuid() : _Sys_UserRole.UserRole_ID;
                         userRoleModel.UserRole_RoleID = item;
                         userRoleModel.UserRole_UserID = model.User_ID;
-                        await userRoleDb.InsertAsync(userRoleModel);
+                        await dbUserRole.InsertAsync(userRoleModel);
                     }
                 }
 
@@ -120,10 +115,10 @@ namespace HZY.Services.Sys
 
             foreach (var item in Ids)
             {
-                var userModel = await userDb.FindByIdAsync(item);
+                var userModel = await dbRepository.FindByIdAsync(item);
                 if (userModel.User_IsDelete == 2) throw new MessageBox("该信息不能删除!");
-                await userRoleDb.DeleteAsync(w => w.UserRole_UserID == item);
-                await userDb.DeleteAsync(userModel);
+                await dbUserRole.DeleteAsync(w => w.UserRole_UserID == item);
+                await dbRepository.DeleteAsync(userModel);
             }
 
             return await db.CommitAsync();
@@ -138,7 +133,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await userDb.FindByIdAsync(Id);
+            var Model = await dbRepository.FindByIdAsync(Id);
 
             var RoleIds = await (
                 from userRole in db.Sys_UserRoles

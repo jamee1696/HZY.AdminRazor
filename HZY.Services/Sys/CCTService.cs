@@ -14,14 +14,15 @@ namespace HZY.Services.Sys
     using System.IO;
     using Microsoft.AspNetCore.Hosting;
     using HZY.Toolkit;
+    using HZY.Models.Sys;
 
-    public class CCTService : ServiceBase
+    public class CCTService : ServiceBase<Sys_Menu>
     {
-        protected readonly EFCoreContext db;
+        public CCTService(EFCoreContext _db, DefaultRepository<Sys_Menu> _dbRepository
 
-        public CCTService(EFCoreContext _db)
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
+
         }
 
         /// <summary>

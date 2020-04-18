@@ -17,33 +17,28 @@ namespace HZY.Services.Sys
     using Microsoft.EntityFrameworkCore;
     using HZY.EFCore;
 
-    public class Sys_RoleMenuFunctionService : ServiceBase
+    public class Sys_RoleMenuFunctionService : ServiceBase<Sys_RoleMenuFunction>
     {
-
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Sys_Menu> menuDb;
-        protected readonly DefaultRepository<Sys_Role> roleDb;
-        protected readonly DefaultRepository<Sys_Function> functionDb;
-        protected readonly DefaultRepository<Sys_MenuFunction> menuFunctionDb;
-        protected readonly DefaultRepository<Sys_RoleMenuFunction> roleMenuFunctionDb;
+        protected readonly DefaultRepository<Sys_Menu> dbMenu;
+        protected readonly DefaultRepository<Sys_Role> dbRole;
+        protected readonly DefaultRepository<Sys_Function> dbFunction;
+        protected readonly DefaultRepository<Sys_MenuFunction> dbMenuFunction;
         protected readonly AccountService accountService;
 
-        public Sys_RoleMenuFunctionService(
-            EFCoreContext _db,
-            DefaultRepository<Sys_Menu> _menuDb,
-            DefaultRepository<Sys_Role> _roleDb,
-            DefaultRepository<Sys_Function> _functionDb,
-            DefaultRepository<Sys_MenuFunction> _menuFunctionDb,
-            DefaultRepository<Sys_RoleMenuFunction> _roleMenuFunctionDb,
+        public Sys_RoleMenuFunctionService(EFCoreContext _db, DefaultRepository<Sys_RoleMenuFunction> _dbRepository,
+
+            DefaultRepository<Sys_Menu> _dbMenu,
+            DefaultRepository<Sys_Role> _dbRole,
+            DefaultRepository<Sys_Function> _dbFunction,
+            DefaultRepository<Sys_MenuFunction> _dbMenuFunction,
             AccountService _accountService
-            )
+
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.menuDb = _menuDb;
-            this.roleDb = _roleDb;
-            this.functionDb = _functionDb;
-            this.menuFunctionDb = _menuFunctionDb;
-            this.roleMenuFunctionDb = _roleMenuFunctionDb;
+            this.dbMenu = _dbMenu;
+            this.dbRole = _dbRole;
+            this.dbFunction = _dbFunction;
+            this.dbMenuFunction = _dbMenuFunction;
             this.accountService = _accountService;
 
         }
@@ -64,7 +59,7 @@ namespace HZY.Services.Sys
 
             db.CommitOpen();
 
-            await roleMenuFunctionDb.DeleteAsync(w => w.RoleMenuFunction_RoleID == RoleId & w.RoleMenuFunction_MenuID == MenuId);
+            await dbRepository.DeleteAsync(w => w.RoleMenuFunction_RoleID == RoleId & w.RoleMenuFunction_MenuID == MenuId);
 
             foreach (var item in Dto.FunctionIds)
             {
@@ -73,7 +68,7 @@ namespace HZY.Services.Sys
                 model.RoleMenuFunction_RoleID = RoleId;
                 model.RoleMenuFunction_FunctionID = item;
 
-                await roleMenuFunctionDb.InsertAsync(model);
+                await dbRepository.InsertAsync(model);
             }
 
             await db.CommitAsync();
@@ -89,7 +84,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var _Sys_RoleList = await roleDb.Query()
+            var _Sys_RoleList = await dbRole.Query()
                 .OrderBy(w => w.Role_Num)
                 .Select(w => new
                 {
@@ -125,10 +120,10 @@ namespace HZY.Services.Sys
 
         public async Task<(List<Guid>, List<object>)> GetRoleMenuFunctionTreeAsync(Guid RoleId)
         {
-            var _Sys_MenuList = await menuDb.Query().OrderBy(w => w.Menu_Num).ToListAsync();
-            var _Sys_FunctionList = await functionDb.Query().OrderBy(w => w.Function_Num).ToListAsync();
-            var _Sys_MenuFunctionList = await menuFunctionDb.Query().OrderBy(w => w.MenuFunction_CreateTime).ToListAsync();
-            var _Sys_RoleMenuFunctionList = await roleMenuFunctionDb.ToListAsync(w => w.RoleMenuFunction_RoleID == RoleId);
+            var _Sys_MenuList = await dbMenu.Query().OrderBy(w => w.Menu_Num).ToListAsync();
+            var _Sys_FunctionList = await dbFunction.Query().OrderBy(w => w.Function_Num).ToListAsync();
+            var _Sys_MenuFunctionList = await dbMenuFunction.Query().OrderBy(w => w.MenuFunction_CreateTime).ToListAsync();
+            var _Sys_RoleMenuFunctionList = await dbRepository.ToListAsync(w => w.RoleMenuFunction_RoleID == RoleId);
 
             return (Ids, this.CreateRoleMenuFuntionTree(Guid.Empty, _Sys_MenuList, _Sys_FunctionList, _Sys_MenuFunctionList, _Sys_RoleMenuFunctionList));
         }

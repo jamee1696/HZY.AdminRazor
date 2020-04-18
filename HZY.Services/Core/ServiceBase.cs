@@ -9,10 +9,20 @@ namespace HZY.Services.Core
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Hosting;
+    using HZY.EFCore;
+    using HZY.EFCore.Repository;
 
-    public class ServiceBase
+    public class ServiceBase<T> where T : class, new()
     {
+        protected readonly EFCoreContext db;
+        protected readonly DefaultRepository<T> dbRepository;
+
+        public ServiceBase(EFCoreContext _db, DefaultRepository<T> _dbRepository)
+        {
+            this.db = _db;
+            this.dbRepository = _dbRepository;
+        }
+
         #region µ¼³ö Excel
 
         protected virtual byte[] ExportExcelByTableViewModel(TableViewModel tableViewModel)

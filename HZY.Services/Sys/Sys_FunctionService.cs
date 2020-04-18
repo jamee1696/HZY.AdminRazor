@@ -15,18 +15,13 @@ namespace HZY.Services.Sys
     using HZY.Services.Core;
     using HZY.EFCore;
 
-    public class Sys_FunctionService : ServiceBase
+    public class Sys_FunctionService : ServiceBase<Sys_Function>
     {
-        protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<Sys_Function> functionDb;
+        public Sys_FunctionService(EFCoreContext _db, DefaultRepository<Sys_Function> _dbRepository
 
-        public Sys_FunctionService(
-            EFCoreContext _db,
-            DefaultRepository<Sys_Function> _functionDb
-            )
+            ) : base(_db, _dbRepository)
         {
-            this.db = _db;
-            this.functionDb = _functionDb;
+
         }
 
 
@@ -41,7 +36,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_Function Search)
         {
-            var query = functionDb.Query()
+            var query = dbRepository.Query()
                 .WhereIF(w => w.Function_Name.Contains(Search.Function_Name), !string.IsNullOrWhiteSpace(Search?.Function_Name))
                 .OrderBy(w => w.Function_Num)
                 .Select(w => new
@@ -64,7 +59,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<Guid> SaveAsync(Sys_Function model)
         {
-            await functionDb.InsertOrUpdateAsync(model);
+            await dbRepository.InsertOrUpdateAsync(model);
 
             return model.Function_ID;
         }
@@ -75,7 +70,7 @@ namespace HZY.Services.Sys
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await functionDb.DeleteAsync(w => Ids.Contains(w.Function_ID));
+            => await dbRepository.DeleteAsync(w => Ids.Contains(w.Function_ID));
 
         /// <summary>
         /// 加载表单 数据
@@ -86,7 +81,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await functionDb.FindByIdAsync(Id);
+            var Model = await dbRepository.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();
