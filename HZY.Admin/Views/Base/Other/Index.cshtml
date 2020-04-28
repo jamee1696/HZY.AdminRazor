@@ -227,6 +227,10 @@
                 openBaidu: function () {
                     //这是一个在页面内部打开一个标签页的例子
                     top.hzyBootStrapTabs.addTab('baidu_id', '大家好我是百度', 'https://www.baidu.com');
+                },
+                openBaiduMap: function () {
+                    var path = "https://www.baidu.com/link?url=UKeA9WyYe_6Tv7SMOhwYWoLbLAMPNXeMX36hwOB2L1m&wd=&eqid=bea9a4e90002a0f1000000025ea7c756";
+                    top.hzyBootStrapTabs.addTab('baidu_id', '我是一个百度地图', path);
                 }
             }
         });
@@ -234,7 +238,6 @@
 }
 <div class="m-20" id="app">
     <div class="container-fluid animation-fade">
-
 
         <el-row :gutter="20">
             <el-col :span="12">
@@ -257,6 +260,12 @@
                             <el-button type="primary" @@click="openBaidu" style="width:100%">打开一个百度</el-button>
                         </el-col>
                     </el-row>
+                    <el-row class="mb-20">
+                        <el-col :span="24">
+                            <el-button type="primary" @@click="openBaiduMap" style="width:100%">打开一个百度地图</el-button>
+                        </el-col>
+                    </el-row>
+                    
                     <el-row class="mb-20">
                         <el-button>默认按钮</el-button>
                         <el-button type="primary">主要按钮</el-button>
