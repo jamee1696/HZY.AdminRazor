@@ -19,9 +19,8 @@ namespace HZY.Services.Sys
 
     public class CCTService : ServiceBase<Sys_Menu>
     {
-        public CCTService(EFCoreContext _db, DefaultRepository<Sys_Menu> _dbRepository
-
-            ) : base(_db, _dbRepository)
+        public CCTService(EFCoreContext _db)
+            : base(_db)
         {
 
         }

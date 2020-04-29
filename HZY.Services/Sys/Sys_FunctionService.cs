@@ -17,9 +17,7 @@ namespace HZY.Services.Sys
 
     public class Sys_FunctionService : ServiceBase<Sys_Function>
     {
-        public Sys_FunctionService(EFCoreContext _db, DefaultRepository<Sys_Function> _dbRepository
-
-            ) : base(_db, _dbRepository)
+        public Sys_FunctionService(EFCoreContext _db) : base(_db)
         {
 
         }
@@ -36,7 +34,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_Function Search)
         {
-            var query = dbRepository.Query()
+            var query = this.Query()
                 .WhereIF(w => w.Function_Name.Contains(Search.Function_Name), !string.IsNullOrWhiteSpace(Search?.Function_Name))
                 .OrderBy(w => w.Function_Num)
                 .Select(w => new
@@ -59,7 +57,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<Guid> SaveAsync(Sys_Function model)
         {
-            await dbRepository.InsertOrUpdateAsync(model);
+            await this.InsertOrUpdateAsync(model);
 
             return model.Function_ID;
         }
@@ -70,7 +68,7 @@ namespace HZY.Services.Sys
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await dbRepository.DeleteAsync(w => Ids.Contains(w.Function_ID));
+            => await this.DeleteAsync(w => Ids.Contains(w.Function_ID));
 
         /// <summary>
         /// 加载表单 数据
@@ -81,7 +79,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await dbRepository.FindByIdAsync(Id);
+            var Model = await this.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();

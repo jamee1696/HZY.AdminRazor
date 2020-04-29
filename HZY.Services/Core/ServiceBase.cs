@@ -21,15 +21,15 @@ namespace HZY.Services.Core
     using HZY.EFCore;
     using HZY.EFCore.Repository;
 
-    public class ServiceBase<T> where T : class, new()
+    public class ServiceBase<T> : DefaultRepository<T>
+        where T : class, new()
     {
         protected readonly EFCoreContext db;
-        protected readonly DefaultRepository<T> dbRepository;
 
-        public ServiceBase(EFCoreContext _db, DefaultRepository<T> _dbRepository)
+        public ServiceBase(EFCoreContext _db)
+            :base(_db)
         {
             this.db = _db;
-            this.dbRepository = _dbRepository;
         }
 
         #region µ¼³ö Excel

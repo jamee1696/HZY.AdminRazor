@@ -17,9 +17,8 @@ namespace HZY.Services.Sys
 
     public class Sys_RoleService : ServiceBase<Sys_Role>
     {
-        public Sys_RoleService(EFCoreContext _db, DefaultRepository<Sys_Role> _dbRepository
-
-            ): base(_db, _dbRepository)
+        public Sys_RoleService(EFCoreContext _db)
+            : base(_db)
         {
 
         }
@@ -35,7 +34,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_Role Search)
         {
-            var query = dbRepository.Query()
+            var query = this.Query()
                 .WhereIF(w => w.Role_Name.Contains(Search.Role_Name), !string.IsNullOrWhiteSpace(Search?.Role_Name))
                 .Select(w => new
                 {
@@ -57,7 +56,7 @@ namespace HZY.Services.Sys
         /// <returns></returns>
         public async Task<Guid> SaveAsync(Sys_Role model)
         {
-            await dbRepository.InsertOrUpdateAsync(model);
+            await this.InsertOrUpdateAsync(model);
 
             return model.Role_ID;
         }
@@ -68,7 +67,7 @@ namespace HZY.Services.Sys
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await dbRepository.DeleteAsync(w => Ids.Contains(w.Role_ID) && w.Role_IsDelete != 2);
+            => await this.DeleteAsync(w => Ids.Contains(w.Role_ID) && w.Role_IsDelete != 2);
 
         /// <summary>
         /// 加载表单 数据
@@ -79,7 +78,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await dbRepository.FindByIdAsync(Id);
+            var Model = await this.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();

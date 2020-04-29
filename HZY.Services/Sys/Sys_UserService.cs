@@ -21,11 +21,8 @@ namespace HZY.Services.Sys
     {
         protected readonly DefaultRepository<Sys_UserRole> dbUserRole;
 
-        public Sys_UserService(EFCoreContext _db, DefaultRepository<Sys_User> _dbRepository,
-
-            DefaultRepository<Sys_UserRole> _dbUserRole
-
-            ) : base(_db, _dbRepository)
+        public Sys_UserService(EFCoreContext _db, DefaultRepository<Sys_UserRole> _dbUserRole)
+            : base(_db)
         {
             this.dbUserRole = _dbUserRole;
         }
@@ -34,7 +31,7 @@ namespace HZY.Services.Sys
 
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, Sys_User Search)
         {
-            var query = dbRepository.Query()
+            var query = this.Query()
                 .WhereIF(w => w.User_LoginName.Contains(Search.User_LoginName), !string.IsNullOrWhiteSpace(Search?.User_LoginName))
                 .WhereIF(w => w.User_Name.Contains(Search.User_Name), !string.IsNullOrWhiteSpace(Search?.User_Name))
                 .Select(w => new
@@ -72,11 +69,11 @@ namespace HZY.Services.Sys
                 if (model.User_ID == Guid.Empty)
                 {
                     model.User_Pwd = string.IsNullOrWhiteSpace(model.User_Pwd) ? "123" : model.User_Pwd; //Tools.MD5Encrypt("123");
-                    model = await dbRepository.InsertAsync(model);
+                    model = await this.InsertAsync(model);
                 }
                 else
                 {
-                    await dbRepository.UpdateByIdAsync(model);
+                    await this.UpdateByIdAsync(model);
                 }
 
                 //变更用户角色
@@ -115,10 +112,10 @@ namespace HZY.Services.Sys
 
             foreach (var item in Ids)
             {
-                var userModel = await dbRepository.FindByIdAsync(item);
+                var userModel = await this.FindByIdAsync(item);
                 if (userModel.User_IsDelete == 2) throw new MessageBox("该信息不能删除!");
                 await dbUserRole.DeleteAsync(w => w.UserRole_UserID == item);
-                await dbRepository.DeleteAsync(userModel);
+                await this.DeleteAsync(userModel);
             }
 
             return await db.CommitAsync();
@@ -133,7 +130,7 @@ namespace HZY.Services.Sys
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await dbRepository.FindByIdAsync(Id);
+            var Model = await this.FindByIdAsync(Id);
 
             var RoleIds = await (
                 from userRole in db.Sys_UserRoles
