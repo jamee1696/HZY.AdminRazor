@@ -179,7 +179,7 @@ namespace HZY.Toolkit
             this.data = data;
         }
 
-        public int status { get; set; } = (int)StatusCodeEnum.失败;
+        public int status { get; set; } = (int)StatusCodeEnum.警告;
 
         public string msg { get; set; }
 

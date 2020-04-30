@@ -64,13 +64,13 @@ namespace HZY.Admin.Controllers
         public ApiResult ResultOk(string msg, object data) => new ApiResult(StatusCodeEnum.成功, msg, data);
 
         [NonAction]
-        public ApiResult ResultError(string msg) => new ApiResult(StatusCodeEnum.失败, msg);
+        public ApiResult ResultError(string msg) => new ApiResult(StatusCodeEnum.警告, msg);
 
         [NonAction]
-        public ApiResult ResultError(object data) => new ApiResult(StatusCodeEnum.失败, "", data);
+        public ApiResult ResultError(object data) => new ApiResult(StatusCodeEnum.警告, "", data);
 
         [NonAction]
-        public ApiResult ResultError(string msg, object data) => new ApiResult(StatusCodeEnum.失败, msg, data);
+        public ApiResult ResultError(string msg, object data) => new ApiResult(StatusCodeEnum.警告, msg, data);
 
     }
 }
