@@ -71,7 +71,7 @@ namespace HZY.Admin.Services.Core
 
             public ServiceType serviceType { get; set; } = ServiceType.Scoped;
 
-            public AppServiceAttribute()
+            public AppServiceAttribute(ServiceType serviceType = ServiceType.Scoped)
             {
 
             }

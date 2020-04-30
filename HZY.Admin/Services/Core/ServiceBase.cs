@@ -22,14 +22,14 @@ namespace HZY.Admin.Services.Core
     using HZY.EFCore.Repository;
     using static HZY.Admin.Services.Core.LoadServices;
 
-    [AppService]
+    [AppService(ServiceType.Scoped)]
     public class ServiceBase<T> : DefaultRepository<T>
         where T : class, new()
     {
         protected readonly EFCoreContext db;
 
         public ServiceBase(EFCoreContext _db)
-            :base(_db)
+            : base(_db)
         {
             this.db = _db;
         }
