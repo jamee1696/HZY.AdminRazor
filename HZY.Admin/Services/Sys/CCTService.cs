@@ -47,7 +47,12 @@ namespace HZY.Admin.Services.Sys
                 var item = _TableNames[i];
                 var _Cols = await db.GetColsByTableNameAsync(item.Name);
 
-                var fieldInfoList = _TableAll[item.Name].ToList();
+                List<ModelInfo> fieldInfoList = null;
+                if (_TableAll.ContainsKey(item.Name))
+                {
+                    fieldInfoList = _TableAll[item.Name].ToList();
+                }
+
                 if (fieldInfoList == null) continue;
 
                 foreach (var _Col in _Cols)
@@ -72,7 +77,11 @@ namespace HZY.Admin.Services.Sys
             var _Cols = await db.GetColsByTableNameAsync(TableName);
 
             var _TableAll = ModelCache.All();
-            var fieldInfoList = _TableAll[TableName].ToList();
+            List<ModelInfo> fieldInfoList = null;
+            if (_TableAll.ContainsKey(TableName))
+            {
+                fieldInfoList = _TableAll[TableName].ToList();
+            }
 
             var _Code = Temp.ToString();
             var _ClassName = TableName;
@@ -317,7 +326,12 @@ namespace HZY.Admin.Services.Sys
                 {
                     var _TableName = item.Split('/')[0];
                     var _FieldName = item.Split('/')[1];
-                    var fieldInfos = _TableAll[_TableName].ToList();
+
+                    List<ModelInfo> fieldInfos = null;
+                    if (_TableAll.ContainsKey(_TableName))
+                    {
+                        fieldInfos = _TableAll[_TableName].ToList();
+                    }
 
                     if (fieldInfos == null) continue;
 
