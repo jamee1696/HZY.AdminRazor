@@ -20,7 +20,7 @@ namespace HZY.Admin.Services.Core
     using Microsoft.AspNetCore.Http;
     using HZY.EFCore;
     using HZY.EFCore.Repository;
-    using static HZY.Admin.Core.LoadServices;
+    using static HZY.Admin.Services.Core.LoadServices;
 
     [AppService]
     public class ServiceBase<T> : DefaultRepository<T>

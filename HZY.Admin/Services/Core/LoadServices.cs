@@ -13,7 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace HZY.Admin.Core
+namespace HZY.Admin.Services.Core
 {
     using Microsoft.Extensions.DependencyInjection;
 

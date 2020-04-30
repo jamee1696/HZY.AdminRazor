@@ -34,6 +34,7 @@ namespace HZY.Admin
     using UEditor.Core;
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc;
+    using HZY.Admin.Services.Core;
 
     public class Startup
     {
