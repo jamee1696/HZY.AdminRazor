@@ -53,11 +53,9 @@ namespace HZY.Admin.Services.Sys
                     fieldInfoList = _TableAll[item.Name].ToList();
                 }
 
-                if (fieldInfoList == null) continue;
-
                 foreach (var _Col in _Cols)
                 {
-                    var _FieldDescribe = fieldInfoList.FirstOrDefault(w => w.Name == _Col.ColName);
+                    var _FieldDescribe = fieldInfoList?.FirstOrDefault(w => w.Name == _Col.ColName);
                     if (_FieldDescribe != null) _Col.ColRemark = _FieldDescribe.Remark;
                 }
                 dic[item.Name] = _Cols;
