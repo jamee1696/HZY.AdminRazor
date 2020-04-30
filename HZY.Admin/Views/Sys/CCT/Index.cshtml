@@ -170,10 +170,10 @@
                     <li @@click="onSelectedTab(1)" :class="selectedTab==1?'cctActive':''">1&nbsp;>&nbsp;HZY.Models</li>
                     <li @@click="onSelectedTab(2)" :class="selectedTab==2?'cctActive':''">2&nbsp;>&nbsp;HZY.EFCore.DbSet</li>
                     <li @@click="onSelectedTab(3)" :class="selectedTab==3?'cctActive':''">3&nbsp;>&nbsp;HZY.Services</li>
-                    <li @@click="onSelectedTab(4)" :class="selectedTab==4?'cctActive':''">4&nbsp;>&nbsp;HZY.Services.Register</li>
-                    <li @@click="onSelectedTab(5)" :class="selectedTab==5?'cctActive':''">5&nbsp;>&nbsp;HZY.Admin.Controllers</li>
-                    <li @@click="onSelectedTab(6)" :class="selectedTab==6?'cctActive':''">6&nbsp;>&nbsp;HZY.Admin.Index.cshtml</li>
-                    <li @@click="onSelectedTab(7)" :class="selectedTab==7?'cctActive':''">7&nbsp;>&nbsp;HZY.Admin.Info.cshtml</li>
+                    @*<li @@click="onSelectedTab(4)" :class="selectedTab==4?'cctActive':''">4&nbsp;>&nbsp;HZY.Services.Register</li>*@
+                    <li @@click="onSelectedTab(5)" :class="selectedTab==5?'cctActive':''">4&nbsp;>&nbsp;HZY.Admin.Controllers</li>
+                    <li @@click="onSelectedTab(6)" :class="selectedTab==6?'cctActive':''">5&nbsp;>&nbsp;HZY.Admin.Index.cshtml</li>
+                    <li @@click="onSelectedTab(7)" :class="selectedTab==7?'cctActive':''">6&nbsp;>&nbsp;HZY.Admin.Info.cshtml</li>
                 </ul>
                 <div class="bg-primary-500 p-5 font-size-16 text-center download" @@click="download" v-show="codeType != ''">下载当前</div>
                 <div class="bg-primary-700 p-5 font-size-16 text-center downloadAll" @@click="downloadAll" v-show="codeType != ''">下载全部</div>

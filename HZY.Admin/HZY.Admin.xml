@@ -369,6 +369,16 @@
             异常过滤
             </summary>
         </member>
+        <member name="T:HZY.Admin.Core.LoadServices">
+            <summary>
+            加载服务
+            </summary>
+        </member>
+        <member name="T:HZY.Admin.Core.LoadServices.AppServiceAttribute">
+            <summary>
+            服务标记 用于 程序 启动 扫描到后自动 注册服务
+            </summary>
+        </member>
         <member name="P:HZY.Admin.Dto.Sys.AuthUserDto.UserName">
             <summary>
             用户名称
@@ -405,13 +415,6 @@
             Ef 数据
             </summary>
             <param name="host"></param>
-        </member>
-        <member name="M:HZY.Admin.Services.Core.HZYServiceExtensions.UseHZYServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入 HZYServices 服务
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
         </member>
         <member name="M:HZY.Admin.Services.Core.ServiceBase`1.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.String[])">
             <summary>

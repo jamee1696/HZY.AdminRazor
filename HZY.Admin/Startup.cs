@@ -30,15 +30,10 @@ namespace HZY.Admin
     using HZY.Admin.Core;
     using HZY.Toolkit;
     using HZY.Toolkit.Entitys;
-    using HZY.EFCore.Repository.Interface;
-    using HZY.Admin.Services.Core;
     using HZY.Admin.Hubs;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using HZY.Admin.Services.Sys;
     using UEditor.Core;
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Http.Features;
 
     public class Startup
     {
@@ -87,9 +82,8 @@ namespace HZY.Admin
             // services.AddScoped(typeof(IRepository<,>), typeof(DefaultRepository<>));
             #endregion
 
-            #region 业务服务 在开发中请 对 HZY.Service 下得 HZYServiceExtensions 类 注入 Service 服务
-            //注入 业务 服务
-            services.UseHZYServices();
+            #region 注入 业务 服务
+            services.StartService(typeof(Startup));
             #endregion
 
             #region 跨域配置 配置跨域处理
@@ -240,7 +234,6 @@ namespace HZY.Admin
             //    options.MultipartBodyLengthLimit = int.MaxValue;// 60000000; 
             //    options.MultipartHeadersLengthLimit = int.MaxValue;
             //});
-
 
         }
 

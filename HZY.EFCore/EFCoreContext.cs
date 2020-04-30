@@ -52,7 +52,7 @@ namespace HZY.EFCore
             //modelBuilder.Entity<Sys_AppLog>().ToTable("Sys_AppLog");
             //modelBuilder.Entity<User>().ToTable("User");
 
-            #region 缓存表及属性信息
+            #region 扫描表 并 缓存 属性信息
             var types = modelBuilder.Model.GetEntityTypes().Select(item => item.ClrType).ToList();
             ModelCache.Set(types);
             #endregion
