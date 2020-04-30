@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace HZY.Logic
+namespace HZY.Services
 {
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.AspNetCore.Http;
     using HZY.EFCore.Repository;
     using HZY.Models.Sys;
     using HZY.Toolkit;    
@@ -17,9 +15,8 @@ namespace HZY.Logic
 
     public class <#ClassName#>Service : ServiceBase<<#ClassName#>>
     {
-        public <#ClassName#>(EFCoreContext _db, DefaultRepository<<#ClassName#>> _dbRepository
-        
-            ) : base(_db, _dbRepository)
+        public <#ClassName#>(EFCoreContext _db) 
+            : base(_db)
         {
 
         }
