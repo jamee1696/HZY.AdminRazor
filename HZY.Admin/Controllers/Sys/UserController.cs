@@ -11,6 +11,7 @@ namespace HZY.Admin.Controllers.Sys
     using HZY.Models.Sys;
     using HZY.Admin.Dto.Sys;
     using HZY.Admin.Services.Sys;
+    using HZY.Toolkit.HzyNetCoreUtil.Attributes;
 
     public class UserController : ApiBaseController<Sys_UserService>
     {
@@ -47,6 +48,7 @@ namespace HZY.Admin.Controllers.Sys
         /// 保存数据
         /// </summary>
         /// <returns></returns>
+        [AppTransaction]
         [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync(Sys_UserDto Model)
             => this.ResultOk(await this.service.SaveAsync(Model));
@@ -56,6 +58,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
+        [AppTransaction]
         [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody]List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));

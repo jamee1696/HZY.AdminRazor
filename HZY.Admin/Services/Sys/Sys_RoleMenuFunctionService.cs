@@ -56,8 +56,6 @@ namespace HZY.Admin.Services.Sys
             var MenuId = Dto.MenuId;
             var FunctionIds = Dto.FunctionIds;
 
-            db.CommitOpen();
-
             await this.DeleteAsync(w => w.RoleMenuFunction_RoleID == RoleId & w.RoleMenuFunction_MenuID == MenuId);
 
             foreach (var item in Dto.FunctionIds)
@@ -69,8 +67,6 @@ namespace HZY.Admin.Services.Sys
 
                 await this.InsertAsync(model);
             }
-
-            await db.CommitAsync();
 
             return RoleId;
         }

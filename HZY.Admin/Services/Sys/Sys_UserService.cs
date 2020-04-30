@@ -63,39 +63,32 @@ namespace HZY.Admin.Services.Sys
 
             if (string.IsNullOrWhiteSpace(model.User_Pwd)) throw new MessageBox("密码不能为空!");
 
-            using (var transaction = await db.BeginTransactionAsync())
+            if (model.User_ID == Guid.Empty)
             {
-                //db.CommitOpen();
-                if (model.User_ID == Guid.Empty)
+                model.User_Pwd = string.IsNullOrWhiteSpace(model.User_Pwd) ? "123" : model.User_Pwd; //Tools.MD5Encrypt("123");
+                model = await this.InsertAsync(model);
+            }
+            else
+            {
+                await this.UpdateByIdAsync(model);
+            }
+
+            //变更用户角色
+            if (roleIds.Count > 0)
+            {
+                var _Sys_UserRoleList = await dbUserRole.ToListAsync(w => w.UserRole_UserID == model.User_ID);
+
+                await dbUserRole.DeleteAsync(w => w.UserRole_UserID == model.User_ID);
+                foreach (var item in roleIds)
                 {
-                    model.User_Pwd = string.IsNullOrWhiteSpace(model.User_Pwd) ? "123" : model.User_Pwd; //Tools.MD5Encrypt("123");
-                    model = await this.InsertAsync(model);
+                    var _Sys_UserRole = _Sys_UserRoleList.FirstOrDefault(w => w.UserRole_RoleID == item);
+
+                    var userRoleModel = new Sys_UserRole();
+                    userRoleModel.UserRole_ID = _Sys_UserRole == null ? Guid.NewGuid() : _Sys_UserRole.UserRole_ID;
+                    userRoleModel.UserRole_RoleID = item;
+                    userRoleModel.UserRole_UserID = model.User_ID;
+                    await dbUserRole.InsertAsync(userRoleModel);
                 }
-                else
-                {
-                    await this.UpdateByIdAsync(model);
-                }
-
-                //变更用户角色
-                if (roleIds.Count > 0)
-                {
-                    var _Sys_UserRoleList = await dbUserRole.ToListAsync(w => w.UserRole_UserID == model.User_ID);
-
-                    await dbUserRole.DeleteAsync(w => w.UserRole_UserID == model.User_ID);
-                    foreach (var item in roleIds)
-                    {
-                        var _Sys_UserRole = _Sys_UserRoleList.FirstOrDefault(w => w.UserRole_RoleID == item);
-
-                        var userRoleModel = new Sys_UserRole();
-                        userRoleModel.UserRole_ID = _Sys_UserRole == null ? Guid.NewGuid() : _Sys_UserRole.UserRole_ID;
-                        userRoleModel.UserRole_RoleID = item;
-                        userRoleModel.UserRole_UserID = model.User_ID;
-                        await dbUserRole.InsertAsync(userRoleModel);
-                    }
-                }
-
-                //await db.CommitAsync();
-                await transaction.CommitAsync();
             }
 
             return model.User_ID;
@@ -108,8 +101,6 @@ namespace HZY.Admin.Services.Sys
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
         {
-            db.CommitOpen();
-
             foreach (var item in Ids)
             {
                 var userModel = await this.FindByIdAsync(item);
@@ -118,7 +109,7 @@ namespace HZY.Admin.Services.Sys
                 await this.DeleteAsync(userModel);
             }
 
-            return await db.CommitAsync();
+            return 1;
         }
 
         /// <summary>

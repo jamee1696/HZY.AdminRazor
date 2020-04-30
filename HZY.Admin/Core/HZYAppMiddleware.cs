@@ -32,5 +32,6 @@ namespace HZY.Admin.Core
 
             Tools.Log.Write($"请求：{context.Request.Path} 耗时：{sw.ElapsedMilliseconds} 毫秒!");
         }
+
     }
 }

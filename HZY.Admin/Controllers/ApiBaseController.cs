@@ -18,8 +18,11 @@ namespace HZY.Admin.Controllers
     using HZY.Admin.Core;
     using HZY.Admin.Services.Sys;
     using HZY.Toolkit;
+    using HZY.Toolkit.HzyNetCoreUtil.Attributes;
+    using Microsoft.AspNetCore.Mvc.Controllers;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Newtonsoft.Json;
+    using System.Reflection;
 
     /// <summary>
     /// 接口 基类
@@ -60,6 +63,10 @@ namespace HZY.Admin.Controllers
             //"ChangePwd",
         };
 
+        /// <summary>
+        /// Action 执行 前
+        /// </summary>
+        /// <param name="context"></param>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
@@ -128,6 +135,39 @@ namespace HZY.Admin.Controllers
             ViewData["isFindback"] = isFindback ? 1 : 0;
             #endregion
 
+            #region 检查是否需要 事务
+
+            var methodInfo = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo;
+
+            if (this.CheckTransactionAttribute(methodInfo))
+            {
+                this.menuService.Context.CommitOpen();
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Action 执行 后
+        /// </summary>
+        /// <param name="context"></param>
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            base.OnActionExecuted(context);
+
+            var methodInfo = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo;
+
+            if (this.CheckTransactionAttribute(methodInfo))
+            {
+                this.menuService.Context.Commit();
+            }
+        }
+
+        private bool CheckTransactionAttribute(MethodInfo methodInfo)
+        {
+            //判断是否 有 事务标记
+            var transactionAttribute = methodInfo.GetCustomAttribute<AppTransactionAttribute>();
+            return transactionAttribute != null;
         }
 
     }

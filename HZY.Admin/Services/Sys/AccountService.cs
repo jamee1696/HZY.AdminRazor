@@ -24,12 +24,10 @@ namespace HZY.Admin.Services.Sys
         protected readonly string Key;
 
         public AccountService(EFCoreContext _db,
-
             DefaultRepository<Sys_UserRole> _dbUserRole,
             DefaultRepository<Sys_AppLog> _dbAppLog,
-            IHttpContextAccessor iHttpContextAccessor
-
-            ) : base(_db)
+            IHttpContextAccessor iHttpContextAccessor)
+            : base(_db)
         {
             this.dbUserRole = _dbUserRole;
             this.dbAppLog = _dbAppLog;

@@ -15,6 +15,18 @@
             接口 基类
             </summary>
         </member>
+        <member name="M:HZY.Admin.Controllers.ApiBaseController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Action 执行 前
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:HZY.Admin.Controllers.ApiBaseController.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            Action 执行 后
+            </summary>
+            <param name="context"></param>
+        </member>
         <member name="T:HZY.Admin.Controllers.AuthorizationController">
             <summary>
             授权
@@ -409,11 +421,6 @@
         <member name="T:HZY.Admin.Services.Core.LoadServices">
             <summary>
             加载服务
-            </summary>
-        </member>
-        <member name="T:HZY.Admin.Services.Core.LoadServices.AppServiceAttribute">
-            <summary>
-            服务标记 用于 程序 启动 扫描到后自动 注册服务
             </summary>
         </member>
         <member name="M:HZY.Admin.Services.Core.ServiceBase`1.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.String[])">

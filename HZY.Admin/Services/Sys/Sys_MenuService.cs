@@ -88,8 +88,6 @@ namespace HZY.Admin.Services.Sys
             var model = Dto.Model;
             var functionIds = Dto.FunctionIds;
 
-            db.CommitOpen();
-
             model = await this.InsertOrUpdateAsync(model);
             //
             await dbMenuFunction.DeleteAsync(w => w.MenuFunction_MenuID == model.Menu_ID);
@@ -109,8 +107,6 @@ namespace HZY.Admin.Services.Sys
                 }
             }
 
-            await db.CommitAsync();
-
             return model.Menu_ID;
         }
 
@@ -121,13 +117,11 @@ namespace HZY.Admin.Services.Sys
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
         {
-            db.CommitOpen();
-
             await dbRoleMenuFunction.DeleteAsync(w => Ids.Contains(w.RoleMenuFunction_MenuID));
             await dbMenuFunction.DeleteAsync(w => Ids.Contains(w.MenuFunction_MenuID));
             await this.DeleteAsync(w => Ids.Contains(w.Menu_ID));
 
-            return await db.CommitAsync();
+            return 1;
         }
 
         /// <summary>
