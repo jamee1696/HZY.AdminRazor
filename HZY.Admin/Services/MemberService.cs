@@ -110,7 +110,7 @@ namespace HZY.Admin.Services
             var res = new Dictionary<string, object>();
 
             var Model = await this.FindByIdAsync(Id);
-            var User = await userDb.FindByIdAsync(Model.Member_UserID);
+            var User = await userDb.FindByIdAsync(Model?.Member_UserID);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();
