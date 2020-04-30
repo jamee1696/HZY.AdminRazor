@@ -240,15 +240,21 @@ namespace HZY.Admin.Services.Sys
             //        ;
             //");
 
-            var _SelectString = $@"{(_Select == null ? "" : "w." + string.Join(",w.", _Select.Select(w => w.ColName)))},
-                        _ukid = w.{ _KeyName.ColName}
-            ";
+            var codeList = new List<string>();
+            if (_Select != null && _Select.Count > 0)
+            {
+                foreach (var item in _Select.Select(w => w.ColName))
+                {
+                    codeList.Add($"w.{item}");
+                }
+                if (_KeyName != null) codeList.Add($"_ukid = w.{ _KeyName.ColName}");
+            }
 
-            _Code = _Code.Replace("<#Select#>", _SelectString);
+            _Code = _Code.Replace("<#Select#>", string.Join(",", codeList));
             _Code = _Code.Replace("<#ClassName#>", _ClassName);
             _Code = _Code.Replace("<#className#>", _ClassName.First().ToString().ToLower() + _ClassName.Substring(1));
             _Code = _Code.Replace("<#TableName#>", TableName);
-            _Code = _Code.Replace("<#KeyName#>", _KeyName.ColName);
+            _Code = _Code.Replace("<#KeyName#>", _KeyName?.ColName);
             //_Code = _Code.Replace("<#QueryCode#>", _QueryCode.ToString());
 
             return _Code.ToString();
