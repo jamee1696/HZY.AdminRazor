@@ -31,10 +31,10 @@ namespace HZY.Admin
     using HZY.Toolkit;
     using HZY.Toolkit.Entitys;
     using HZY.EFCore.Repository.Interface;
-    using HZY.Services.Core;
+    using HZY.Admin.Services.Core;
     using HZY.Admin.Hubs;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
     using UEditor.Core;
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc;
@@ -155,7 +155,7 @@ namespace HZY.Admin
                 //为 Swagger JSON and UI设置xml文档注释路径
                 var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.xml");
                 var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Models.xml");
-                var xmlPath2 = Path.Combine(System.AppContext.BaseDirectory, "HZY.DTO.xml");
+                var xmlPath2 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.Dto.xml");
                 options.IncludeXmlComments(xmlPath, true);
                 options.IncludeXmlComments(xmlPath1, true);
                 options.IncludeXmlComments(xmlPath2, true);

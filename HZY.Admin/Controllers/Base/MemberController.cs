@@ -8,30 +8,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace HZY.Admin.Controllers.Base
 {
     using HZY.Toolkit;
-    using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services;
+    using HZY.Admin.Services.Sys;
     using HZY.Models;
     using Microsoft.AspNetCore.Hosting;
 
     /// <summary>
     /// 会员管理
     /// </summary>
-    public class MemberController : ApiBaseController
+    public class MemberController : ApiBaseController<MemberService>
     {
-        protected readonly MemberService service;
         protected readonly IWebHostEnvironment webHostEnvironment;
         protected readonly string webRootPath;
 
-        public MemberController(
-            Sys_MenuService _menservice,
-            MemberService _service,
-            IWebHostEnvironment _webHostEnvironment)
-            : base(Guid.Parse("7c34c2fd-98ed-4655-aa04-bb00b915a751"), _menservice)
+        public MemberController(Sys_MenuService _menservice, MemberService _service, IWebHostEnvironment _webHostEnvironment)
+            : base(Guid.Parse("7c34c2fd-98ed-4655-aa04-bb00b915a751"), _menservice, _service)
         {
-            this.service = _service;
             this.webHostEnvironment = _webHostEnvironment;
             this.webRootPath = _webHostEnvironment.WebRootPath;
         }

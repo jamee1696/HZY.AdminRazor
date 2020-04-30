@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace HZY.Admin.Hubs
 {
     using HZY.EFCore.Repository;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
     using Microsoft.AspNetCore.SignalR;
 
     public class ChatHub : Hub

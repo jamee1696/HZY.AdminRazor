@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace HZY.Services.Sys
+namespace HZY.Admin.Services.Sys
 {
     using Newtonsoft.Json;
     using Microsoft.AspNetCore.Http;
@@ -12,7 +12,7 @@ namespace HZY.Services.Sys
     using HZY.Models.Sys;
     using HZY.Toolkit;
     using System.Linq;
-    using HZY.Services.Core;
+    using HZY.Admin.Services.Core;
     using HZY.EFCore;
 
     public class AccountService : ServiceBase<Sys_User>
@@ -129,7 +129,7 @@ namespace HZY.Services.Sys
         /// </summary>
         /// <param name="oldpwd"></param>
         /// <param name="newpwd"></param>
-        /// <param name="newlypwd"></param>
+        /// <returns></returns>
         public async Task<int> ChangePwd(string oldpwd, string newpwd)
         {
             if (string.IsNullOrEmpty(oldpwd)) throw new MessageBox("¾ÉÃÜÂë²»ÄÜÎª¿Õ");

@@ -8,19 +8,14 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
 
-    public class AppLogController : ApiBaseController
+    public class AppLogController : ApiBaseController<Sys_AppLogService>
     {
-        protected readonly Sys_AppLogService service;
-
         public AppLogController(Sys_MenuService _menuservice, Sys_AppLogService _service)
-            : base(Guid.Parse("74b837ae-d24f-4f57-b107-e20dbe70f5d3"), _menuservice)
+            : base(Guid.Parse("74b837ae-d24f-4f57-b107-e20dbe70f5d3"), _menuservice, _service)
         {
-            this.service = _service;
+
         }
 
         #region 页面 Views

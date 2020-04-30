@@ -8,22 +8,20 @@ namespace HZY.Admin.Controllers.//请输入命名空间
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
+    using HZY.Admin.Dto;
+    using HZY.Admin.Dto.Sys;
     using HZY.Services;
     using HZY.Services.Sys;
 
     /// <summary>
     /// <#TableName#>管理
     /// </summary>
-    public class <#ClassName#> : ApiBaseController
+    public class <#ClassName#>Controller : ApiBaseController<<#ClassName#>Service>
     {
-        protected readonly <#TableName#>Service service;
-
-        public FunctionController(Sys_MenuService _menuService, <#TableName#>Service _service)
-            : base(Guid.Parse("请设置菜单ID"), _menuService)
+        public <#ClassName#>Controller(Sys_MenuService _menuService, <#TableName#>Service _service)
+            : base(Guid.Parse("请设置菜单ID"), _menuService, _service)
         {
-            this.service = _service;
+
         }
 
         #region 页面 Views

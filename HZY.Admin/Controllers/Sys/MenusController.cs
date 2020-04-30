@@ -8,22 +8,19 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services.Sys;
+    using HZY.Admin.Dto.Sys;
+    using HZY.Admin.Services.Sys;
 
     /// <summary>
     /// 菜单管理
     /// </summary>
-    public class MenusController : ApiBaseController
+    public class MenusController : ApiBaseController<Sys_MenuService>
     {
-        protected readonly Sys_MenuService service;
         protected readonly AccountService accountService;
 
         public MenusController(Sys_MenuService _service, AccountService _accountService)
-            : base(Guid.Parse("e5d4da6b-aab0-4aaa-982f-43673e8152c0"), _service)
+            : base(Guid.Parse("e5d4da6b-aab0-4aaa-982f-43673e8152c0"), _service, _service)
         {
-            this.service = _service;
             this.accountService = _accountService;
         }
 

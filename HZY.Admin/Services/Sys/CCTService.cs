@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Services.Sys
+namespace HZY.Admin.Services.Sys
 {
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Microsoft.AspNetCore.Http;
     using HZY.EFCore.Repository;
-    using HZY.Services.Core;
+    using HZY.Admin.Services.Core;
     using HZY.EFCore;
     using System.Linq;
     using System.IO;
@@ -65,6 +65,7 @@ namespace HZY.Services.Sys
         /// 创建 Model 代码
         /// </summary>
         /// <param name="TableName"></param>
+        /// <param name="Temp"></param>
         /// <returns></returns>
         public async Task<string> CreateModelCode(string TableName, string Temp)
         {

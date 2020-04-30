@@ -9,10 +9,8 @@ namespace HZY.Admin.Controllers
 {
     using HZY.Toolkit;
     using HZY.Admin.Core;
-    using HZY.DTO.Sys;
-    using HZY.Services;
-    using HZY.Services.Sys;
-    using HZY.EFCore.Repository;
+    using HZY.Admin.Dto.Sys;
+    using HZY.Admin.Services.Sys;
 
     /// <summary>
     /// 授权

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace HZY.Admin.Controllers.Base
 {
     using HZY.Admin.Hubs;
-    using HZY.Toolkit;
     using Microsoft.AspNetCore.SignalR;
 
     public class SignalRChatController : Controller

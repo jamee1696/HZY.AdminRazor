@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.DTO.Sys
+namespace HZY.Admin.Dto.Sys
 {
     using AutoMapper;
-    using HZY.DTO.Core;
+    using HZY.Admin.Dto.Core;
     using HZY.Models.Sys;
 
     public class Sys_MenuDto

@@ -8,22 +8,16 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services.Sys;
+    using HZY.Admin.Dto.Sys;
+    using HZY.Admin.Services.Sys;
 
-    public class RoleFunctionController : ApiBaseController
+    public class RoleFunctionController : ApiBaseController<Sys_RoleMenuFunctionService>
     {
-        protected readonly Sys_RoleMenuFunctionService srevice;
         protected readonly Sys_RoleService roleService;
 
-        public RoleFunctionController(
-            Sys_MenuService _menuService,
-            Sys_RoleMenuFunctionService _srevice,
-            Sys_RoleService _roleService
-            ) : base(Guid.Parse("bd024f3a-99a7-4407-861c-a016f243f222"), _menuService)
+        public RoleFunctionController(Sys_MenuService _menuService, Sys_RoleMenuFunctionService _srevice, Sys_RoleService _roleService)
+            : base(Guid.Parse("bd024f3a-99a7-4407-861c-a016f243f222"), _menuService, _srevice)
         {
-            this.srevice = _srevice;
             this.roleService = _roleService;
         }
 
@@ -60,7 +54,7 @@ namespace HZY.Admin.Controllers.Sys
         /// <returns></returns>
         [HttpPost("Save"), Core.HZYAppCheckModel]
         public async Task<ApiResult> SaveAsync([FromBody]Sys_RoleMenuFunctionDto Model)
-            => this.ResultOk(await this.srevice.SaveAsync(Model));
+            => this.ResultOk(await this.service.SaveAsync(Model));
 
         ///// <summary>
         ///// 删除数据
@@ -97,7 +91,7 @@ namespace HZY.Admin.Controllers.Sys
         [HttpPost("RoleMenuFunctionTree/{RoleId}")]
         public async Task<ApiResult> RoleMenuFunctionTree(Guid RoleId)
         {
-            var tuple = await this.srevice.GetRoleMenuFunctionTreeAsync(RoleId);
+            var tuple = await this.service.GetRoleMenuFunctionTreeAsync(RoleId);
 
             return this.ResultOk(new
             {

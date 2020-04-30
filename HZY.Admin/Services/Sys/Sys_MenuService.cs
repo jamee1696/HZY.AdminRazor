@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Services.Sys
+namespace HZY.Admin.Services.Sys
 {
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -12,10 +12,9 @@ namespace HZY.Services.Sys
     using HZY.Toolkit;
     using System.Linq;
     using HZY.EFCore.Base;
-    using HZY.Services.Core;
+    using HZY.Admin.Services.Core;
     using System.Security.Cryptography;
-    using HZY.DTO.Sys;
-    using Microsoft.CodeAnalysis.CSharp;
+    using HZY.Admin.Dto.Sys;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Internal;
     using System.Collections;
@@ -118,7 +117,7 @@ namespace HZY.Services.Sys
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="Keys"></param>
+        /// <param name="Ids"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
         {
@@ -331,7 +330,7 @@ namespace HZY.Services.Sys
         /// <summary>
         /// 根据菜单获取权限
         /// </summary>
-        /// <param name="_Sys_Menu"></param>
+        /// <param name="MenuId"></param>
         /// <returns></returns>
         public async Task<Dictionary<string, object>> GetPowerStateByMenuId(Guid MenuId)
         {

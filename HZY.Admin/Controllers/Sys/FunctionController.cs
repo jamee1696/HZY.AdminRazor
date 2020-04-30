@@ -8,22 +8,17 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
 
     /// <summary>
     /// 功能管理
     /// </summary>
-    public class FunctionController : ApiBaseController
+    public class FunctionController : ApiBaseController<Sys_FunctionService>
     {
-        protected readonly Sys_FunctionService service;
-
         public FunctionController(Sys_MenuService _menuService, Sys_FunctionService _service)
-            : base(Guid.Parse("d721fc55-2174-40eb-bb37-5c54a158525a"), _menuService)
+            : base(Guid.Parse("d721fc55-2174-40eb-bb37-5c54a158525a"), _menuService, _service)
         {
-            this.service = _service;
+
         }
 
         #region 页面 Views

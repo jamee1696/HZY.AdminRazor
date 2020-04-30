@@ -8,19 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
-    using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services.Sys;
+    using HZY.Admin.Dto.Sys;
+    using HZY.Admin.Services.Sys;
 
-    public class ChangePasswordController : ApiBaseController
+    public class ChangePasswordController : ApiBaseController<AccountService>
     {
-        protected readonly AccountService service;
-
         public ChangePasswordController(Sys_MenuService _menuService, AccountService _service)
-            : base(Guid.Parse("f35d64ae-ecb7-4d06-acfb-d91595966d9e"), _menuService)
+            : base(Guid.Parse("f35d64ae-ecb7-4d06-acfb-d91595966d9e"), _menuService, _service)
         {
-            this.service = _service;
+
         }
 
         #region 页面 Views

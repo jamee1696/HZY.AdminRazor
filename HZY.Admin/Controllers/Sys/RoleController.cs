@@ -8,22 +8,17 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
 
     /// <summary>
     /// 角色管理
     /// </summary>
-    public class RoleController : ApiBaseController
+    public class RoleController : ApiBaseController<Sys_RoleService>
     {
-
-        protected readonly Sys_RoleService service;
-
         public RoleController(Sys_MenuService _menuService, Sys_RoleService _service)
-            : base(Guid.Parse("60ae9382-31ab-4276-a379-d3876e9bb783"), _menuService)
+            : base(Guid.Parse("60ae9382-31ab-4276-a379-d3876e9bb783"), _menuService, _service)
         {
-            this.service = _service;
+
         }
 
         #region 页面 Views

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace HZY.Services
+namespace HZY.Admin.Services
 {
     using System.Threading.Tasks;
     using HZY.EFCore.Repository;
     using HZY.Models.Sys;
-    using HZY.Toolkit;    
+    using HZY.Toolkit;
     using HZY.EFCore.Base;
-    using HZY.Services.Core;
+    using HZY.Admin.Services.Core;
     using HZY.EFCore;
 
     public class <#ClassName#>Service : ServiceBase<<#ClassName#>>

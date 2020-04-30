@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.Base
 {
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
 
     public class OtherController : ApiBaseController
     {

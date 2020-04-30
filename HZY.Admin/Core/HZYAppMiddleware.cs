@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace HZY.Admin.Core
 {
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
     using HZY.Toolkit;
     using System.Diagnostics;
 

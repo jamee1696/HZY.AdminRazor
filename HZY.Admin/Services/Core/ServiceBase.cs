@@ -11,7 +11,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace HZY.Services.Core
+namespace HZY.Admin.Services.Core
 {
     using HZY.EFCore.Base;
     using HZY.Toolkit;
@@ -78,6 +78,8 @@ namespace HZY.Services.Core
         /// 上传文件 辅助函数
         /// </summary>
         /// <param name="iFormFile"></param>
+        /// <param name="webRootPath"></param>
+        /// <param name="folder"></param>
         /// <param name="format"></param>
         /// <returns></returns>
         public string HandleUploadFile(IFormFile iFormFile, string webRootPath, string folder = "Files", params string[] format)

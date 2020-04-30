@@ -7,20 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers
 {
-    using HZY.Admin.Core;
-    using HZY.EFCore.Repository;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
 
-    public class HomeController : ApiBaseController
+    public class HomeController : ApiBaseController<AccountService>
     {
-        protected readonly AccountService accountService;
-
-        public HomeController(
-            Sys_MenuService _menuService,
-            AccountService _accountService
-            ) : base(Guid.Parse("0b7f8e2c-9faa-4496-9068-80b87ba1b64e"), _menuService)
+        public HomeController(Sys_MenuService _menuService, AccountService _accountService)
+            : base(Guid.Parse("0b7f8e2c-9faa-4496-9068-80b87ba1b64e"), _menuService, _accountService)
         {
-            this.accountService = _accountService;
+
         }
 
         [HttpGet(nameof(Index)), Route(""), Route("/")]
@@ -29,7 +23,7 @@ namespace HZY.Admin.Controllers
             var allList = await this.menuService.GetMenuByRoleIDAsync();
 
             ViewData["menuList"] = this.menuService.CreateMenus(Guid.Empty, allList);
-            ViewData["UserName"] = this.accountService.info.UserName;
+            ViewData["UserName"] = this.service.info.UserName;
 
             return View();
         }

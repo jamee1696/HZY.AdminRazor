@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Services.Core
+namespace HZY.Admin.Services.Core
 {
     using Microsoft.Extensions.DependencyInjection;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
     
     public static class HZYServiceExtensions
     {

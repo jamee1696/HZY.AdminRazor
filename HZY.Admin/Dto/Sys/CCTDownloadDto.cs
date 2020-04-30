@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.DTO.Sys
+namespace HZY.Admin.Dto.Sys
 {
     public class CCTDownloadDto
     {

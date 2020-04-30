@@ -6,32 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.Sys
 {
-    using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
+    using HZY.Admin.Dto.Sys;
     using Microsoft.AspNetCore.Hosting;
     using HZY.Toolkit;
     using System.Text;
     using System.IO;
-    using HZY.Services.Sys;
-    using HZY.EFCore.Repository;
-    using HZY.EFCore;
+    using HZY.Admin.Services.Sys;
 
     /// <summary>
     /// 代码创建 工具
     /// </summary>
-    public class CCTController : ApiBaseController
+    public class CCTController : ApiBaseController<CCTService>
     {
         private string _WebRootPath { get; } = string.Empty;
-        protected readonly CCTService service;
 
-        public CCTController(
-            Sys_MenuService _menuservice,
-            CCTService _service,
-            IWebHostEnvironment IWebHostEnvironment)
-            : base(Guid.Parse("4ce21a81-1cae-44d2-b29e-07058ff04b3e"), _menuservice)
+        public CCTController(Sys_MenuService _menuservice, CCTService _service, IWebHostEnvironment IWebHostEnvironment)
+            : base(Guid.Parse("4ce21a81-1cae-44d2-b29e-07058ff04b3e"), _menuservice, _service)
         {
-            this.service = _service;
             this._WebRootPath = IWebHostEnvironment.WebRootPath;
         }
 

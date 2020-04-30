@@ -16,26 +16,34 @@ using Microsoft.AspNetCore.Mvc;
 namespace HZY.Admin.Controllers
 {
     using HZY.Admin.Core;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services.Sys;
     using HZY.Toolkit;
-    using Microsoft.AspNetCore.Cors;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Newtonsoft.Json;
-    using System.IO;
-    using System.Text;
 
+    /// <summary>
+    /// 接口 基类
+    /// </summary>
+    /// <typeparam name="TService"></typeparam>
+    public class ApiBaseController<TService> : ApiBaseController
+        where TService : class
+    {
+        protected readonly TService service;
+
+        public ApiBaseController(Guid menuId, Sys_MenuService _menuService, TService _service)
+            : base(menuId, _menuService)
+        {
+            this.service = _service;
+        }
+
+    }
+
+    /// <summary>
+    /// 接口 基类
+    /// </summary>
     [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin), IgnoreApi = true)]
     public class ApiBaseController : BaseController
     {
-        private List<string> Actions { get; set; } = new List<string>()
-        {
-            //"Save",
-            //"Delete",
-            //"ChangePwd",
-        };
-
         protected readonly Guid MenuId;
         protected readonly Sys_MenuService menuService;
 
@@ -44,6 +52,13 @@ namespace HZY.Admin.Controllers
             this.MenuId = menuId;
             this.menuService = _menuService;
         }
+
+        private List<string> Actions { get; set; } = new List<string>()
+        {
+            //"Save",
+            //"Delete",
+            //"ChangePwd",
+        };
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -115,6 +130,10 @@ namespace HZY.Admin.Controllers
 
         }
 
-
     }
+
+
+
+
+
 }

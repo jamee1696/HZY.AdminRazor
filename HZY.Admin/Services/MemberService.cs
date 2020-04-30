@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Services
+namespace HZY.Admin.Services
 {
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -12,10 +12,10 @@ namespace HZY.Services
     using HZY.Toolkit;
     using System.Linq;
     using HZY.EFCore.Base;
-    using HZY.Services.Core;
+    using HZY.Admin.Services.Core;
     using HZY.EFCore;
     using HZY.Models;
-    using HZY.DTO;
+    using HZY.Admin.Dto;
 
     public class MemberService : ServiceBase<Member>
     {
@@ -66,6 +66,9 @@ namespace HZY.Services
         /// 新增\修改
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="webRootPath"></param>
+        /// <param name="Photo"></param>
+        /// <param name="Files"></param>
         /// <returns></returns>
         public async Task<Guid> SaveAsync(Member model, string webRootPath, IFormFile Photo, List<IFormFile> Files)
         {
@@ -92,7 +95,7 @@ namespace HZY.Services
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="Keys"></param>
+        /// <param name="Ids"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
             => await this.DeleteAsync(w => Ids.Contains(w.Member_ID));

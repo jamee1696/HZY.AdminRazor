@@ -9,23 +9,15 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Toolkit;
     using HZY.Models.Sys;
-    using HZY.DTO;
-    using HZY.DTO.Sys;
-    using HZY.Services.Sys;
+    using HZY.Admin.Dto.Sys;
+    using HZY.Admin.Services.Sys;
 
-    public class UserController : ApiBaseController
+    public class UserController : ApiBaseController<Sys_UserService>
     {
-        protected readonly Sys_UserService service;
-        protected readonly AccountService accountService;
-
-        public UserController(
-            Sys_MenuService _menuService,
-            Sys_UserService _service,
-            AccountService _accountService
-            ) : base(Guid.Parse("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d"), _menuService)
+        public UserController(Sys_MenuService _menuService, Sys_UserService _service)
+            : base(Guid.Parse("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d"), _menuService, _service)
         {
-            this.service = _service;
-            this.accountService = _accountService;
+
         }
 
         #region 页面 Views

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.DTO.Core
+namespace HZY.Admin.Dto.Core
 {
     using AutoMapper;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Services.Sys
+namespace HZY.Admin.Services.Sys
 {
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -12,8 +12,8 @@ namespace HZY.Services.Sys
     using HZY.Toolkit;
     using System.Linq;
     using HZY.EFCore.Base;
-    using HZY.Services.Core;
-    using HZY.DTO.Sys;
+    using HZY.Admin.Services.Core;
+    using HZY.Admin.Dto.Sys;
     using Microsoft.EntityFrameworkCore;
     using HZY.EFCore;
 
@@ -135,7 +135,6 @@ namespace HZY.Services.Sys
         /// <param name="_Sys_FunctionList"></param>
         /// <param name="_Sys_MenuFunctionList"></param>
         /// <param name="_Sys_RoleMenuFunctionList"></param>
-        /// <param name="RoleId"></param>
         /// <returns></returns>
         public List<object> CreateRoleMenuFuntionTree(Guid Id, List<Sys_Menu> _Sys_MenuList, List<Sys_Function> _Sys_FunctionList, List<Sys_MenuFunction> _Sys_MenuFunctionList, List<Sys_RoleMenuFunction> _Sys_RoleMenuFunctionList)
         {
