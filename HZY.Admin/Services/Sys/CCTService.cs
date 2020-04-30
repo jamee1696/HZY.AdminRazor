@@ -242,8 +242,8 @@ namespace HZY.Admin.Services.Sys
             //        ;
             //");
 
-            var _SelectString = $@"{(_Select == null ? "" : "w.t1." + string.Join(",w.t1.", _Select.Select(w => w.ColName)))},
-                        _ukid = w.t1.{ _KeyName.ColName}
+            var _SelectString = $@"{(_Select == null ? "" : "w." + string.Join(",w.", _Select.Select(w => w.ColName)))},
+                        _ukid = w.{ _KeyName.ColName}
             ";
 
             _Code = _Code.Replace("<#Select#>", _SelectString);

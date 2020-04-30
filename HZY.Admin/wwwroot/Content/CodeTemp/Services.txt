@@ -32,7 +32,7 @@ namespace HZY.Admin.Services
         /// <returns></returns>
         public async Task<TableViewModel> FindListAsync(int Page, int Rows, <#ClassName#> Search)
         {
-            var query = dbRepository.Query()
+            var query = this.Query()
                 //.WhereIF(w => w.Function_Name.Contains(Search.Function_Name), !string.IsNullOrWhiteSpace(Search?.Function_Name))
                 //.OrderBy(w => w.Function_Num)
                 .Select(w => new
@@ -51,7 +51,7 @@ namespace HZY.Admin.Services
         /// <returns></returns>
         public async Task<Guid> SaveAsync(<#ClassName#> model)
         {
-            await dbRepository.InsertOrUpdateAsync(model);
+            await this.InsertOrUpdateAsync(model);
 
             return model.<#KeyName#>;
         }
@@ -62,7 +62,7 @@ namespace HZY.Admin.Services
         /// <param name="Keys"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await dbRepository.DeleteAsync(w => Ids.Contains(w.<#KeyName#>));
+            => await this.DeleteAsync(w => Ids.Contains(w.<#KeyName#>));
 
         /// <summary>
         /// 加载表单 数据
@@ -73,7 +73,7 @@ namespace HZY.Admin.Services
         {
             var res = new Dictionary<string, object>();
 
-            var Model = await dbRepository.FindByIdAsync(Id);
+            var Model = await this.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();
