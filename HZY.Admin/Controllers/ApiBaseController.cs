@@ -55,9 +55,9 @@ namespace HZY.Admin.Controllers
 
         private List<string> Actions { get; set; } = new List<string>()
         {
-            "Save",
-            "Delete",
-            "ChangePwd",
+            //"Save",
+            //"Delete",
+            //"ChangePwd",
         };
 
         public override void OnActionExecuting(ActionExecutingContext context)

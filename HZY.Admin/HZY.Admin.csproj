@@ -11,15 +11,19 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <Compile Remove="wwwroot\Content\Codes\Model\**" />
     <Compile Remove="wwwroot\Content\CodeTemp\Codes\**" />
     <Compile Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
     <Content Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <Content Remove="wwwroot\Content\Codes\Model\**" />
     <Content Remove="wwwroot\Content\CodeTemp\Codes\**" />
     <Content Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
     <EmbeddedResource Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <EmbeddedResource Remove="wwwroot\Content\Codes\Model\**" />
     <EmbeddedResource Remove="wwwroot\Content\CodeTemp\Codes\**" />
     <EmbeddedResource Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
     <None Remove="wwwroot\admin\libs\elementui\node_modules\**" />
+    <None Remove="wwwroot\Content\Codes\Model\**" />
     <None Remove="wwwroot\Content\CodeTemp\Codes\**" />
     <None Remove="wwwroot\Content\CodeTemp\ZipFile\**" />
   </ItemGroup>

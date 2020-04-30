@@ -12,6 +12,7 @@ namespace HZY.Admin.Controllers.Sys
     using System.Text;
     using System.IO;
     using HZY.Admin.Services.Sys;
+    using System.Threading;
 
     /// <summary>
     /// 代码创建 工具
@@ -205,6 +206,11 @@ namespace HZY.Admin.Controllers.Sys
 
             var isViews = CodeType == "Index" || CodeType == "Info";
 
+            if (Directory.Exists($"{_WebRootPath}/Content/ZipFile/"))
+            {
+                Directory.CreateDirectory($"{_WebRootPath}/Content/ZipFile/");
+            }
+
             if (!string.IsNullOrWhiteSpace(TempUrl)) Temp = await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8);
 
             var _TableNames = await this.service.GetAllTableAsync();
@@ -234,18 +240,12 @@ namespace HZY.Admin.Controllers.Sys
             }
 
             //开始压缩
-            await Task.Delay(1000);
             Zip zip = new Zip(path, pathZip);
-            await Task.Delay(1000);
             var bytes = await System.IO.File.ReadAllBytesAsync(pathZip);
 
-            //异步延迟删除
-            await Task.Run(() =>
-            {
-                Task.Delay(10 * 1000);//延迟 5s 删除文件
-                if (System.IO.File.Exists(pathZip)) System.IO.File.Delete(pathZip);
-                if (Directory.Exists(path)) Directory.Delete(path, true);
-            });
+            //删除文件
+            if (System.IO.File.Exists(pathZip)) System.IO.File.Delete(pathZip);
+            if (Directory.Exists(path)) Directory.Delete(path, true);
 
             return File(bytes, Tools.GetFileContentType[".zip"], $"{(isViews ? "Views" : CodeType)}.zip");
         }
