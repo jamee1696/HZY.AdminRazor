@@ -39,7 +39,7 @@ namespace HZY.Toolkit
         public MessageBox(string Message)
             : base(Message)
         {
-            this.apiResult = new ApiResult(StatusCodeEnum.失败, Message);
+            this.apiResult = new ApiResult(StatusCodeEnum.警告, Message);
         }
 
         /// <summary>
@@ -122,13 +122,43 @@ namespace HZY.Toolkit
         {
 
         }
+
+        /// <summary>
+        /// 弹出警告
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Show(string message)
+        {
+            throw new MessageBox(StatusCodeEnum.警告, message, null);
+        }
+
+        /// <summary>
+        /// 弹出警告
+        /// </summary>
+        /// <param name="data"></param>
+        public static void Show(object data)
+        {
+            throw new MessageBox(StatusCodeEnum.警告, StatusCodeEnum.警告.ToString(), data);
+        }
+
+        /// <summary>
+        /// 弹出警告
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="data"></param>
+        public static void Show(string message, object data)
+        {
+            throw new MessageBox(StatusCodeEnum.警告, message, data);
+        }
+
+
     }
 
     public enum StatusCodeEnum
     {
         程序异常 = -2,
         未授权 = -1,
-        失败 = 0,
+        警告 = 0,
         成功 = 1,
 
     }

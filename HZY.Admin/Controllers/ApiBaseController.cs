@@ -71,7 +71,7 @@ namespace HZY.Admin.Controllers
         {
             base.OnActionExecuting(context);
 
-            #region 阻止编辑操作 CURD
+            #region 阻止编辑操作 CURD 【这块代码 可删除】
 
             var _RouteValues = context.ActionDescriptor.RouteValues;
             //var _AreaName = _RouteValues["area"];

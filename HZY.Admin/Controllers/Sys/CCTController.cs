@@ -53,7 +53,7 @@ namespace HZY.Admin.Controllers.Sys
             var TempUrl = _WebRootPath + "/Content/CodeTemp/Model.txt";
 
             if (!System.IO.File.Exists(TempUrl))
-                throw new MessageBox("模板文件不存在");
+                MessageBox.Show("模板文件不存在");
 
             return this.ResultOk(data: await this.service.CreateModelCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
         }
@@ -77,7 +77,7 @@ namespace HZY.Admin.Controllers.Sys
             var TempUrl = _WebRootPath + "/Content/CodeTemp/Services.txt";
 
             if (!System.IO.File.Exists(TempUrl))
-                throw new MessageBox("模板文件不存在");
+                MessageBox.Show("模板文件不存在");
 
             return this.ResultOk(data: await this.service.CreateServiceCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
         }
@@ -101,7 +101,7 @@ namespace HZY.Admin.Controllers.Sys
             var TempUrl = _WebRootPath + "/Content/CodeTemp/Controllers.txt";
 
             if (!System.IO.File.Exists(TempUrl))
-                throw new MessageBox("模板文件不存在");
+                MessageBox.Show("模板文件不存在");
 
             return this.ResultOk(data: await this.service.CreateControllersCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
         }
@@ -117,7 +117,7 @@ namespace HZY.Admin.Controllers.Sys
             var TempUrl = _WebRootPath + "/Content/CodeTemp/Index.txt";
 
             if (!System.IO.File.Exists(TempUrl))
-                throw new MessageBox("模板文件不存在");
+                MessageBox.Show("模板文件不存在");
 
             return this.ResultOk(data: await this.service.CreateIndexCode(TableName, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
         }
@@ -134,7 +134,7 @@ namespace HZY.Admin.Controllers.Sys
             var TempUrl = _WebRootPath + "/Content/CodeTemp/Info.txt";
 
             if (!System.IO.File.Exists(TempUrl))
-                throw new MessageBox("模板文件不存在");
+                MessageBox.Show("模板文件不存在");
 
             if (Fields == null || Fields.Count == 0)
             {

@@ -37,7 +37,7 @@ namespace HZY.Admin.Core
                         messages.Add($"{err.ErrorMessage}");
                     }
                 }
-                var apiResult = new ApiResult((int)StatusCodeEnum.失败, string.Join("<br /><br />", messages));
+                var apiResult = new ApiResult((int)StatusCodeEnum.警告, string.Join("<br /><br />", messages));
                 context.Result = new JsonResult(apiResult);
 
             }

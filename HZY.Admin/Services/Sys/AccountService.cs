@@ -86,15 +86,15 @@ namespace HZY.Admin.Services.Sys
         /// <param name="loginCode"></param>
         public async Task<string> CheckedAsync(string uName, string uPwd, string loginCode)
         {
-            if (string.IsNullOrEmpty(uName)) throw new MessageBox("请输入用户名");
-            if (string.IsNullOrEmpty(uPwd)) throw new MessageBox("请输入密码");
+            if (string.IsNullOrEmpty(uName)) MessageBox.Show("请输入用户名！");
+            if (string.IsNullOrEmpty(uPwd)) MessageBox.Show("请输入密码！");
             //if (string.IsNullOrEmpty(loginCode)) throw new MessageBox("请输入验证码");
 
             var _Sys_User = await this.FindAsync(w => w.User_LoginName == uName);
 
-            if (_Sys_User == null) throw new MessageBox("用户不存在");
+            if (_Sys_User == null) MessageBox.Show("用户不存在！");
             //Tools.MD5Encrypt(userpwd)))//
-            if (_Sys_User.User_Pwd.ToStr().Trim() != uPwd) throw new MessageBox("密码错误");
+            if (_Sys_User.User_Pwd.ToStr().Trim() != uPwd) MessageBox.Show("密码错误！");
             //string code = Tools.GetCookie("loginCode");
             //if (string.IsNullOrEmpty(code)) throw new MessageBox("验证码失效");
             //if (!code.ToLower().Equals(loginCode.ToLower())) throw new MessageBox("验证码不正确");
@@ -130,10 +130,10 @@ namespace HZY.Admin.Services.Sys
         /// <returns></returns>
         public async Task<int> ChangePwd(string oldpwd, string newpwd)
         {
-            if (string.IsNullOrEmpty(oldpwd)) throw new MessageBox("旧密码不能为空");
-            if (string.IsNullOrEmpty(newpwd)) throw new MessageBox("新密码不能为空");
+            if (string.IsNullOrEmpty(oldpwd)) MessageBox.Show("旧密码不能为空！"); 
+            if (string.IsNullOrEmpty(newpwd)) MessageBox.Show("新密码不能为空！");
             var _Sys_User = await this.FindByIdAsync(info.UserID);
-            if (_Sys_User.User_Pwd != oldpwd) throw new MessageBox("旧密码不正确");
+            if (_Sys_User.User_Pwd != oldpwd) MessageBox.Show("旧密码不正确！");
 
             _Sys_User.User_Pwd = newpwd;
             return await this.UpdateByIdAsync(_Sys_User);

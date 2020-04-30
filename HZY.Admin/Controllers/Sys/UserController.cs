@@ -97,7 +97,7 @@ namespace HZY.Admin.Controllers.Sys
         [HttpPost("GetPowerState/{MenuId}")]
         public async Task<ApiResult> GetPowerState(Guid MenuId)
         {
-            if (MenuId == Guid.Empty) throw new MessageBox("参数MenuId不能为空!");
+            if (MenuId == Guid.Empty) MessageBox.Show("参数MenuId不能为空！");
             return this.ResultOk(new { powerState = await this.menuService.GetPowerStateByMenuId(MenuId) });
         }
 

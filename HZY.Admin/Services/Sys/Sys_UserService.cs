@@ -61,7 +61,7 @@ namespace HZY.Admin.Services.Sys
             var model = Dto.Model;
             var roleIds = Dto.RoleIds;
 
-            if (string.IsNullOrWhiteSpace(model.User_Pwd)) throw new MessageBox("密码不能为空!");
+            if (string.IsNullOrWhiteSpace(model.User_Pwd)) MessageBox.Show("密码不能为空！");
 
             if (model.User_ID == Guid.Empty)
             {
@@ -104,7 +104,7 @@ namespace HZY.Admin.Services.Sys
             foreach (var item in Ids)
             {
                 var userModel = await this.FindByIdAsync(item);
-                if (userModel.User_IsDelete == 2) throw new MessageBox("该信息不能删除!");
+                if (userModel.User_IsDelete == 2) MessageBox.Show("该信息不能删除！");
                 await dbUserRole.DeleteAsync(w => w.UserRole_UserID == item);
                 await this.DeleteAsync(userModel);
             }
