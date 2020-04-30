@@ -228,18 +228,6 @@ namespace HZY.Admin.Services.Sys
 
             var _Select = _Cols.FindAll(w => w.ColIsKey == 0);
 
-            //var _QueryCode = new StringBuilder().Append($@"
-            //    var query = db.Query<{TableName}>()
-            //        .Where(w => w.t1.Role_Name.Contains(Search.{_Name}), !string.IsNullOrWhiteSpace(Search.{_Name}))
-            //        .Select(w => new
-            //        {{
-            //            {(_Select == null ? "" : "w.t1." + string.Join(",w.t1.", _Select.Select(w => w.ColName)))},
-            //            _ukid = w.t1.{_KeyName.ColName}
-            //        }})
-            //        .TakePage(Page, Rows, out int TotalCount)
-            //        ;
-            //");
-
             var codeList = new List<string>();
             if (_Select != null && _Select.Count > 0)
             {
