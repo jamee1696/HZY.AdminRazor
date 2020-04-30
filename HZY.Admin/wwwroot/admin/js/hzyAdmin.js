@@ -225,7 +225,7 @@ var hzyAdmin = {
             //"attachment; filename=6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls;filename*=UTF-8''6a9c13bc-e214-44e4-8456-dbca9fcd2367.xls"
             var contentDisposition = headers['content-disposition'];
             var contentType = headers['content-type'];
-            var attachmentInfoArrary = contentDisposition.split(';');
+            var attachmentInfoArrary = contentDisposition ? contentDisposition.split(';') : [];
             var fileName = '';
             if (attachmentInfoArrary.length > 1) {
                 fileName = attachmentInfoArrary[1].split('=')[1];
