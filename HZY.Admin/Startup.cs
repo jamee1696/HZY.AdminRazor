@@ -150,10 +150,8 @@ namespace HZY.Admin
                 //为 Swagger JSON and UI设置xml文档注释路径
                 var xmlPath = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.xml");
                 var xmlPath1 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Models.xml");
-                var xmlPath2 = Path.Combine(System.AppContext.BaseDirectory, "HZY.Admin.Dto.xml");
                 options.IncludeXmlComments(xmlPath, true);
                 options.IncludeXmlComments(xmlPath1, true);
-                options.IncludeXmlComments(xmlPath2, true);
 
                 #region Jwt token 配置
                 //option.OperationFilter<AppService.SwaggerParameterFilter>(); // 给每个接口配置授权码传入参数文本框

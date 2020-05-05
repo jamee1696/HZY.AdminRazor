@@ -15,7 +15,7 @@ namespace HZY.Admin.Services
 
     public class <#ClassName#>Service : ServiceBase<<#ClassName#>>
     {
-        public <#ClassName#>(EFCoreContext _db) 
+        public <#ClassName#>Service(EFCoreContext _db) 
             : base(_db)
         {
 
