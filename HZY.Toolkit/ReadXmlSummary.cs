@@ -71,24 +71,16 @@ namespace HZY.Toolkit
 
         private static XmlDocument XMLFromAssemblyNonCached(Assembly assembly)
         {
-            string assemblyFilename = assembly.CodeBase;
+            string location = assembly.Location;
 
-            const string prefix = "file:///";
+            StreamReader streamReader;
 
-            if (assemblyFilename.StartsWith(prefix))
-            {
-                StreamReader streamReader;
+            streamReader = new StreamReader(Path.ChangeExtension(location, ".xml"));
 
-                streamReader = new StreamReader(Path.ChangeExtension(assemblyFilename.Substring(prefix.Length), ".xml"));
-
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(streamReader);
-                return xmlDocument;
-            }
-
-            return null;
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(streamReader);
+            return xmlDocument;
         }
-
 
 
     }
