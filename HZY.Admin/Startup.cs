@@ -84,7 +84,7 @@ namespace HZY.Admin
             #endregion
 
             #region 注入 业务 服务
-            services.StartService(typeof(Startup));
+            services.ServiceStart(typeof(Startup));
             #endregion
 
             #region 跨域配置 配置跨域处理
@@ -179,9 +179,6 @@ namespace HZY.Admin
             {
                 options.Filters.Add<HZY.Admin.Core.HZYAppExceptionFilter>();
                 options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            })
-            .AddMvcOptions(options =>
-            {
                 options.MaxModelValidationErrors = 50;
             })
             .AddNewtonsoftJson(options =>

@@ -423,6 +423,13 @@
             加载服务
             </summary>
         </member>
+        <member name="M:HZY.Admin.Services.Core.LoadServices.ServiceStart(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type)">
+            <summary>
+            Service 服务启动
+            </summary>
+            <param name="serviceCollection"></param>
+            <param name="type"></param>
+        </member>
         <member name="M:HZY.Admin.Services.Core.ServiceBase`1.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.String[])">
             <summary>
             上传文件 辅助函数

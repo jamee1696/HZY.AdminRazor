@@ -23,8 +23,12 @@ namespace HZY.Admin.Services.Core
     /// </summary>
     public static class LoadServices
     {
-
-        public static void StartService(this IServiceCollection serviceCollection, Type type)
+        /// <summary>
+        /// Service 服务启动
+        /// </summary>
+        /// <param name="serviceCollection"></param>
+        /// <param name="type"></param>
+        public static void ServiceStart(this IServiceCollection serviceCollection, Type type)
         {
             if (type == null) throw new ArgumentException(" 参数 type null 异常!");
 
