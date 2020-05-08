@@ -16,7 +16,7 @@ namespace HZY.Admin.Controllers.Sys
     public class RoleController : ApiBaseController<Sys_RoleService>
     {
         public RoleController(Sys_MenuService _menuService, Sys_RoleService _service)
-            : base(Guid.Parse("60ae9382-31ab-4276-a379-d3876e9bb783"), _menuService, _service)
+            : base("60ae9382-31ab-4276-a379-d3876e9bb783", _menuService, _service)
         {
 
         }

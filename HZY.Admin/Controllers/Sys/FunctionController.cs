@@ -16,7 +16,7 @@ namespace HZY.Admin.Controllers.Sys
     public class FunctionController : ApiBaseController<Sys_FunctionService>
     {
         public FunctionController(Sys_MenuService _menuService, Sys_FunctionService _service)
-            : base(Guid.Parse("d721fc55-2174-40eb-bb37-5c54a158525a"), _menuService, _service)
+            : base("d721fc55-2174-40eb-bb37-5c54a158525a", _menuService, _service)
         {
 
         }

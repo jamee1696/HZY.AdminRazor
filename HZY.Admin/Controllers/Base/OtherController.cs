@@ -11,7 +11,7 @@ namespace HZY.Admin.Controllers.Base
     public class OtherController : ApiBaseController
     {
         public OtherController(Sys_MenuService _menuService)
-            : base(Guid.Parse("7c34c2fd-98ed-4655-aa04-bb00b915a751"), _menuService)
+            : base("7c34c2fd-98ed-4655-aa04-bb00b915a751", _menuService)
         {
 
         }

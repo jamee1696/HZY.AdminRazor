@@ -13,7 +13,7 @@ namespace HZY.Admin.Controllers.Sys
     public class AppLogController : ApiBaseController<Sys_AppLogService>
     {
         public AppLogController(Sys_MenuService _menuservice, Sys_AppLogService _service)
-            : base(Guid.Parse("74b837ae-d24f-4f57-b107-e20dbe70f5d3"), _menuservice, _service)
+            : base("74b837ae-d24f-4f57-b107-e20dbe70f5d3", _menuservice, _service)
         {
 
         }

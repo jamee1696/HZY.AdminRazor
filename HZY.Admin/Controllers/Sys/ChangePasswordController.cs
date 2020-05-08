@@ -14,7 +14,7 @@ namespace HZY.Admin.Controllers.Sys
     public class ChangePasswordController : ApiBaseController<AccountService>
     {
         public ChangePasswordController(Sys_MenuService _menuService, AccountService _service)
-            : base(Guid.Parse("f35d64ae-ecb7-4d06-acfb-d91595966d9e"), _menuService, _service)
+            : base("f35d64ae-ecb7-4d06-acfb-d91595966d9e", _menuService, _service)
         {
 
         }

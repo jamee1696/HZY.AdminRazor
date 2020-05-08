@@ -33,7 +33,7 @@ namespace HZY.Admin.Controllers
     {
         protected readonly TService service;
 
-        public ApiBaseController(Guid menuId, Sys_MenuService _menuService, TService _service)
+        public ApiBaseController(string menuId, Sys_MenuService _menuService, TService _service)
             : base(menuId, _menuService)
         {
             this.service = _service;
@@ -50,9 +50,9 @@ namespace HZY.Admin.Controllers
         protected readonly Guid MenuId;
         protected readonly Sys_MenuService menuService;
 
-        public ApiBaseController(Guid menuId, Sys_MenuService _menuService)
+        public ApiBaseController(string menuId, Sys_MenuService _menuService)
         {
-            this.MenuId = menuId;
+            this.MenuId = Guid.Parse(menuId);
             this.menuService = _menuService;
         }
 

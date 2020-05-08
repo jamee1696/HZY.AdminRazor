@@ -20,7 +20,7 @@ namespace HZY.Admin.Controllers.Sys
         protected readonly AccountService accountService;
 
         public MenusController(Sys_MenuService _service, AccountService _accountService)
-            : base(Guid.Parse("e5d4da6b-aab0-4aaa-982f-43673e8152c0"), _service, _service)
+            : base("e5d4da6b-aab0-4aaa-982f-43673e8152c0", _service, _service)
         {
             this.accountService = _accountService;
         }

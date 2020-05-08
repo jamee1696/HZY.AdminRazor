@@ -22,7 +22,7 @@ namespace HZY.Admin.Controllers.Sys
         private string _WebRootPath { get; } = string.Empty;
 
         public CCTController(Sys_MenuService _menuservice, CCTService _service, IWebHostEnvironment IWebHostEnvironment)
-            : base(Guid.Parse("4ce21a81-1cae-44d2-b29e-07058ff04b3e"), _menuservice, _service)
+            : base("4ce21a81-1cae-44d2-b29e-07058ff04b3e", _menuservice, _service)
         {
             this._WebRootPath = IWebHostEnvironment.WebRootPath;
         }

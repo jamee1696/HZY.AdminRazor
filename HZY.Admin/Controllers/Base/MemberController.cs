@@ -22,7 +22,7 @@ namespace HZY.Admin.Controllers.Base
         protected readonly string webRootPath;
 
         public MemberController(Sys_MenuService _menservice, MemberService _service, IWebHostEnvironment _webHostEnvironment)
-            : base(Guid.Parse("7c34c2fd-98ed-4655-aa04-bb00b915a751"), _menservice, _service)
+            : base("7c34c2fd-98ed-4655-aa04-bb00b915a751", _menservice, _service)
         {
             this.webHostEnvironment = _webHostEnvironment;
             this.webRootPath = _webHostEnvironment.WebRootPath;

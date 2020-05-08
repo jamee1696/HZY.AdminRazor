@@ -16,7 +16,7 @@ namespace HZY.Admin.Controllers.Sys
     public class UserController : ApiBaseController<Sys_UserService>
     {
         public UserController(Sys_MenuService _menuService, Sys_UserService _service)
-            : base(Guid.Parse("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d"), _menuService, _service)
+            : base("38d864ff-f6e7-43af-8c5c-8bbcf9fa586d", _menuService, _service)
         {
 
         }
