@@ -19,7 +19,7 @@ namespace HZY.Admin.Controllers.//请输入命名空间
     public class <#ClassName#>Controller : ApiBaseController<<#ClassName#>Service>
     {
         public <#ClassName#>Controller(Sys_MenuService _menuService, <#TableName#>Service _service)
-            : base(Guid.Parse("请设置菜单ID"), _menuService, _service)
+            : base("请设置菜单ID", _menuService, _service)
         {
 
         }
