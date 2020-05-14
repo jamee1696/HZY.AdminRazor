@@ -20,11 +20,13 @@ namespace HZY.Admin.Services.Sys
     public class Sys_UserService : ServiceBase<Sys_User>
     {
         protected readonly DefaultRepository<Sys_UserRole> dbUserRole;
+        protected readonly DefaultRepository<Sys_Role> dbRole;
 
-        public Sys_UserService(EFCoreContext _db, DefaultRepository<Sys_UserRole> _dbUserRole)
+        public Sys_UserService(EFCoreContext _db, DefaultRepository<Sys_UserRole> _dbUserRole, DefaultRepository<Sys_Role> dbRole)
             : base(_db)
         {
             this.dbUserRole = _dbUserRole;
+            this.dbRole = dbRole;
         }
 
         #region CURD 基础
@@ -122,20 +124,8 @@ namespace HZY.Admin.Services.Sys
             var res = new Dictionary<string, object>();
 
             var Model = await this.FindByIdAsync(Id);
-
-            var RoleIds = await (
-                from userRole in db.Sys_UserRoles
-                join role in db.Sys_Roles on userRole.UserRole_RoleID equals role.Role_ID
-                where userRole.UserRole_UserID == Id
-                orderby userRole.UserRole_CreateTime
-                select userRole.UserRole_RoleID
-                ).ToListAsync();
-
-            var AllRoleList = await (
-                from role in db.Sys_Roles
-                orderby role.Role_Num
-                select new { role.Role_ID, role.Role_Num, role.Role_Name }
-                ).ToListAsync();
+            var RoleIds = await this.dbUserRole.Query().Where(w => w.UserRole_UserID == Id).Select(w => w.UserRole_RoleID).ToListAsync();
+            var AllRoleList = await this.dbRole.Query().Select(w => new { w.Role_ID, w.Role_Num, w.Role_Name }).ToListAsync();
 
             res[nameof(Id)] = Id;
             res[nameof(Model)] = Model.ToNewByNull();
