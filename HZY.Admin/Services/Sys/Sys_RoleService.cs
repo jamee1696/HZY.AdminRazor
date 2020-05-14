@@ -17,10 +17,11 @@ namespace HZY.Admin.Services.Sys
 
     public class Sys_RoleService : ServiceBase<Sys_Role>
     {
-        public Sys_RoleService(EFCoreContext _db)
+        protected readonly DefaultRepository<Sys_UserRole> dbUserRole;
+        public Sys_RoleService(EFCoreContext _db, DefaultRepository<Sys_UserRole> dbUserRole)
             : base(_db)
         {
-
+            this.dbUserRole = dbUserRole;
         }
 
         #region CURD 基础
@@ -67,7 +68,17 @@ namespace HZY.Admin.Services.Sys
         /// <param name="Ids"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
-            => await this.DeleteAsync(w => Ids.Contains(w.Role_ID) && w.Role_IsDelete != 2);
+        {
+            foreach (var item in Ids)
+            {
+                var role = await this.FindByIdAsync(item);
+                if (role.Role_IsDelete == 2) continue;
+                await this.DeleteAsync(w => w.Role_ID == item && w.Role_IsDelete != 2);
+                await this.dbUserRole.DeleteAsync(w => w.UserRole_RoleID == item);
+            }
+
+            return 1;
+        }
 
         /// <summary>
         /// 加载表单 数据

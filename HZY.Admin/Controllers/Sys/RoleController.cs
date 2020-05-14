@@ -59,6 +59,7 @@ namespace HZY.Admin.Controllers.Sys
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
+        [AppTransaction]
         [HttpPost("Delete")]
         public async Task<ApiResult> DeleteAsync([FromBody]List<Guid> Ids)
             => this.ResultOk(await this.service.DeleteAsync(Ids));
