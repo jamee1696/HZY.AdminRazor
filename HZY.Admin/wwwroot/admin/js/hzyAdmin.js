@@ -317,8 +317,9 @@ var hzyAdmin = {
         var strsec = hzyAdmin.getsec(time);
         var exp = new Date();
         exp.setTime(exp.getTime() + strsec * 1);
-        top.document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + (path ? (";path=" + path) : ";path=/");
-
+        //";domain=" + host +
+        //ie 无法 设置 cookie 问题:IE11 cookie可以设置 domain 但是不能接受localhost 或者 顶级域名 类如http://myservername/，同时也不接受带下划线的子域名（_talck.com）
+        top.document.cookie = name + "=" + escape(value) + (path ? (";path=" + path) : ";path=/") + ";expires=" + exp.toGMTString();
     },
     getsec: function (str) {
         var str1 = str.substring(1, str.length) * 1;
