@@ -10,8 +10,8 @@ namespace HZY.Admin.Controllers.//请输入命名空间
     using HZY.Models.Sys;
     using HZY.Admin.Dto;
     using HZY.Admin.Dto.Sys;
-    using HZY.Services;
-    using HZY.Services.Sys;
+    using HZY.Admin.Services;
+    using HZY.Admin.Services.Sys;
 
     /// <summary>
     /// <#TableName#>管理
