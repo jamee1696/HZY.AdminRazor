@@ -19,10 +19,8 @@ namespace HZY.Admin.Controllers.Base
             this.chatHub = _chatHub;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        [HttpGet(nameof(Index))]
+        public IActionResult Index() => View();
 
 
 
