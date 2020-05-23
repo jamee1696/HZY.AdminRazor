@@ -21,8 +21,8 @@
             },
             methods: {
                 save: function () {
-                    var path = `@Url.Action("Save")`;
                     var _this = this;
+                    var path = "/Admin/ChangePassword/Save";                    
 
                     hzyAdmin.post(path, {
                         OldPwd: this.OldPwd,
@@ -32,7 +32,7 @@
                             if (r.status != 1) return;
                             hzyAdmin.alert('变更成功!即将退出重新登录', '成功');
                             setTimeout(function () {
-                                top.window.location = '/Authorization/Out';
+                                top.window.location = '/Admin/Authorization/Out';
                             }, 500);
                     });
                 }

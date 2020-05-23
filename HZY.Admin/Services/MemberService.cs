@@ -113,8 +113,8 @@ namespace HZY.Admin.Services
             var User = await userDb.FindByIdAsync(Model?.Member_UserID);
 
             res[nameof(Id)] = Id;
-            res[nameof(Model)] = Model.ToNewByNull();
-            res[nameof(User)] = User.ToNewByNull();
+            res[nameof(Model)] = Model.NullSafe();
+            res[nameof(User)] = User.NullSafe();
 
             return res;
         }

@@ -60,7 +60,7 @@ var hzyAdmin = {
                 // 成功 = 1,
 
                 if (data.status == -1) { //接口授权码无效
-                    if (confirm(data.msg + ',请重新登录授权!')) window.location = "/Authorization/Out";
+                    if (confirm(data.msg + ',请重新登录授权!')) window.location = "Admin/Authorization/Out";
                 }
                 else if (data.status == -2) { //服务端异常
                     _this.alert(data.msg, '错误');
@@ -76,7 +76,7 @@ var hzyAdmin = {
             console.log(error);
             if (error.response.status === 401) {
                 _this.alert(data.msg, '请重新登录授权!');
-                window.location = "/Authorization/Out";
+                window.location = "Admin/Authorization/Out";
             } else {
                 return Promise.reject(error)
             }

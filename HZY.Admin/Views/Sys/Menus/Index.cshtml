@@ -9,7 +9,8 @@
             el: "#app",
             data: function () {
                 return {
-                    power,
+                    power: power,
+                    prefix: "/Admin/Menus",
                     search: {
                         state:false,
                         vm: {
@@ -43,7 +44,7 @@
                 //获取列表
                 findList: function () {
                     var _this = this;
-                    var path = `@Url.Action("FindList")/${_this.table.page}/${_this.table.rows}`;
+                    var path = _this.prefix + "/FindList/" + _this.table.page + "/" + _this.table.rows;
 
                     hzyAdmin.post(path, _this.search.vm, function (r) {
                         if (r.status != 1) return;
@@ -72,7 +73,7 @@
                     }
                     if (confirm("确定要删除吗?")) {
                         //请求接口删除
-                        var path = `@Url.Action("Delete")`;
+                        var path = _this.prefix + "/Delete";
 
                         hzyAdmin.post(path, ids, function (r) {
                             if (r.status != 1) return;
@@ -82,9 +83,9 @@
                     }
                 },
                 openForm: function (id) {
-                    var path = `@Url.Action("Info")/${(id ? id : '')}`;
-                    path += `?PId=${(this.search.vm.Menu_ParentID == null ? '' : this.search.vm.Menu_ParentID)}`;
                     var _this = this;
+                    var path = _this.prefix + "/Info/" + (id ? id : '');
+                    path += "?PId=" + (this.search.vm.Menu_ParentID == null ? '' : this.search.vm.Menu_ParentID);                    
 
                     hzyAdmin.openPage(id ? '编辑' : '新建', path, function () {
                         _this.findList();//刷新列表
@@ -92,8 +93,8 @@
                     }, 800);
                 },
                 getTree: function () {
-                    var path = `@Url.Action("MenuFunctionTree")`;
                     var _this = this;
+                    var path = _this.prefix + "/MenuFunctionTree";
 
                     hzyAdmin.post(path, {}, function (r) {
                         if (r.status != 1) return;

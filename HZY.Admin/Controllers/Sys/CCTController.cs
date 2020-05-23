@@ -146,7 +146,7 @@ namespace HZY.Admin.Controllers.Sys
                 }
             }
 
-            return this.ResultOk(data: await this.service.CreateInfoCode(Fields, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8)));
+            return this.ResultOk(data: await this.service.CreateInfoCode(Fields, await System.IO.File.ReadAllTextAsync(TempUrl, Encoding.UTF8), TableName));
         }
 
         /// <summary>

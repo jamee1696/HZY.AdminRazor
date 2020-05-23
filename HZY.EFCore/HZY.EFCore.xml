@@ -208,12 +208,13 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:HZY.EFCore.Repository.HZYEFCoreExtensions.ToNewByNull``1(``0)">
+        <member name="M:HZY.EFCore.Repository.HZYEFCoreExtensions.NullSafe``1(``0,``0)">
             <summary>
             将 Null 对象转换为 对象的实例
             </summary>
             <typeparam name="T"></typeparam>
             <param name="model"></param>
+            <param name="defaultInstance">自定义 默认实例</param>
             <returns></returns>
         </member>
         <member name="T:HZY.EFCore.Repository.HZYRepositoryBase`2">

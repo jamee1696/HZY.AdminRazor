@@ -146,7 +146,7 @@ namespace HZY.Admin.Services.Sys
                 .ToListAsync();
 
             res[nameof(Id)] = Id;
-            res[nameof(Model)] = Model.ToNewByNull();
+            res[nameof(Model)] = Model.NullSafe();
             res[nameof(AllFunctionList)] = AllFunctionList;
             res[nameof(FunctionIds)] = FunctionIds;
 

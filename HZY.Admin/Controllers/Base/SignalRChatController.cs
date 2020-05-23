@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace HZY.Admin.Controllers.Base
 {
     using HZY.Admin.Hubs;
+    using HZY.Admin.Services.Sys;
     using Microsoft.AspNetCore.SignalR;
 
-    public class SignalRChatController : Controller
+    public class SignalRChatController : ApiBaseController
     {
         public readonly IHubContext<ChatHub> chatHub;
-        public SignalRChatController(IHubContext<ChatHub> _chatHub)
+        public SignalRChatController(IHubContext<ChatHub> _chatHub, Sys_MenuService menuService)
+            : base("", menuService)
         {
             this.chatHub = _chatHub;
         }
