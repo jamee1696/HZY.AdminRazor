@@ -338,7 +338,7 @@ var hzyAdmin = {
         var _htmlW = top.$("html").width();
         var _htmlH = top.$("html").height();
         var _width = _htmlW > w ? w : _htmlW;
-        var _height = _htmlH > w ? h : _htmlH;
+        var _height = _htmlH > h ? h : _htmlH;
         hzyAdmin.layer.open({
             type: 2,
             title: title,
