@@ -128,7 +128,7 @@ namespace HZY.Admin.Services.Sys
             var AllRoleList = await this.dbRole.Query().Select(w => new { w.Role_ID, w.Role_Num, w.Role_Name }).ToListAsync();
 
             res[nameof(Id)] = Id;
-            res[nameof(Model)] = Model.ToNewByNull();
+            res[nameof(Model)] = Model.NullSafe();
             res[nameof(RoleIds)] = RoleIds;
             res[nameof(AllRoleList)] = AllRoleList;
 

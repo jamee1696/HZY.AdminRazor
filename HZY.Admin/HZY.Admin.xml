@@ -569,7 +569,7 @@
             <param name="Temp"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Services.Sys.CCTService.CreateInfoCode(System.Collections.Generic.List{System.String},System.String)">
+        <member name="M:HZY.Admin.Services.Sys.CCTService.CreateInfoCode(System.Collections.Generic.List{System.String},System.String,System.String)">
             <summary>
             创建 Info.cshtml 代码
             </summary>

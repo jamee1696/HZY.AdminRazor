@@ -13,7 +13,8 @@
             el: "#app",
             data: function () {
                 return {
-                    power,
+                    power: power,
+                    prefix: "/Admin/AppLog",
                     form: {
                         saveState: false,
                         vm: {
@@ -32,8 +33,8 @@
             },
             methods: {
                 loadForm: function () {
-                    var path = `@Url.Action("LoadForm")/${this.form.vm.Id}`;
                     var _this = this;
+                    var path = _this.prefix + "/LoadForm/" + _this.form.vm.Id;
 
                     hzyAdmin.post(path, {}, function (r) {
                         if (r.status != 1) return;
@@ -46,11 +47,11 @@
                     }, delay);
                 },
                 save: function () {
-                    var path = `@Url.Action("Save")`;
                     var _this = this;
+                    var path = _this.prefix + "/Save";
 
                     //验证
-                    if (!this.form.vm.Model.AppLog_Name) return hzyAdmin.alert('功能名称不能为空!','警告');
+                    if (!_this.form.vm.Model.AppLog_Name) return hzyAdmin.alert('功能名称不能为空!','警告');
 
                     this.form.saveState = true;
                     hzyAdmin.post(path, this.form.vm.Model, function (r) {

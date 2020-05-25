@@ -82,7 +82,7 @@ namespace HZY.Admin.Services.Sys
             var Model = await this.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
-            res[nameof(Model)] = Model.ToNewByNull();
+            res[nameof(Model)] = Model.NullSafe();
 
             return res;
         }

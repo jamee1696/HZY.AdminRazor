@@ -44,7 +44,7 @@ namespace HZY.Admin.Controllers
     /// <summary>
     /// 接口 基类
     /// </summary>
-    [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin), IgnoreApi = true)]
+    [ApiExplorerSettings(GroupName = nameof(ApiVersionsEnum.Admin), IgnoreApi = false)]
     public class ApiBaseController : BaseController
     {
         protected readonly Guid MenuId;
@@ -52,7 +52,7 @@ namespace HZY.Admin.Controllers
 
         public ApiBaseController(string menuId, Sys_MenuService _menuService)
         {
-            this.MenuId = Guid.Parse(menuId);
+            this.MenuId = string.IsNullOrEmpty(menuId) ? Guid.Empty : Guid.Parse(menuId);
             this.menuService = _menuService;
         }
 
@@ -98,7 +98,7 @@ namespace HZY.Admin.Controllers
                 {
                     var Alert = $@"<script type='text/javascript'>
                                         alert('{StatusCodeEnum.未授权.ToString()}！请重新登录授权！');
-                                        top.window.location='/Authorization/Index';
+                                        top.window.location='Admin/Authorization/Index';
                                     </script>";
                     context.Result = new ContentResult() { Content = Alert, ContentType = "text/html;charset=utf-8;" };
                 }

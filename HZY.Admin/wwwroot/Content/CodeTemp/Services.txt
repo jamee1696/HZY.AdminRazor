@@ -7,6 +7,7 @@ namespace HZY.Admin.Services
 {
     using System.Threading.Tasks;
     using HZY.EFCore.Repository;
+    using HZY.Models;
     using HZY.Models.Sys;
     using HZY.Toolkit;
     using HZY.EFCore.Base;
@@ -59,7 +60,7 @@ namespace HZY.Admin.Services
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="Keys"></param>
+        /// <param name="Ids"></param>
         /// <returns></returns>
         public async Task<int> DeleteAsync(List<Guid> Ids)
             => await this.DeleteAsync(w => Ids.Contains(w.<#KeyName#>));
@@ -76,7 +77,7 @@ namespace HZY.Admin.Services
             var Model = await this.FindByIdAsync(Id);
 
             res[nameof(Id)] = Id;
-            res[nameof(Model)] = Model.ToNewByNull();
+            res[nameof(Model)] = Model.NullSafe();
 
             return res;
         }

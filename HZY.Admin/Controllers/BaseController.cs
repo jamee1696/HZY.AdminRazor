@@ -29,7 +29,7 @@ namespace HZY.Admin.Controllers
 {
     using HZY.Toolkit;
 
-    [Route("[controller]")]
+    [Route("Admin/[controller]")]
     [ApiController]
     public class BaseController : Controller
     {

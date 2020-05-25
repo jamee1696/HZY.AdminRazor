@@ -307,7 +307,7 @@ namespace HZY.Admin.Services.Sys
         /// <param name="Fields"></param>
         /// <param name="Temp"></param>
         /// <returns></returns>
-        public async Task<string> CreateInfoCode(List<string> Fields, string Temp)
+        public async Task<string> CreateInfoCode(List<string> Fields, string Temp,string TableName)
         {
             StringBuilder _Codes = new StringBuilder();
             await Task.Run(() =>
@@ -339,6 +339,7 @@ namespace HZY.Admin.Services.Sys
                 }
             });
             Temp = Temp.Replace("<#Form#>", _Codes.ToString());
+            Temp = Temp.Replace("<#TableName#>", TableName);
             return Temp;
         }
 
@@ -393,7 +394,7 @@ namespace HZY.Admin.Services.Sys
                 {
                     list.Add($"{TableName}/{_Col.ColName}");
                 }
-                var code = await this.CreateInfoCode(list, Temp);
+                var code = await this.CreateInfoCode(list, Temp, TableName);
                 path += $"Views";
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 path += $"/{TableName}";

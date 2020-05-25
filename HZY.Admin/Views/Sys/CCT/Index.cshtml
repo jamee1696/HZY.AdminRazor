@@ -7,6 +7,7 @@
             el: "#app",
             data: function () {
                 return {
+                    prefix: "/Admin/CCT",
                     tablesAndFields: {},
                     tables: [],
                     selectedTable: '',
@@ -26,7 +27,7 @@
                 //获取表及字段
                 getTableNameAndFields: function () {
                     var _this = this;
-                    var path = `@Url.Action("GetTableNameAndFields")`;
+                    var path = _this.prefix + "/GetTableNameAndFields";
 
                     hzyAdmin.post(path, {}, function (r) {
                         _this.tablesAndFields = r.data;
@@ -85,44 +86,57 @@
                 },
                 //获取 model
                 getModelCode: function () {
-                    var path = `@Url.Action("GetModelCode")/${this.selectedTable}`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetModelCode/" + _this.selectedTable;
                     this.getCode(path);
                 },
                 //获取 efcore 使用的 dbset
                 getDbSetCode: function () {
-                    var path = `@Url.Action("GetDbSetCode")`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetDbSetCode";
+
                     this.getCode(path);
                 },
                 //获取 service 服务代码
                 getServicesCode: function () {
-                    var path = `@Url.Action("GetServicesCode")/${this.selectedTable}`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetServicesCode/" + _this.selectedTable;
+
                     this.getCode(path);
                 },
                 //获取 服务 注入代码
                 getServicesRegister: function () {
-                    var path = `@Url.Action("GetServicesRegister")`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetServicesRegister";
+
                     this.getCode(path);
                 },
                 //获取 控制器 代码
                 getControllersCode: function () {
-                    var path = `@Url.Action("GetControllersCode")/${this.selectedTable}`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetControllersCode/" + _this.selectedTable;
                     this.getCode(path);
                 },
                 //获取 Index.cshtml 代码
                 getIndexCode: function () {
-                    var path = `@Url.Action("GetIndexCode")/${this.selectedTable}`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetIndexCode/" + _this.selectedTable;
+
                     this.getCode(path);
                 },
                 //获取 Info.cshtml 代码
                 getInfoCode: function () {
-                    var path = `@Url.Action("GetInfoCode")/${this.selectedTable}`;
+                    var _this = this;
+                    var path = _this.prefix + "/GetInfoCode/" + _this.selectedTable;
+
                     this.getCode(path);
                 },
                 //下载
                 download: function () {
                     if (this.codeType == "") return;
+                    var _this = this;
+                    var path = _this.prefix + "/Download";
 
-                    var path = `@Url.Action("Download")`;
                     hzyAdmin.download(path, {
                         TableName: this.selectedTable,
                         CodeType: this.codeType,
@@ -132,8 +146,9 @@
                 //下载所有
                 downloadAll: function () {
                     if (this.codeType == "") return;
+                    var _this = this;
+                    var path = _this.prefix + "/DownloadAll/" + _this.codeType;
 
-                    var path = `@Url.Action("DownloadAll")/${this.codeType}`;
                     hzyAdmin.download(path);
                 }
             }

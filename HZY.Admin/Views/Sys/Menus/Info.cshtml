@@ -16,7 +16,8 @@
             el: "#app",
             data: function () {
                 return {
-                    power,
+                    power: power,
+                    prefix: "/Admin/Menus",
                     form: {
                         saveState: false,
                         pId:'@PId',
@@ -37,8 +38,8 @@
             },
             methods: {
                 loadForm: function () {
-                    var path = `@Url.Action("LoadForm")/${this.form.vm.Id}`;
                     var _this = this;
+                    var path = _this.prefix + "/LoadForm/" + this.form.vm.Id;
 
                     hzyAdmin.post(path, {}, function (r) {
                         if (r.status != 1) return;
@@ -53,8 +54,8 @@
                     }, delay);
                 },
                 save: function () {
-                    var path = `@Url.Action("Save")`;
                     var _this = this;
+                    var path = _this.prefix + "/Save";                    
 
                     //验证
                     if (!this.form.vm.Model.Menu_Name) return hzyAdmin.alert('菜单名不能为空!','警告');

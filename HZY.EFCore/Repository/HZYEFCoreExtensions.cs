@@ -157,12 +157,16 @@ namespace HZY.EFCore.Repository
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
+        /// <param name="defaultInstance">自定义 默认实例</param>
         /// <returns></returns>
-        public static T ToNewByNull<T>(this T model) 
+        public static T NullSafe<T>(this T model, T defaultInstance = null)
             where T : class, new()
         {
             if (model != null) return model;
-            return CreateInstance<T>();
+
+            if (defaultInstance == null)
+                return CreateInstance<T>();
+            return defaultInstance;
         }
 
         #region LINQ 扩展

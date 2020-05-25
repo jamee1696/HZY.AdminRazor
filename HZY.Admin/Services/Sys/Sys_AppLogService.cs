@@ -95,7 +95,7 @@ namespace HZY.Admin.Services.Sys
             var _Sys_User = await dbUser.FindByIdAsync(Model.AppLog_UserID);
 
             res[nameof(Id)] = Id;
-            res[nameof(Model)] = Model.ToNewByNull();
+            res[nameof(Model)] = Model.NullSafe();
             res[nameof(_Sys_User.User_Name)] = _Sys_User.User_Name;
 
             return res;

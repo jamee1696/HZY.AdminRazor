@@ -9,7 +9,8 @@
             el: "#app",
             data: function () {
                 return {
-                    power,
+                    power: power,
+                    prefix: "/Admin/<#TableName#>",
                     search: {
                         state:false,
                         vm: {
@@ -38,7 +39,7 @@
                 //获取列表
                 findList: function () {
                     var _this = this;
-                    var path = `@Url.Action("FindList")/${_this.table.page}/${_this.table.rows}`;
+                    var path = _this.prefix + "/FindList/" + _this.table.page + "/" + _this.table.rows;
 
                     hzyAdmin.post(path, _this.search.vm, function (r) {
                         if (r.status != 1) return;
@@ -67,7 +68,7 @@
                     }
                     if (confirm("确定要删除吗?")) {
                         //请求接口删除
-                        var path = `@Url.Action("Delete")`;
+                        var path = _this.prefix + "/Delete";
 
                         hzyAdmin.post(path, ids, function (r) {
                             if (r.status != 1) return;
@@ -77,8 +78,8 @@
                     }
                 },
                 openForm: function (id) {
-                    var path = `@Url.Action("Info")/${(id ? id : '')}`;
                     var _this = this;
+                    var path = _this.prefix + "/Info/" + (id ? id : '');
 
                     hzyAdmin.openPage(id ? '编辑' : '新建', path, function () {
                         _this.findList();//刷新列表

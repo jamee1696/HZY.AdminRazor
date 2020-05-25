@@ -45,7 +45,7 @@ namespace HZY.EFCore.Repository
 
         public Expression<Func<T, bool>> GetKeyWhere(T model)
         {
-            model = model.ToNewByNull();
+            model = model.NullSafe();
             var keyProperty = model.GetType().GetKeyProperty();
             var expWhere = HZYEFCoreExtensions.ToWhere<T>(keyProperty.Name, keyProperty.GetValue(model));
             // var expMemberInit = HZYEFCoreExtensions.ToMemberInitByModel(model);
