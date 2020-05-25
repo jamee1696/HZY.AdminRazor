@@ -59,7 +59,7 @@ namespace HZY.Admin.Services.Sys
                 from pmenu in db.Sys_Menus.Where(w => w.Menu_ID == menu.Menu_ParentID).DefaultIfEmpty()
                 select new { menu, 父级菜单 = pmenu.Menu_Name }
                 )
-                .WhereIF(w => w.menu.Menu_ParentID == null || w.menu.Menu_ParentID == Guid.Empty, Search?.Menu_ParentID == Guid.Empty || Search.Menu_ParentID == null)
+                .WhereIF(w => w.menu.Menu_ParentID == null || w.menu.Menu_ParentID == Guid.Empty, Search?.Menu_ParentID == Guid.Empty || Search?.Menu_ParentID == null)
                 .WhereIF(w => w.menu.Menu_ParentID == Search.Menu_ParentID, Search?.Menu_ParentID != Guid.Empty && Search?.Menu_ParentID != null)
                 .WhereIF(w => w.menu.Menu_Name.Contains(Search.Menu_Name), !string.IsNullOrWhiteSpace(Search?.Menu_Name))
                 .OrderBy(w => w.menu.Menu_Num)
