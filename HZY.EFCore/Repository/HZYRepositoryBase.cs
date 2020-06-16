@@ -104,16 +104,18 @@ namespace HZY.EFCore.Repository
         /// </summary>
         /// <param name="updateExpression"></param>
         /// <param name="predicate"></param>
+        /// <param name="updateColumns"></param>
         /// <returns></returns>
-        public virtual int BatchUpdate(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate)
+        public virtual int BatchUpdate(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
             => this.Set.Where(predicate).BatchUpdate(updateExpression);
         /// <summary>
         /// 批量更新 [更新全字段] 如果使用事务 请使用 db.BeginTransaction() 不能使用 db.Commit()
         /// </summary>
         /// <param name="updateExpression"></param>
         /// <param name="predicate"></param>
+        /// <param name="updateColumns"></param>
         /// <returns></returns>
-        public virtual int BatchUpdate(T updateExpression, Expression<Func<T, bool>> predicate)
+        public virtual int BatchUpdate(T updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
             => this.Set.Where(predicate).BatchUpdate(updateExpression);
 
         public virtual Task<int> UpdateAsync(T model)
@@ -138,16 +140,18 @@ namespace HZY.EFCore.Repository
         /// </summary>
         /// <param name="updateExpression"></param>
         /// <param name="predicate"></param>
+        /// <param name="updateColumns"></param>
         /// <returns></returns>
-        public virtual Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate)
+        public virtual Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
             => this.Set.Where(predicate).BatchUpdateAsync(updateExpression);
         /// <summary>
         /// 批量更新 [更新全字段] 异步 如果使用事务 请使用 db.BeginTransactionAsync() 不能使用 db.CommitAsync()
         /// </summary>
         /// <param name="updateExpression"></param>
         /// <param name="predicate"></param>
+        /// <param name="updateColumns"></param>
         /// <returns></returns>
-        public virtual Task<int> BatchUpdateAsync(T updateExpression, Expression<Func<T, bool>> predicate)
+        public virtual Task<int> BatchUpdateAsync(T updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
             => this.Set.Where(predicate).BatchUpdateAsync(updateExpression);
         #endregion
 
@@ -162,16 +166,16 @@ namespace HZY.EFCore.Repository
                 this.Update(entity, model);
             return model;
         }
-        public virtual T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate)
+        public virtual T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
         {
             var entity = this.Set.FirstOrDefault(predicate);
             if (entity == null)
                 this.Insert(model);
             else
-                this.BatchUpdate(model, predicate);
+                this.BatchUpdate(model, predicate, updateColumns);
             return model;
         }
-        
+
         public virtual async Task<T> InsertOrUpdateAsync(T model)
         {
             var expWhere = this.GetKeyWhere(model);
@@ -182,13 +186,13 @@ namespace HZY.EFCore.Repository
                 await this.UpdateAsync(entity, model);
             return model;
         }
-        public virtual async Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate)
+        public virtual async Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
         {
             var entity = this.Set.FirstOrDefault(predicate);
             if (entity == null)
                 await this.InsertAsync(model);
             else
-                await this.BatchUpdateAsync(model, predicate);
+                await this.BatchUpdateAsync(model, predicate, updateColumns);
             return model;
         }
         #endregion

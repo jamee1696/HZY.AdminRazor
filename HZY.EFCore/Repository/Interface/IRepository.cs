@@ -40,16 +40,16 @@ namespace HZY.EFCore.Repository.Interface
         Task<int> UpdateAsync(T model);
         Task<int> UpdateByIdAsync(T model);
         Task<int> UpdateAsync(T oldModel, T newModel);
-        Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate);
-        Task<int> BatchUpdateAsync(T updateExpression, Expression<Func<T, bool>> predicate);
+        Task<int> BatchUpdateAsync(Expression<Func<T, T>> updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null);
+        Task<int> BatchUpdateAsync(T updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null);
         #endregion
 
         #region 插入或者更新
         T InsertOrUpdate(T model);
-        T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate);
+        T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate, List<string> updateColumns = null);
 
         Task<T> InsertOrUpdateAsync(T model);
-        Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate);
+        Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate, List<string> updateColumns = null);
         #endregion
 
         #region 删除
