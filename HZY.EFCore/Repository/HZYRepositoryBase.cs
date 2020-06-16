@@ -22,6 +22,7 @@ namespace HZY.EFCore.Repository
     using global::EFCore.BulkExtensions;
     using HZY.EFCore.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
 
     /// <summary>
     /// 基础仓储
@@ -162,11 +163,29 @@ namespace HZY.EFCore.Repository
                 this.Update(entity, model);
             return model;
         }
+        public virtual T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate)
+        {
+            var entity = this.Set.FirstOrDefault(predicate);
+            if (entity == null)
+                this.Insert(model);
+            else
+                this.Update(entity, model);
+            return model;
+        }
 
         public virtual async Task<T> InsertOrUpdateAsync(T model)
         {
             var expWhere = this.GetKeyWhere(model);
             var entity = await this.Set.FirstOrDefaultAsync(expWhere);
+            if (entity == null)
+                await this.InsertAsync(model);
+            else
+                await this.UpdateAsync(entity, model);
+            return model;
+        }
+        public virtual async Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate)
+        {
+            var entity = this.Set.FirstOrDefault(predicate);
             if (entity == null)
                 await this.InsertAsync(model);
             else

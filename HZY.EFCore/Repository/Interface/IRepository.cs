@@ -46,8 +46,10 @@ namespace HZY.EFCore.Repository.Interface
 
         #region 插入或者更新
         T InsertOrUpdate(T model);
+        T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate);
 
         Task<T> InsertOrUpdateAsync(T model);
+        Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate);
         #endregion
 
         #region 删除
