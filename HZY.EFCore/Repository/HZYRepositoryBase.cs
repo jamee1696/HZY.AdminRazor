@@ -168,8 +168,8 @@ namespace HZY.EFCore.Repository
         }
         public virtual T InsertOrUpdate(T model, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
         {
-            var entity = this.Set.FirstOrDefault(predicate);
-            if (entity == null)
+            var count = this.Set.Count(predicate);
+            if (count == 0)
                 this.Insert(model);
             else
                 this.BatchUpdate(model, predicate, updateColumns);
@@ -188,8 +188,8 @@ namespace HZY.EFCore.Repository
         }
         public virtual async Task<T> InsertOrUpdateAsync(T model, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
         {
-            var entity = this.Set.FirstOrDefault(predicate);
-            if (entity == null)
+            var count = await this.Set.CountAsync(predicate);
+            if (count == 0)
                 await this.InsertAsync(model);
             else
                 await this.BatchUpdateAsync(model, predicate, updateColumns);
