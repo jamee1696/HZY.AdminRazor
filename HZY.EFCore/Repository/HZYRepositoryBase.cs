@@ -22,7 +22,6 @@ namespace HZY.EFCore.Repository
     using global::EFCore.BulkExtensions;
     using HZY.EFCore.Repository.Interface;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Diagnostics;
 
     /// <summary>
     /// 基础仓储
