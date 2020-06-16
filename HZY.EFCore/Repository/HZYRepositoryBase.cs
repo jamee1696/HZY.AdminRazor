@@ -169,10 +169,10 @@ namespace HZY.EFCore.Repository
             if (entity == null)
                 this.Insert(model);
             else
-                this.Update(entity, model);
+                this.BatchUpdate(model, predicate);
             return model;
         }
-
+        
         public virtual async Task<T> InsertOrUpdateAsync(T model)
         {
             var expWhere = this.GetKeyWhere(model);
@@ -189,7 +189,7 @@ namespace HZY.EFCore.Repository
             if (entity == null)
                 await this.InsertAsync(model);
             else
-                await this.UpdateAsync(entity, model);
+                await this.BatchUpdateAsync(model, predicate);
             return model;
         }
         #endregion
