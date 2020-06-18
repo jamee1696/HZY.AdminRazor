@@ -430,10 +430,10 @@ a {
     /*padding-top: 35px;*/
 }
 
-.hzy-container .hzy-menu .fas,
-.hzy-container .hzy-menu .fa {
-    font-size: normal;
-}
+    .hzy-container .hzy-menu .fas,
+    .hzy-container .hzy-menu .fa {
+        font-size: 16px;
+    }
 
 .hzy-container .hzy-main-right {
     height: 100%;
