@@ -7,6 +7,7 @@ namespace Admin.Areas.Admin.Controllers
     using HZY.Admin.Controllers;
 
     //[EnableCors("ApiAny")]//跨域
+    [Route("[controller]")]
     public class UEditorController : BaseController
     {
         private readonly UEditorService _ueditorService;

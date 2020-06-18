@@ -35,15 +35,16 @@
                 }
             },
             created: function () {
-                this.loadForm();
-            },
-            mounted: function () {
                 var _this = this;
                 //编辑器 配置
                 this.form.editor = UE.getEditor('Member_Introduce');
                 this.form.editor.addListener('blur', function (e) {
                     _this.form.vm.Model.Member_Introduce = _this.form.editor.getContent();
                 });
+                this.loadForm();
+            },
+            mounted: function () {
+                
             },
             methods: {
                 loadForm: function () {
