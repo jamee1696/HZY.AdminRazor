@@ -352,6 +352,6 @@ var hzyAdmin = {
 
 };
 
-Vue.prototype.$ELEMENT = { size: 'small', zIndex: 99999999 };
+Vue.prototype.$ELEMENT = { zIndex: 99999999 };//size: 'small',
 
 hzyAdmin.init();
