@@ -301,20 +301,31 @@ namespace HZY.Admin.Services.Sys
         /// 获取查找带回权限
         /// </summary>
         /// <returns></returns>
-        public async Task<Dictionary<string, object>> GetFindBackPower()
+        public async Task<Dictionary<string, object>> GetFindBackPower(bool isCheck = true)
         {
             var res = new Dictionary<string, object>();
             var _Sys_FunctionList = await dbFunction.Query().OrderBy(w => w.Function_Num).ToListAsync();
-            foreach (var item in _Sys_FunctionList)
+
+            if (isCheck)
             {
-                if (item.Function_ByName == "Have" || item.Function_ByName == "Search")
+                foreach (var item in _Sys_FunctionList)
+                {
+                    if (item.Function_ByName == "Have" || item.Function_ByName == "Search")
+                    {
+                        res[item.Function_ByName] = true;
+
+                    }
+                    else
+                    {
+                        res[item.Function_ByName] = false;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in _Sys_FunctionList)
                 {
                     res[item.Function_ByName] = true;
-
-                }
-                else
-                {
-                    res[item.Function_ByName] = false;
                 }
             }
 

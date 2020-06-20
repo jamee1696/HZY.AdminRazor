@@ -84,7 +84,7 @@ namespace HZY.Admin.Services.Core
         /// <param name="folder"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public string HandleUploadFile(IFormFile iFormFile, string webRootPath, string folder = "Files", params string[] format)
+        public string HandleUploadFile(IFormFile iFormFile, string webRootPath, string folder, params string[] format)
         {
             string ExtensionName = Path.GetExtension(iFormFile.FileName).ToLower().Trim();//获取后缀名
 
@@ -93,22 +93,26 @@ namespace HZY.Admin.Services.Core
                 throw new MessageBox("请上传后缀名为：" + string.Join("、", format) + " 格式的文件");
             }
 
-            if (string.IsNullOrWhiteSpace(folder)) folder = "Files";
+            if (string.IsNullOrWhiteSpace(folder)) folder = "files";
 
-            var path = $"/AppUploadFile/{folder}";
-            var fullPath = webRootPath + path;
-            //webRootPath
+            var path = $"/upload/{folder}";
 
-            if (!Directory.Exists(fullPath))
+            if (!Directory.Exists(webRootPath + path))
             {
-                Directory.CreateDirectory(fullPath);
+                Directory.CreateDirectory(webRootPath + path);
             }
 
-            path = $"{path}/{DateTime.Now.ToString("yyyyMMddHHmmss")}_{iFormFile.FileName}";
-            fullPath = webRootPath + path;
+            path += $"/{DateTime.Now:yyyyMMdd}";
+
+            if (!Directory.Exists(webRootPath + path))
+            {
+                Directory.CreateDirectory(webRootPath + path);
+            }
+
+            path += $"/time_{DateTime.Now:HHmmss}_oldname_{iFormFile.FileName}";
 
             // 创建新文件
-            using (FileStream fs = System.IO.File.Create(fullPath))
+            using (FileStream fs = File.Create(webRootPath + path))
             {
                 iFormFile.CopyTo(fs);
                 // 清空缓冲区数据
@@ -117,6 +121,26 @@ namespace HZY.Admin.Services.Core
 
             return path;
         }
+
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="iFormFile"></param>
+        /// <param name="webRootPath"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
+        public string HandleUploadFile(IFormFile iFormFile, string webRootPath, params string[] format)
+            => this.HandleUploadFile(iFormFile, webRootPath, "files", format);
+
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="iFormFile"></param>
+        /// <param name="webRootPath"></param>
+        /// <param name="folder"></param>
+        /// <returns></returns>
+        public string HandleUploadImageFile(IFormFile iFormFile, string webRootPath, string folder = "files")
+            => this.HandleUploadFile(iFormFile, webRootPath, folder, ".jpg", ".jpeg", ".png", ".gif", ".jfif");
 
         #endregion
 

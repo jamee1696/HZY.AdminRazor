@@ -74,7 +74,7 @@ namespace HZY.Admin.Services
         {
             if (Photo != null)
             {
-                model.Member_Photo = this.HandleUploadFile(Photo, webRootPath, null, ".jpg", ".jpeg", ".png", "gif");
+                model.Member_Photo = this.HandleUploadImageFile(Photo, webRootPath);
             }
 
             if (Files.Count > 0)

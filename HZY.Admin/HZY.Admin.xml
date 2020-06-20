@@ -440,6 +440,24 @@
             <param name="format"></param>
             <returns></returns>
         </member>
+        <member name="M:HZY.Admin.Services.Core.ServiceBase`1.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String[])">
+            <summary>
+            上传文件
+            </summary>
+            <param name="iFormFile"></param>
+            <param name="webRootPath"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HZY.Admin.Services.Core.ServiceBase`1.HandleUploadImageFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String)">
+            <summary>
+            上传图片
+            </summary>
+            <param name="iFormFile"></param>
+            <param name="webRootPath"></param>
+            <param name="folder"></param>
+            <returns></returns>
+        </member>
         <member name="M:HZY.Admin.Services.MemberService.FindListAsync(System.Int32,System.Int32,HZY.Models.Member)">
             <summary>
             获取数据源
@@ -693,7 +711,7 @@
             <param name="_Sys_MenuList"></param>
             <returns></returns>
         </member>
-        <member name="M:HZY.Admin.Services.Sys.Sys_MenuService.GetFindBackPower">
+        <member name="M:HZY.Admin.Services.Sys.Sys_MenuService.GetFindBackPower(System.Boolean)">
             <summary>
             获取查找带回权限
             </summary>
