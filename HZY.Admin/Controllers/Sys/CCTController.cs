@@ -8,7 +8,7 @@ namespace HZY.Admin.Controllers.Sys
 {
     using HZY.Admin.Dto.Sys;
     using Microsoft.AspNetCore.Hosting;
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using System.Text;
     using System.IO;
     using HZY.Admin.Services.Sys;

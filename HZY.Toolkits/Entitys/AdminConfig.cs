@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit.Entitys
+namespace HZY.Toolkits.Entitys
 {
     public class AdminConfig
     {

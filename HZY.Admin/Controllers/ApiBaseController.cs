@@ -17,8 +17,8 @@ namespace HZY.Admin.Controllers
 {
     using HZY.Admin.Core;
     using HZY.Admin.Services.Sys;
-    using HZY.Toolkit;
-    using HZY.Toolkit.HzyNetCoreUtil.Attributes;
+    using HZY.Toolkits;
+    using HZY.Toolkits.HzyNetCoreUtil.Attributes;
     using Microsoft.AspNetCore.Mvc.Controllers;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Newtonsoft.Json;

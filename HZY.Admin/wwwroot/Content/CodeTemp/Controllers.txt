@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.//请输入命名空间
 {
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using HZY.Models;
     using HZY.Models.Sys;
     using HZY.Admin.Dto;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;

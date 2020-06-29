@@ -13,7 +13,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Collections.Generic;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     using ICSharpCode.SharpZipLib.Checksum;
     //

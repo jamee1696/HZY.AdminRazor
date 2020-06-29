@@ -1,7 +1,7 @@
 ﻿using System;
-using HZY.Toolkit.Entitys;
+using HZY.Toolkits.Entitys;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     public class AppConfig
     {

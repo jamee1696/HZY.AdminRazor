@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     using ICSharpCode.SharpZipLib.Checksum;
     using ICSharpCode.SharpZipLib.Zip;

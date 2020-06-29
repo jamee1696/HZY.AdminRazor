@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers.Sys
 {
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using HZY.Models.Sys;
     using HZY.Admin.Dto.Sys;
     using HZY.Admin.Services.Sys;
-    using HZY.Toolkit.HzyNetCoreUtil.Attributes;
+    using HZY.Toolkits.HzyNetCoreUtil.Attributes;
 
     public class RoleFunctionController : ApiBaseController<Sys_RoleMenuFunctionService>
     {

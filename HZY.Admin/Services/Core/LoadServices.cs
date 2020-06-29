@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace HZY.Admin.Services.Core
 {
-    using HZY.Toolkit.HzyNetCoreUtil.Attributes;
+    using HZY.Toolkits.HzyNetCoreUtil.Attributes;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>

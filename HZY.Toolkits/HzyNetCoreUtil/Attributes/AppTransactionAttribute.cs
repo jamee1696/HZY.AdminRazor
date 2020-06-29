@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit.HzyNetCoreUtil.Attributes
+namespace HZY.Toolkits.HzyNetCoreUtil.Attributes
 {
     /// <summary>
     /// 用户 事务 标记

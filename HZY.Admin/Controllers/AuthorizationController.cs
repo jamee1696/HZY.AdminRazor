@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers
 {
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using HZY.Admin.Core;
     using HZY.Admin.Dto.Sys;
     using HZY.Admin.Services.Sys;

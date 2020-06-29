@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     public static class ConvertExtension
     {

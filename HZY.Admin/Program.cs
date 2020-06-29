@@ -22,7 +22,7 @@ namespace HZY.Admin
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using NLog.Web;
-    using Toolkit;
+    using HZY.Toolkits;
 
     public class Program
     {

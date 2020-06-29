@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit.HzyNetCoreUtil.Attributes
+namespace HZY.Toolkits.HzyNetCoreUtil.Attributes
 {
     /// <summary>
     /// 服务标记 用于 程序 启动 扫描到后自动 注册服务

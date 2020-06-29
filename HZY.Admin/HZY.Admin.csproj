@@ -141,8 +141,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HZY.Models\HZY.Models.csproj" />
-    <ProjectReference Include="..\HZY.Toolkit\HZY.Toolkit.csproj" />
     <ProjectReference Include="..\HZY.EFCore\HZY.EFCore.csproj" />
+    <ProjectReference Include="..\HZY.Toolkits\HZY.Toolkits.csproj" />
   </ItemGroup>
 
   <ItemGroup>

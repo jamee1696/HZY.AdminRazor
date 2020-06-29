@@ -13,7 +13,7 @@ namespace HZY.Admin.Services.Sys
     using System.Linq;
     using System.IO;
     using Microsoft.AspNetCore.Hosting;
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using HZY.Models.Sys;
     using HZY.EFCore.Base;
 

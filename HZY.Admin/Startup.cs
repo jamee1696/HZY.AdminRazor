@@ -28,8 +28,8 @@ namespace HZY.Admin
     using HZY.EFCore.Repository;
     using HZY.EFCore;
     using HZY.Admin.Core;
-    using HZY.Toolkit;
-    using HZY.Toolkit.Entitys;
+    using HZY.Toolkits;
+    using HZY.Toolkits.Entitys;
     using HZY.Admin.Hubs;
     using UEditor.Core;
     using Microsoft.Extensions.Logging;

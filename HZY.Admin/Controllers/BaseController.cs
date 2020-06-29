@@ -27,7 +27,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HZY.Admin.Controllers
 {
-    using HZY.Toolkit;
+    using HZY.Toolkits;
 
     [Route("Admin/[controller]")]
     [ApiController]

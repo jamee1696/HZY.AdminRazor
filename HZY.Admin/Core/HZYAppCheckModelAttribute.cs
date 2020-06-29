@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HZY.Admin.Core
 {
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 

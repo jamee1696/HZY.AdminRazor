@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 namespace HZY.Admin.Core
 {
     using HZY.Admin.Services.Sys;
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using System.Diagnostics;
 
     public class HZYAppMiddleware : IMiddleware

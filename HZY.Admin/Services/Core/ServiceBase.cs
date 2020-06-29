@@ -14,13 +14,13 @@ using System.Linq;
 namespace HZY.Admin.Services.Core
 {
     using HZY.EFCore.Base;
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
     using Microsoft.AspNetCore.Http;
     using HZY.EFCore;
     using HZY.EFCore.Repository;
-    using HZY.Toolkit.HzyNetCoreUtil.Attributes;
+    using HZY.Toolkits.HzyNetCoreUtil.Attributes;
 
     [AppService(ServiceType.Scoped)]
     public class ServiceBase<T> : DefaultRepository<T>

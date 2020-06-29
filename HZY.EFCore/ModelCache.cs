@@ -29,7 +29,7 @@ namespace HZY.EFCore
             foreach (var item in propertyInfos)
             {
                 var modelInfo = new ModelInfo();
-                var Remark = Toolkit.ReadXmlSummary.XMLForMember(item)?.InnerText?.Trim()?.Split("=>")?[0];
+                var Remark = Toolkits.ReadXmlSummary.XMLForMember(item)?.InnerText?.Trim()?.Split("=>")?[0];
                 modelInfo.Name = item.Name;
                 modelInfo.Remark = Remark;
                 modelInfo.IsKey = HZYEFCoreExtensions.HasKey(item);

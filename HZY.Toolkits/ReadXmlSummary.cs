@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     using System.IO;
     using System.Reflection;

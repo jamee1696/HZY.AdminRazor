@@ -10,7 +10,7 @@
 using System;
 using System.Net;
 
-namespace HZY.Toolkit
+namespace HZY.Toolkits
 {
     /// <summary>
     /// MVC 异常拦截 该对象 返回客户端

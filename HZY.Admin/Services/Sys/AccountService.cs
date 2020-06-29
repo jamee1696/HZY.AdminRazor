@@ -10,7 +10,7 @@ namespace HZY.Admin.Services.Sys
     using Microsoft.AspNetCore.Http;
     using HZY.EFCore.Repository;
     using HZY.Models.Sys;
-    using HZY.Toolkit;
+    using HZY.Toolkits;
     using System.Linq;
     using HZY.Admin.Services.Core;
     using HZY.EFCore;
