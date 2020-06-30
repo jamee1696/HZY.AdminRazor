@@ -212,20 +212,20 @@ namespace HZY.EFCore
             string SqlString = $@"
 
 SELECT 
-    d.name AS TabName,
-	isnull(f.value,'') AS TabNameRemark,
+    convert(varchar(100),d.name) AS TabName,
+	convert(varchar(100),isnull(f.value,'')) AS TabNameRemark,
 	convert(int,a.colorder) AS ColOrder,
 	a.name AS ColName,
 	case when COLUMNPROPERTY( a.id,a.name,'IsIdentity')=1 then 1 else 0 end ColIsIdentity,
 	case when exists(SELECT 1 FROM sysobjects where xtype='PK' and parent_obj=a.id and name in (
                      SELECT name FROM sysindexes WHERE indid in( SELECT indid FROM sysindexkeys WHERE id = a.id AND colid=a.colid))) then 1 else 0 end ColIsKey,
-	b.name AS ColType,
+	convert(varchar(100),b.name) AS ColType,
 	convert(int,a.length) AS ColLength,
 	convert(int,COLUMNPROPERTY(a.id,a.name,'PRECISION')) AS ColMaxLength,
 	convert(int,isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0)) AS ColScale,
-	case when a.isnullable=1 then 1 else 0 end ColIsNull,
-	isnull(e.text,'') AS ColDefaultValue,
-    isnull(g.[value],'') AS ColRemark
+	convert(int,case when a.isnullable=1 then 1 else 0 end) AS ColIsNull,
+	convert(varchar(100),isnull(e.text,'')) AS ColDefaultValue,
+    convert(varchar(100),isnull(g.[value],'')) AS ColRemark
 FROM syscolumns a
 left join systypes b on a.xusertype=b.xusertype
 inner join sysobjects d on a.id=d.id  and d.xtype='U' and  d.name<>'dtproperties'
