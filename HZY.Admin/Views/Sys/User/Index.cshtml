@@ -141,7 +141,8 @@
                         <el-table :data="table.data"
                                   @@selection-change="(array)=>{table.selecteds=array;}"
                                   @@row-dblclick="row_dblclick"
-                                  row-key="_ukid">
+                                  row-key="_ukid"
+                                  size="medium">
                             <el-table-column type="index" width="50" fixed></el-table-column>
                             <el-table-column type="selection" width="50" fixed></el-table-column>
 
