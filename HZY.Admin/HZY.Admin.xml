@@ -593,12 +593,17 @@
             </summary>
             <param name="Fields"></param>
             <param name="Temp"></param>
+            <param name="TableName"></param>
             <returns></returns>
         </member>
         <member name="M:HZY.Admin.Services.Sys.CCTService.CreateAllFiles(System.String,System.String,System.String,System.String)">
             <summary>
             创建文件
             </summary>
+            <param name="webRootPath"></param>
+            <param name="CodeType"></param>
+            <param name="TableName"></param>
+            <param name="Temp"></param>
             <returns></returns>
         </member>
         <member name="M:HZY.Admin.Services.Sys.Sys_AppLogService.FindListAsync(System.Int32,System.Int32,HZY.Models.Sys.Sys_AppLog)">
