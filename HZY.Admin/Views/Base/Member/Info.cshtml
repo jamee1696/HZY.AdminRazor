@@ -44,7 +44,7 @@
                 this.loadForm();
             },
             mounted: function () {
-                
+
             },
             methods: {
                 loadForm: function () {
@@ -125,7 +125,7 @@
                     }
                     //打开页面查找带回信息
                     var _this = this;
-                    var path = "/Admin/User/Index?findback=1";                    
+                    var path = "/Admin/User/Index?findback=1";
 
                     hzyAdmin.openPage('请选择用户', path, function () {
                         var row = JSON.parse(window.localStorage.getItem('findback'));
@@ -157,7 +157,13 @@
             </div>
             <div class="col-sm-4">
                 <h4 class="example-title">生日</h4>
-                <el-date-picker type="date" placeholder="请选择 生日" v-model="form.vm.Model.Member_Birthday" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" style="width:100%"></el-date-picker>
+                <el-date-picker type="date"
+                                placeholder="请选择 生日" 
+                                v-model="form.vm.Model.Member_Birthday" 
+                                format="yyyy 年 MM 月 dd 日" 
+                                value-format="yyyy-MM-dd" 
+                                style="width:100%"
+                                size="small"></el-date-picker>
             </div>
             <div class="col-sm-4">
                 <h4 class="example-title">性别</h4>
