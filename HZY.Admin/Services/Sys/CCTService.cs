@@ -306,8 +306,9 @@ namespace HZY.Admin.Services.Sys
         /// </summary>
         /// <param name="Fields"></param>
         /// <param name="Temp"></param>
+        /// <param name="TableName"></param>
         /// <returns></returns>
-        public async Task<string> CreateInfoCode(List<string> Fields, string Temp,string TableName)
+        public async Task<string> CreateInfoCode(List<string> Fields, string Temp, string TableName)
         {
             StringBuilder _Codes = new StringBuilder();
             await Task.Run(() =>
@@ -346,6 +347,10 @@ namespace HZY.Admin.Services.Sys
         /// <summary>
         /// 创建文件
         /// </summary>
+        /// <param name="webRootPath"></param>
+        /// <param name="CodeType"></param>
+        /// <param name="TableName"></param>
+        /// <param name="Temp"></param>
         /// <returns></returns>
         public async Task<string> CreateAllFiles(string webRootPath, string CodeType, string TableName, string Temp)
         {
