@@ -381,6 +381,18 @@
             异常过滤
             </summary>
         </member>
+        <member name="T:HZY.Admin.Core.LoadServices">
+            <summary>
+            加载服务
+            </summary>
+        </member>
+        <member name="M:HZY.Admin.Core.LoadServices.ServiceStart(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type)">
+            <summary>
+            Service 服务启动
+            </summary>
+            <param name="serviceCollection"></param>
+            <param name="type"></param>
+        </member>
         <member name="P:HZY.Admin.Dto.Sys.AuthUserDto.UserName">
             <summary>
             用户名称
@@ -417,18 +429,6 @@
             Ef 数据
             </summary>
             <param name="host"></param>
-        </member>
-        <member name="T:HZY.Admin.Services.Core.LoadServices">
-            <summary>
-            加载服务
-            </summary>
-        </member>
-        <member name="M:HZY.Admin.Services.Core.LoadServices.ServiceStart(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type)">
-            <summary>
-            Service 服务启动
-            </summary>
-            <param name="serviceCollection"></param>
-            <param name="type"></param>
         </member>
         <member name="M:HZY.Admin.Services.Core.ServiceBase`1.HandleUploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.String[])">
             <summary>
