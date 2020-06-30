@@ -24,7 +24,7 @@
 
 交流群: 534584927
 
-前端：BootStrap 4、Layer、Jquery、Vue 、Element UI
+前端：BootStrap 4、Layer(只是弹层 没用到 layui)、Jquery、Vue 、Element UI
 
 后端：NetCore 3.1.100 一定要安装等于或者大于该版本的SDK
 
