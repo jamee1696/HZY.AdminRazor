@@ -172,9 +172,10 @@ namespace HZY.EFCore.Repository
         #region LINQ 扩展
 
         public static IQueryable<T> WhereIF<T>(this IQueryable<T> query, Expression<Func<T, bool>> expWhere, bool IF)
-        {
-            return IF ? query.Where(expWhere) : query;
-        }
+            => IF ? query.Where(expWhere) : query;
+
+        public static IQueryable<T> Page<T>(this IQueryable<T> query, int page, int rows)
+            => query.Skip((page - 1) * rows).Take(rows);
 
         #endregion
 

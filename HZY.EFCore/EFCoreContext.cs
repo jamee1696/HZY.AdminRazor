@@ -107,7 +107,7 @@ namespace HZY.EFCore
             _tableViewModel.TotalCount = await query.CountAsync();
             _tableViewModel.TotalPage = (_tableViewModel.TotalCount / Rows);
             //DynamicQueryable.OrderBy(query, "name asc");
-            var Datas = await query.Skip((Page - 1) * Rows).Take(Rows).ToListAsync();
+            var Datas = await query.Page(Page, Rows).ToListAsync();
 
             var type = typeof(T);
             var fields = type.GetProperties();
