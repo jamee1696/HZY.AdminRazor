@@ -5,20 +5,18 @@ using System.Text;
 namespace HZY.Admin.Services.Sys
 {
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.AspNetCore.Http;
     using HZY.EFCore.Repository;
     using HZY.Models.Sys;
     using HZY.Toolkits;
     using System.Linq;
     using HZY.EFCore.Base;
     using HZY.Admin.Services.Core;
-    using System.Security.Cryptography;
     using HZY.Admin.Dto.Sys;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Internal;
     using System.Collections;
     using HZY.EFCore;
+    using HZY.Admin.Core;
 
     public class Sys_MenuService : ServiceBase<Sys_Menu>
     {
@@ -26,15 +24,17 @@ namespace HZY.Admin.Services.Sys
         protected readonly DefaultRepository<Sys_MenuFunction> dbMenuFunction;
         protected readonly DefaultRepository<Sys_RoleMenuFunction> dbRoleMenuFunction;
         protected readonly AccountService accountService;
+        protected readonly AppConfiguration appConfiguration;
 
-        public Sys_MenuService(EFCoreContext _db,
+        public Sys_MenuService(AppConfiguration appConfiguration,
+            EFCoreContext _db,
             DefaultRepository<Sys_Function> _dbFunction,
             DefaultRepository<Sys_MenuFunction> _dbMenuFunction,
             DefaultRepository<Sys_RoleMenuFunction> _dbRoleMenuFunction,
-            AccountService _accountService
-
-            ) : base(_db)
+            AccountService _accountService)
+            : base(_db)
         {
+            this.appConfiguration = appConfiguration;
             this.dbFunction = _dbFunction;
             this.dbMenuFunction = _dbMenuFunction;
             this.dbRoleMenuFunction = _dbRoleMenuFunction;
@@ -261,7 +261,7 @@ namespace HZY.Admin.Services.Sys
                     foreach (var _Sys_Function in _Sys_FunctionList)
                     {
                         var ispower = _Sys_MenuFunctionList.Any(w => w.MenuFunction_MenuID == item.Menu_ID && w.MenuFunction_FunctionID == _Sys_Function.Function_ID);
-                        if (_Sys_Function.Function_ByName == "Have" | item.Menu_ParentID == AppConfig.AdminConfig.SysMenuID) ispower = true;
+                        if (_Sys_Function.Function_ByName == "Have" | item.Menu_ParentID == this.appConfiguration.SysMenuID) ispower = true;
                         _PowerState.Add(_Sys_Function.Function_ByName, ispower);
                     }
 
@@ -354,7 +354,7 @@ namespace HZY.Admin.Services.Sys
                 foreach (var item in _Sys_FunctionList)
                 {
                     var ispower = _Sys_MenuFunctionList.Any(w => w.MenuFunction_MenuID == _Sys_Menu.Menu_ID && w.MenuFunction_FunctionID == item.Function_ID);
-                    if (item.Function_ByName == "Have" || _Sys_Menu.Menu_ParentID == AppConfig.AdminConfig.SysMenuID) ispower = true;
+                    if (item.Function_ByName == "Have" || _Sys_Menu.Menu_ParentID == this.appConfiguration.SysMenuID) ispower = true;
                     _PowerState.Add(item.Function_ByName, ispower);
                 }
                 return _PowerState;

@@ -14,6 +14,7 @@ namespace HZY.Admin.Services.Sys
     using System.Linq;
     using HZY.Admin.Services.Core;
     using HZY.EFCore;
+    using HZY.Admin.Core;
 
     public class AccountService : ServiceBase<Sys_User>
     {
@@ -21,14 +22,16 @@ namespace HZY.Admin.Services.Sys
         public AccountInfo info { get; }
         protected readonly DefaultRepository<Sys_UserRole> dbUserRole;
         protected readonly DefaultRepository<Sys_AppLog> dbAppLog;
+        protected readonly AppConfiguration appConfiguration;
         protected readonly string Key;
 
-        public AccountService(EFCoreContext _db,
+        public AccountService(AppConfiguration appConfiguration, EFCoreContext _db,
             DefaultRepository<Sys_UserRole> _dbUserRole,
             DefaultRepository<Sys_AppLog> _dbAppLog,
             IHttpContextAccessor iHttpContextAccessor)
             : base(_db)
         {
+            this.appConfiguration = appConfiguration;
             this.dbUserRole = _dbUserRole;
             this.dbAppLog = _dbAppLog;
             this.httpContext = iHttpContextAccessor.HttpContext;
@@ -99,7 +102,7 @@ namespace HZY.Admin.Services.Sys
             //if (string.IsNullOrEmpty(code)) throw new MessageBox("验证码失效");
             //if (!code.ToLower().Equals(loginCode.ToLower())) throw new MessageBox("验证码不正确");
 
-            return new JwtTokenUtil().GetToken(_Sys_User.User_ID.ToStr(), AppConfig.AdminConfig.JwtSecurityKey, AppConfig.AdminConfig.JwtKeyName);
+            return new JwtTokenUtil().GetToken(_Sys_User.User_ID.ToStr(), this.appConfiguration.JwtSecurityKey, this.appConfiguration.JwtKeyName);
         }
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace HZY.Admin.Services.Sys
             _Account.UserName = _Sys_User.User_Name;
             _Account._Sys_User = _Sys_User;
             //如果是超级管理员 帐户
-            _Account.IsSuperManage = _Sys_UserRole.Any(w => w.UserRole_RoleID == AppConfig.AdminConfig.AdminRoleID);
+            _Account.IsSuperManage = _Sys_UserRole.Any(w => w.UserRole_RoleID == this.appConfiguration.AdminRoleID);
             return _Account;
         }
 
@@ -130,7 +133,7 @@ namespace HZY.Admin.Services.Sys
         /// <returns></returns>
         public async Task<int> ChangePwd(string oldpwd, string newpwd)
         {
-            if (string.IsNullOrEmpty(oldpwd)) MessageBox.Show("旧密码不能为空！"); 
+            if (string.IsNullOrEmpty(oldpwd)) MessageBox.Show("旧密码不能为空！");
             if (string.IsNullOrEmpty(newpwd)) MessageBox.Show("新密码不能为空！");
             var _Sys_User = await this.FindByIdAsync(info.UserID);
             if (_Sys_User.User_Pwd != oldpwd) MessageBox.Show("旧密码不正确！");

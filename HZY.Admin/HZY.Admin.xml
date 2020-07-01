@@ -365,6 +365,11 @@
             <param name="MenuId"></param>
             <returns></returns>
         </member>
+        <member name="T:HZY.Admin.Core.AppConfiguration">
+            <summary>
+            程序配置信息映射类 appsettings.json
+            </summary>
+        </member>
         <member name="T:HZY.Admin.Core.HZYAppCheckModelAttribute">
             <summary>
             实体模型验证

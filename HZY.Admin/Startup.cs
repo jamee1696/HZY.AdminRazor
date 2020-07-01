@@ -29,7 +29,6 @@ namespace HZY.Admin
     using HZY.EFCore;
     using HZY.Admin.Core;
     using HZY.Toolkits;
-    using HZY.Toolkits.Entitys;
     using HZY.Admin.Hubs;
     using UEditor.Core;
     using Microsoft.Extensions.Logging;
@@ -55,11 +54,6 @@ namespace HZY.Admin
         {
             #region HttpContext
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            #endregion
-
-            #region AppConfigs
-            //配置 AppConfigs
-            AppConfig.AdminConfig = Configuration.GetSection("AppConfig").Get<AdminConfig>();
             #endregion
 
             #region 注入 EFCore
@@ -110,9 +104,9 @@ namespace HZY.Admin
                         ValidateAudience = true,//是否验证Audience
                         ValidateLifetime = true,//是否验证失效时间
                         ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                        ValidAudience = AppConfig.AdminConfig.JwtKeyName,//Audience
-                        ValidIssuer = AppConfig.AdminConfig.JwtKeyName,//Issuer，这两项和前面签发jwt的设置一致
-                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(AppConfig.AdminConfig.JwtSecurityKey))//拿到SecurityKey
+                        ValidAudience = Configuration["AppConfig:JwtKeyName"],//Audience
+                        ValidIssuer = Configuration["AppConfig:JwtKeyName"],//Issuer，这两项和前面签发jwt的设置一致
+                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["AppConfig:JwtSecurityKey"]))//拿到SecurityKey
                     };
 
                     #region SignalR 配置 jwt
