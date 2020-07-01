@@ -9,7 +9,7 @@ namespace HZY.Admin.Core
     /// <summary>
     /// 程序配置信息映射类 appsettings.json
     /// </summary>
-    [AppService]
+    [AppService(ServiceType.Singleton)]
     public class AppConfiguration
     {
         private string AppConfigKey = "AppConfig";
@@ -25,12 +25,15 @@ namespace HZY.Admin.Core
                 {
                     item.SetValue(this, value.ToGuid());
                 }
+                else if (item.PropertyType == typeof(int))
+                {
+                    item.SetValue(this, value.ToInt32());
+                }
                 else
                 {
                     item.SetValue(this, value);
                 }
             }
-
 
         }
 

@@ -36,7 +36,7 @@ namespace HZY.Admin
 
     public class Startup
     {
-        private static readonly IEnumerable<string> _VersionList = typeof(ApiVersionsEnum).GetEnumNames().ToList().OrderBy(w => w);
+        private static readonly IEnumerable<string> versionList = typeof(ApiVersionsEnum).GetEnumNames().ToList().OrderBy(w => w);
 
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
@@ -46,8 +46,6 @@ namespace HZY.Admin
 
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; }
-
-        public static readonly ILoggerFactory efLogger = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -62,7 +60,10 @@ namespace HZY.Admin
             {
                 options
                 .UseSqlServer(Configuration.GetConnectionString(nameof(EFCoreContext)))
-                .UseLoggerFactory(efLogger)
+                .UseLoggerFactory(LoggerFactory.Create(builder =>
+                {
+                    builder.AddConsole();
+                }))
                 ;
                 //无跟踪
                 // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -73,7 +74,6 @@ namespace HZY.Admin
             //    .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(DefaultRepository<>));
-            // services.AddScoped(typeof(IRepository<,>), typeof(DefaultRepository<>));
             #endregion
 
             #region 注入 业务 服务
@@ -136,7 +136,7 @@ namespace HZY.Admin
             #region Swagger 注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(options =>
             {
-                foreach (var item in _VersionList)
+                foreach (var item in versionList)
                 {
                     options.SwaggerDoc(item, new OpenApiInfo { Title = "HZY.Admin" });
                 }
@@ -291,7 +291,7 @@ namespace HZY.Admin
             ////启用中间件服务对swagger-ui，指定Swagger JSON终结点
             //app.UseSwaggerUI(option =>
             //{
-            //    foreach (var item in _VersionList) option.SwaggerEndpoint($"{item}/swagger.json", item);
+            //    foreach (var item in versionList) option.SwaggerEndpoint($"{item}/swagger.json", item);
             //    option.RoutePrefix = "swagger";
             //});
             #endregion
