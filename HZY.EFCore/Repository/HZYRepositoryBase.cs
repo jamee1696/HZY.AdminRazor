@@ -208,6 +208,8 @@ namespace HZY.EFCore.Repository
         }
         public virtual int Delete(Expression<Func<T, bool>> expWhere)
             => this.Delete(this.Query().Where(expWhere));
+        public virtual int DeleteById<TKey>(TKey key)
+            => this.Delete(this.Set.FirstOrDefault(this.GetKeyWhere(null)));
 
         public virtual Task<int> DeleteAsync(T model)
         {
@@ -221,6 +223,8 @@ namespace HZY.EFCore.Repository
         }
         public virtual Task<int> DeleteAsync(Expression<Func<T, bool>> expWhere)
             => this.DeleteAsync(this.Query().Where(expWhere));
+        public virtual async Task<int> DeleteByIdAsync<TKey>(TKey key)
+            => await this.DeleteAsync(await this.Set.FirstOrDefaultAsync(this.GetKeyWhere(null)));
         #endregion
 
         #region 查询 复杂型
@@ -236,12 +240,12 @@ namespace HZY.EFCore.Repository
         #region 查询 单条
         public virtual T Find(Expression<Func<T, bool>> expWhere)
             => this.Query().Where(expWhere).FirstOrDefault();
-        public virtual T FindById(object Key)
+        public virtual T FindById<TKey>(TKey Key)
             => this.Set.Find(Key);
 
         public virtual Task<T> FindAsync(Expression<Func<T, bool>> expWhere)
             => this.Query().Where(expWhere).FirstOrDefaultAsync();
-        public virtual async Task<T> FindByIdAsync(object Key)
+        public virtual async Task<T> FindByIdAsync<TKey>(TKey Key)
             => await this.Set.FindAsync(Key);
         #endregion
 

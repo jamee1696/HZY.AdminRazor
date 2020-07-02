@@ -56,10 +56,12 @@ namespace HZY.EFCore.Repository.Interface
         int Delete(T model);
         int Delete(IEnumerable<T> models);
         int Delete(Expression<Func<T, bool>> expWhere);
+        int DeleteById<TKey>(TKey key);
 
         Task<int> DeleteAsync(T model);
         Task<int> DeleteAsync(IEnumerable<T> models);
         Task<int> DeleteAsync(Expression<Func<T, bool>> expWhere);
+        Task<int> DeleteByIdAsync<TKey>(TKey key);
         #endregion
 
         #region 查询 复杂型
@@ -68,10 +70,10 @@ namespace HZY.EFCore.Repository.Interface
 
         #region 查询 单条
         T Find(Expression<Func<T, bool>> expWhere);
-        T FindById(object Key);
+        T FindById<TKey>(TKey Key);
 
         Task<T> FindAsync(Expression<Func<T, bool>> expWhere);
-        Task<T> FindByIdAsync(object Key);
+        Task<T> FindByIdAsync<TKey>(TKey Key);
         #endregion
 
         #region 查询 多条
