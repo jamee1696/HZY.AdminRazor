@@ -16,7 +16,7 @@
 
  **文档、演示：http://hzyadmin.milaizhijie.com/website/index.html**
 
- **vue单页预览地址 ：http://hzyadmin.milaizhijie.com/index.html** 
+ **vue单页预览地址 ：http://hzyadmin.milaizhijie.com:1520** 
 
 
 #### 软件架构
