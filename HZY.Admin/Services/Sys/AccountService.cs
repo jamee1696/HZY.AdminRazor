@@ -25,7 +25,8 @@ namespace HZY.Admin.Services.Sys
         protected readonly AppConfiguration appConfiguration;
         protected readonly string Key;
 
-        public AccountService(AppConfiguration appConfiguration, EFCoreContext _db,
+        public AccountService(AppConfiguration appConfiguration, 
+            EFCoreContext _db,
             DefaultRepository<Sys_UserRole> _dbUserRole,
             DefaultRepository<Sys_AppLog> _dbAppLog,
             IHttpContextAccessor iHttpContextAccessor)

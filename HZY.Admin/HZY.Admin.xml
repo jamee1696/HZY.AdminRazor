@@ -370,6 +370,12 @@
             程序配置信息映射类 appsettings.json
             </summary>
         </member>
+        <member name="M:HZY.Admin.Core.AppConfiguration.Mapping(System.String)">
+            <summary>
+            映射数据 到 属性
+            </summary>
+            <param name="key"></param>
+        </member>
         <member name="T:HZY.Admin.Core.HZYAppCheckModelAttribute">
             <summary>
             实体模型验证

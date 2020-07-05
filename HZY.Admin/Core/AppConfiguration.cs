@@ -12,14 +12,26 @@ namespace HZY.Admin.Core
     [AppService(ServiceType.Singleton)]
     public class AppConfiguration
     {
-        private string AppConfigKey = "AppConfig";
+        public readonly IConfiguration configuration;
+
         public AppConfiguration(IConfiguration configuration)
         {
-            //AppConfig
+            this.configuration = configuration;
+            //AppConfig 
+            this.Mapping($"AppConfig");
+
+        }
+
+        /// <summary>
+        /// 映射数据 到 属性
+        /// </summary>
+        /// <param name="key"></param>
+        private void Mapping(string key)
+        {
             var propertes = this.GetType().GetProperties();
             foreach (var item in propertes)
             {
-                var value = configuration[$"{AppConfigKey}:{item.Name}"];
+                var value = configuration[$"{key}:{item.Name}"];
 
                 if (item.PropertyType == typeof(Guid))
                 {
@@ -34,7 +46,6 @@ namespace HZY.Admin.Core
                     item.SetValue(this, value);
                 }
             }
-
         }
 
         public string JwtKeyName { get; set; }
