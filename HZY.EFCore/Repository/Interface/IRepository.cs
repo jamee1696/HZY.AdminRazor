@@ -87,10 +87,14 @@ namespace HZY.EFCore.Repository.Interface
         #region 是否存在 、 数量
         int Count();
         long CountLong();
+        int Count(Expression<Func<T, bool>> Where);
+        long CountLong(Expression<Func<T, bool>> Where);
         bool Any(Expression<Func<T, bool>> Where);
 
         Task<int> CountAsync();
         Task<long> CountLongAsync();
+        Task<int> CountAsync(Expression<Func<T, bool>> Where);
+        Task<long> CountLongAsync(Expression<Func<T, bool>> Where);
         Task<bool> AnyAsync(Expression<Func<T, bool>> Where);
         #endregion
 

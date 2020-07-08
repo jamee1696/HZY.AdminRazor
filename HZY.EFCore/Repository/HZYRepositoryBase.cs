@@ -266,6 +266,10 @@ namespace HZY.EFCore.Repository
             => this.Query().Count();
         public virtual long CountLong()
             => this.Query().LongCount();
+        public virtual int Count(Expression<Func<T, bool>> expWhere)
+            => this.Query().Count(expWhere);
+        public virtual long CountLong(Expression<Func<T, bool>> expWhere)
+            => this.Query().LongCount(expWhere);
         public virtual bool Any(Expression<Func<T, bool>> expWhere)
             => this.Query().Where(expWhere).Any();
 
@@ -273,6 +277,10 @@ namespace HZY.EFCore.Repository
             => this.Query().CountAsync();
         public virtual Task<long> CountLongAsync()
             => this.Query().LongCountAsync();
+        public virtual Task<int> CountAsync(Expression<Func<T, bool>> expWhere)
+            => this.Query().CountAsync(expWhere);
+        public virtual Task<long> CountLongAsync(Expression<Func<T, bool>> expWhere)
+            => this.Query().LongCountAsync(expWhere);
         public virtual Task<bool> AnyAsync(Expression<Func<T, bool>> expWhere)
             => this.Query().Where(expWhere).AnyAsync();
         #endregion
