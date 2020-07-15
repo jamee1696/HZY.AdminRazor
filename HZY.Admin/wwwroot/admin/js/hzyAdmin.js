@@ -344,7 +344,7 @@ var hzyAdmin = {
             title: title,
             area: [_width + 'px', _height + 'px'],
             fixed: false, //不固定
-            maxmin: true,
+            maxmin: false,
             content: href,
             end: end
         });

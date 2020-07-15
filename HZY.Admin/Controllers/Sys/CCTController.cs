@@ -206,7 +206,7 @@ namespace HZY.Admin.Controllers.Sys
 
             var isViews = CodeType == "Index" || CodeType == "Info";
 
-            if (Directory.Exists($"{_WebRootPath}/Content/ZipFile/"))
+            if (!Directory.Exists($"{_WebRootPath}/Content/ZipFile/"))
             {
                 Directory.CreateDirectory($"{_WebRootPath}/Content/ZipFile/");
             }
