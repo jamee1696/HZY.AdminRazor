@@ -182,7 +182,9 @@ namespace HZY.Admin
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
                 //设置时间格式
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-            });
+            })
+            .AddRazorRuntimeCompilation()
+            ;
 
             #region 中间件 注入
             services.AddTransient<HZYAppMiddleware>();
