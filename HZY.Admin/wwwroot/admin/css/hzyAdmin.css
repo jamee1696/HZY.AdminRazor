@@ -12,6 +12,10 @@ html, body {
     background: #F2F6FC;
 }
 
+.page {
+    background: #F2F6FC;
+}
+
 .container, .container-fluid {
     padding-right: 0;
     padding-left: 0;

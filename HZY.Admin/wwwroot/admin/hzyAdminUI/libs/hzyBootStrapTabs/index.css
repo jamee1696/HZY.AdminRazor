@@ -87,10 +87,10 @@
     line-height: 35px;
 }
 
-.hzytabs-content .hzytabs-tablist .nav-pills .nav-link.active,
-.hzytabs-content .hzytabs-tablist .nav-pills .show>.nav-link {
-    color: #3e8ef7;
-    font-weight: 600;
-    font-size: 14px;
-    background-color: #f1f4f5;
-}
+    .hzytabs-content .hzytabs-tablist .nav-pills .nav-link.active,
+    .hzytabs-content .hzytabs-tablist .nav-pills .show > .nav-link {
+        color: #3e8ef7;
+        font-weight: 600;
+        font-size: 14px;
+        background-color: #F2F6FC;
+    }

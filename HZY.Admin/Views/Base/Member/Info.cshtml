@@ -166,32 +166,19 @@
             </div>
             <div class="col-sm-4">
                 <h4 class="example-title">性别</h4>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="Member_Sex1" name="Member_Sex" class="custom-control-input" v-model="form.vm.Model.Member_Sex" value="男">
-                            <label class="custom-control-label" for="Member_Sex1">男</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="Member_Sex2" name="Member_Sex" class="custom-control-input" v-model="form.vm.Model.Member_Sex" value="女">
-                            <label class="custom-control-label" for="Member_Sex2">女</label>
-                        </div>
-                    </div>
-                </div>
+                <el-radio v-model="form.vm.Model.Member_Sex" label="男">男</el-radio>
+                <el-radio v-model="form.vm.Model.Member_Sex" label="女">女</el-radio>
             </div>
             <div class="col-sm-4">
                 <h4 class="example-title">用户</h4>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" readonly="readonly" v-model="form.vm.User.User_Name">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-default btn-outline" @@click="findBack_User()"><i class="fas fa-search"></i></button>
-                            <button type="button" class="btn btn-default btn-outline" @@click="findBack_User(1)"><i class="fas fa-trash-alt text-danger"></i></button>
-                        </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" readonly="readonly" v-model="form.vm.User.User_Name">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default btn-outline" @@click="findBack_User()"><i class="fas fa-search"></i></button>
+                        <button type="button" class="btn btn-default btn-outline" @@click="findBack_User(1)"><i class="fas fa-trash-alt text-danger"></i></button>
                     </div>
                 </div>
+
             </div>
 
             <div class="col-sm-12">

@@ -95,31 +95,17 @@
             </div>
             <div class="col-sm-6">
                 <h4 class="example-title">是否显示</h4>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="Menu_IsShow1" name="Menu_IsShow" class="custom-control-input" v-model="form.vm.Model.Menu_IsShow" :value="1">
-                            <label class="custom-control-label" for="Menu_IsShow1">是</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="Menu_IsShow2" name="Menu_IsShow" class="custom-control-input" v-model="form.vm.Model.Menu_IsShow" :value="2">
-                            <label class="custom-control-label" for="Menu_IsShow2">否</label>
-                        </div>
-                    </div>
-                </div>
+                <el-radio v-model="form.vm.Model.Menu_IsShow" :label="1">是</el-radio>
+                <el-radio v-model="form.vm.Model.Menu_IsShow" :label="0">否</el-radio>
             </div>
             <div class='col-sm-12'>
                 <h4 class="example-title">拥有功能</h4>
-                <div class="row">
-                    <div class="col-sm-3" v-for="(item,index) in form.vm.AllFunctionList" :key="index">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" :id="item.Function_ID" :value="item.Function_ID" v-model="form.vm.FunctionIds">
-                            <label class="custom-control-label" :for="item.Function_ID">{{item.Function_Name}}</label>
-                        </div>
-                    </div>
-                </div>
+
+                <el-checkbox-group v-model="form.vm.FunctionIds">
+                    <el-checkbox v-for="(item,index) in form.vm.AllFunctionList" :key="index" :label="item.Function_ID">
+                        {{item.Function_Name}}</el-checkbox>
+                </el-checkbox-group>
+
             </div>
         </div>
         <div class="hzyAdminForm-footer">
