@@ -60,10 +60,7 @@ namespace HZY.Admin
             {
                 options
                 .UseSqlServer(Configuration.GetConnectionString(nameof(EFCoreContext)))
-                .UseLoggerFactory(LoggerFactory.Create(builder =>
-                {
-                    builder.AddConsole();
-                }))
+                .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
                 ;
                 //ÎÞ¸ú×Ù
                 // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
