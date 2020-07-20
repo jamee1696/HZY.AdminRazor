@@ -110,22 +110,22 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 mb-20">
                                 <input type="text" class="form-control" v-model="search.vm.AppLog_Api"
                                     placeholder="Api">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 mb-20">
                                 <input type="text" class="form-control" v-model="search.vm.AppLog_IP" placeholder="IP">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 mb-20">
                                 <input type="text" class="form-control" v-model="search.vm.AppLog_Form"
                                     placeholder="Form参数">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 mb-20">
                                 <input type="text" class="form-control" v-model="search.vm.AppLog_FormBody"
                                     placeholder="FormBody参数">
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 mb-20">
                                 <input type="text" class="form-control" v-model="search.vm.AppLog_QueryString"
                                     placeholder="QueryString参数">
                             </div>
@@ -156,8 +156,12 @@
                             <el-table-column type="index" width="50" fixed></el-table-column>
                             <el-table-column type="selection" width="50" fixed></el-table-column>
                             <!--根据查询接口自动加载头部信息 start-->
-                            <el-table-column v-for="(item,index) in table.columns" :prop="item.DataIndex"
-                                :label="item.Title" :key="index" v-if="item.Show" width="500"></el-table-column>
+                            <el-table-column prop="AppLog_IP" label="Ip" width="150"></el-table-column>
+                            <el-table-column prop="AppLog_Api" label="Api"></el-table-column>
+                            <el-table-column prop="操作人" label="操作人" width="100"></el-table-column>
+                            <el-table-column prop="AppLog_CreateTime" label="创建时间" width="150"></el-table-column>
+                            <!--<el-table-column v-for="(item,index) in table.columns" :prop="item.DataIndex"
+                                :label="item.Title" :key="index" v-if="item.Show" width="500"></el-table-column> -->
                             <!--根据查询接口自动加载头部信息 end-->
                             <el-table-column fixed="right" label="操作" width="100">
                                 <template slot-scope="scope">
