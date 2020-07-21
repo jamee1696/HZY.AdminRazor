@@ -116,6 +116,11 @@ namespace HZY.EFCore.Repository
         /// <returns></returns>
         public virtual int BatchUpdate(T updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
             => this.Set.Where(predicate).BatchUpdate(updateExpression, updateColumns);
+        public virtual int UpdateRange(IEnumerable<T> models)
+        {
+            this.Set.UpdateRange(models);
+            return this.Context.Save();
+        }
 
         public virtual Task<int> UpdateAsync(T model)
         {
@@ -151,6 +156,11 @@ namespace HZY.EFCore.Repository
         /// <returns></returns>
         public virtual Task<int> BatchUpdateAsync(T updateExpression, Expression<Func<T, bool>> predicate, List<string> updateColumns = null)
             => this.Set.Where(predicate).BatchUpdateAsync(updateExpression, updateColumns);
+        public virtual Task<int> UpdateRangeAsync(IEnumerable<T> models)
+        {
+            this.Set.UpdateRange(models);
+            return this.Context.SaveAsync();
+        }
         #endregion
 
         #region 插入或者更新
